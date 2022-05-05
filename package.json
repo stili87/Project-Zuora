@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/stili87/Project-Zora#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "csurf": "^1.11.0",
     "dotenv": "^16.0.0",
@@ -28,6 +29,7 @@
     "express": "^4.18.1",
     "express-async-handler": "^1.2.0",
     "express-session": "^1.17.2",
+    "express-validator": "^6.14.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.16",
     "per-env": "^1.0.2",
