@@ -4,6 +4,7 @@ const db = require('./db/models');
 const app = express();
 const morgan = require('morgan');
 const routes = require('./routes');
+const session = require('express-session');
 
 app.use(morgan('dev'));
 app.set('view engine', 'pug')
@@ -11,12 +12,12 @@ app.use(express.static('./public'))
 app.use(express.urlencoded({extended: false}))
 app.use(cookieParser())
 app.use(express.json())
-// app.use(cookieParser('secretKey'))
-// app.use(session({
-//   secret: 'secretKey',
-//   resave: false,
-//   saveUninitialized: false
-// }))
+app.use(cookieParser('secretKey'))
+app.use(session({
+  secret: 'secretKey',
+  resave: false,
+  saveUninitialized: false
+}))
 //////PUT ALL ROUTERS HERE
 app.use(routes)
 
