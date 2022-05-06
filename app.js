@@ -5,6 +5,8 @@ const app = express();
 const morgan = require('morgan');
 const routes = require('./routes');
 const session = require('express-session');
+const { sessionSecret } = require('./config');
+
 
 app.use(morgan('dev'));
 app.set('view engine', 'pug')
@@ -14,6 +16,7 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(cookieParser('secretKey'))
 app.use(session({
+  name:'zuora.sid',
   secret: 'secretKey',
   resave: false,
   saveUninitialized: false
