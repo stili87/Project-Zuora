@@ -11,6 +11,11 @@ const { sessionSecret, environment } = require('./config');
 const routes = require('./routes');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const answersRouter = require('./routes/answers');
+const commentsRouter = require('./routes/comments');
+const likesRouter = require('./routes/likes');
+const questionsRouter = require('./routes/questions');
+const tagsRouter = require('./routes/tags');
 const {restoreUser} = require('./auth.js')
 const app = express();
 
@@ -37,6 +42,11 @@ store.sync();
 //////PUT ALL ROUTERS HERE
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/answers', answersRouter);
+app.use('/comments', commentsRouter);
+app.use('/likes', likesRouter);
+app.use('/questions', questionsRouter);
+app.use('/tags', tagsRouter);
 
 
 
@@ -49,19 +59,10 @@ app.use((req, res, next) => {
   });
   
   // Custom error handlers.
-  
-  // Error handler to log errors.
-  app.use((err, req, res, next) => {
-    if (process.env.NODE_ENV === 'production') {
-      // TODO Log the error to the database.
-    } else {
-      console.error(err);
-    }
-    next(err);
-  });
-  
+    
   // Error handler for 404 errors. NEED CUSTOM PUG PAGE FOR THIS.
   app.use((err, req, res, next) => {
+    console.error(err);
     if (err.status === 404) {
       res.status(404);
       res.render('page-not-found', {
