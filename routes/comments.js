@@ -16,26 +16,28 @@ const commentValidators = [
 
 
 router.get('/answer/comments/:id', requireAuth, csrfProtection,  asyncHandler( async (req, res, next) => {
-  res.render('comment-form', {title: 'Create New Comment', csrfToken: req.csrfToken() })
+  const id = req.params.id
+  console.log(req.params, '----------------------')
+  res.render('comment-form', {title: 'Create New Comment', csrfToken: req.csrfToken(), id })
 }));
 
 router.post('/answer/comments/:id', requireAuth, csrfProtection, asyncHandler( async (req, res, next) => {
-  const {firstName, lastName, emailAddress, password} = req.body
-    const user = db.User.build({
-        firstName, lastName, emailAddress
-    })
+  const {content} = req.body
+  const answerId = req.params.id
+  const userId = req.session.auth.userId
+   const comment = db.Comment.build({
+        content,
+        answerId,
+        userId
+    });
     const validatorErrors = validationResult(req);
         if (validatorErrors.isEmpty()) {
-        const hashedPassword = await bcrypt.hash(password, 10);
-        user.hashedPassword = hashedPassword;
-        await user.save();
-        loginUser(req, res, user)
-        res.redirect('/');
+          await comment.save();
+          res.redirect('/');
       } else {
         const errors = validatorErrors.array().map((error) => error.msg);
-        res.render('user-register', {
-            title: 'Add User',
-            user,
+        res.render('comment-form', {
+            title: 'Create New Comment',
             csrfToken: req.csrfToken(),
             errors
           });
