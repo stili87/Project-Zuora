@@ -8,7 +8,7 @@
     "start:production": "node ./bin/www",
     "start": "per-env",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "reset": "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all"
+    "reset": "npx dotenv sequelize db:drop && npx dotenv sequelize db:create && npx dotenv sequelize db:migrate && npx dotenv sequelize db:seed:all"
   },
   "repository": {
     "type": "git",
