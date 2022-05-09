@@ -1,9 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
-/* GET list of all questions. */
+
+const db = require('../db/models')
+
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  const questions = db.Question.findAll();
+  console.log(questions)
+  res.send('questions', {
+    title: 'Questions',
+    questions
+   });
 });
 
 module.exports = router;
