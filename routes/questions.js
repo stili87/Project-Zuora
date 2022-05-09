@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+
 const db = require('../db/models')
 
-/* GET users listing. */
 router.get('/', function(req, res, next) {
   const questions = db.Question.findAll();
   console.log(questions)

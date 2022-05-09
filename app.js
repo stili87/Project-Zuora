@@ -1,14 +1,10 @@
-const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const db = require('./db/models');
 const morgan = require('morgan');
-const { sequelize } = require('./db/models');
 const session = require('express-session');
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const { sessionSecret, environment } = require('./config');
-const routes = require('./routes');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const answersRouter = require('./routes/answers');
@@ -26,19 +22,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 app.use(cookieParser(sessionSecret))
-const store = new SequelizeStore({ db: sequelize });
 app.use(session({
   name:'zuora.sid',
   secret: sessionSecret,
-  store,
   resave: false,
   saveUninitialized: false
 }))
 
 
-
-store.sync();
-//app.use(restoreUser)   turn on when auth part is added to routes
+app.use(restoreUser)
 //////PUT ALL ROUTERS HERE
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
