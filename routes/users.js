@@ -7,7 +7,7 @@ const router = express.Router();
 const { loginUser, logoutUser } = require('../auth');
 
 
-router.get('/user/register', csrfProtection, (req, res) => {
+router.get('/register', csrfProtection, (req, res) => {
   const user = db.User.build();
   res.render('user-register', {
     title: 'Register',
@@ -26,37 +26,37 @@ const loginValidators = [
 ];
 
 router.get('/login', csrfProtection, (req, res) => {
-  res.render('user-login', {csrfToken: req.csrfToken(), title:"Login Page"})
+  res.render('user-login', { csrfToken: req.csrfToken(), title: "Login Page" })
 })
 
-router.post('/login',csrfProtection, loginValidators, asyncHandler(async (req, res) => {
-  const {email, password} = req.body
+router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, res) => {
+  const { email, password } = req.body
   console.log(req.body)
   const validatorErrors = validationResult(req);
   if (validatorErrors.isEmpty()) {
-      let user = await db.User.findOne({where: {email}})
-          if(user){
-              const result = await bcrypt.compare(password, user.hashedPassword.toString())
-              console.log(result)
-              if(result){
-                  loginUser(req, res, user)
-                  res.redirect('/')
-              }else{
-                  res.render('user-login', {
-                      title: 'Login Page',
-                      csrfToken: req.csrfToken(),
-                      errors: ["Email or Password did not match records."]
-                    });
-              }
-          }
-    } else {
-      const errors = validatorErrors.array().map((error) => error.msg);
-      res.render('user-login', {
+    let user = await db.User.findOne({ where: { email } })
+    if (user) {
+      const result = await bcrypt.compare(password, user.hashedPassword.toString())
+      console.log(result)
+      if (result) {
+        loginUser(req, res, user)
+        res.redirect('/')
+      } else {
+        res.render('user-login', {
           title: 'Login Page',
           csrfToken: req.csrfToken(),
-          errors
+          errors: ["Email or Password did not match records."]
         });
+      }
     }
+  } else {
+    const errors = validatorErrors.array().map((error) => error.msg);
+    res.render('user-login', {
+      title: 'Login Page',
+      csrfToken: req.csrfToken(),
+      errors
+    });
+  }
 }))
 
 const userValidators = [
@@ -109,11 +109,11 @@ const userValidators = [
     })
 ];
 
-router.post('/user/register', csrfProtection, userValidators,
+router.post('/register', csrfProtection, userValidators,
   asyncHandler(async (req, res) => {
     const {
       email,
-      hashedPassword,
+      password,
       fullName,
       bio,
       credentials,
@@ -131,8 +131,8 @@ router.post('/user/register', csrfProtection, userValidators,
     const validatorErrors = validationResult(req);
 
     if (validatorErrors.isEmpty()) {
-      const password = await bcrypt.hash(hashedPassword, 10);
-      user.password = password;
+      const hashedPassword = await bcrypt.hash(password, 10);
+      user.hashedPassword = hashedPassword;
       await user.save();
       loginUser(req, res, user);
       res.redirect('/');
