@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.hasMany(models.Like, {as: 'likes', foreignKey: 'userId'})
       User.hasMany(models.Answer, {as: 'answers', foreignKey: 'userId'})
-      User.hasMany(models.Comments, {as: 'comments', foreignKey: 'userId'})
+      User.hasMany(models.Comment, {as: 'comments', foreignKey: 'userId'})
       User.hasMany(models.Question, {as: 'question', foreignKey: 'userId'})
     }
   }
