@@ -1,9 +1,8 @@
 doctype html
 html
   head
-    title Project Zuora - #{title}
+      block head
+        title="Project Zuora"
+        link(rel='stylesheet' href='/stylesheets/reset.css')
   body
-    h1 Project Zuora
-    div
-      h2 #{title}
-      block content
+    block content
