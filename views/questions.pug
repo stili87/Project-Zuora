@@ -3,9 +3,15 @@ extends layout.pug
 block content
   table
     thead
-        tr
-            th(colspan="2") The table header
-    tbody
-        tr
-            td The table body
+      tr
+        th title
+        th content
+        th media
 
+    tbody
+      each question in questions
+        tr
+          td= question.title
+          td= question.content
+          td
+            img(src=question.media)
