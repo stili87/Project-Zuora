@@ -35,7 +35,7 @@ app.use(restoreUser)
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/answers', answersRouter);
-app.use('/comments', commentsRouter);
+app.use(commentsRouter);
 app.use('/likes', likesRouter);
 app.use('/questions', questionsRouter);
 app.use('/tags', tagsRouter);
