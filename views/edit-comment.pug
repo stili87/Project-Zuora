@@ -6,7 +6,7 @@ block content
     +validationErrorSummary(errors)
     form(action=`/comments/edit/${id}` method='post')
         input(type='hidden' name='_csrf' value=csrfToken)
-        +field('Content', 'content', '', type="textarea")
+        +field('Content', 'content', editComment.content, type="textarea")
         div(class='py-4')
             button(type='submit' class='btn btn-primary') Submit Edited Comment
             a(href='/' class='btn btn-warning ml-2') Cancel

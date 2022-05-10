@@ -47,7 +47,7 @@ router.post('/answer/:id(\\d+)/comments', requireAuth, csrfProtection, asyncHand
 router.get('/comments/delete/:id(\\d+)',requireAuth, asyncHandler( async(req, res, next) =>{
   const id = req.params.id
   const userId = req.session.auth.userId
-  const deleteComment = await db.Comment.findByPk(commentId)
+  const deleteComment = await db.Comment.findByPk(id)
   if(deleteComment && deleteComment.userId === userId){
       res.render('delete-comment', {id})
     }else {
@@ -62,6 +62,7 @@ router.post('/comments/delete/:id(\\d+)', requireAuth, asyncHandler( async (req,
   const deleteComment = await db.Comment.findByPk(commentId)
     if(deleteComment && deleteComment.userId === userId){
       deleteComment.destroy()
+      res.redirect("/")
     }else{   //Redirects if the author of the comment does not match the current logged in user
       res.redirect("/")
     }

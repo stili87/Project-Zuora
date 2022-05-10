@@ -38,7 +38,7 @@ app.use('/answers', answersRouter);
 app.use(commentsRouter);
 app.use('/likes', likesRouter);
 app.use('/questions', questionsRouter);
-app.use('/tags', tagsRouter);
+app.use(tagsRouter);
 
 
 
