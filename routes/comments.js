@@ -117,7 +117,7 @@ router.post('/comments/edit/:id(\\d+)', requireAuth, commentValidators, csrfProt
       title: "Edit your comment",
       editComment,
       csrfToken: req.csrfToken(),
-      errors 
+      errors: validatorErrors
     })
   }
 }))
