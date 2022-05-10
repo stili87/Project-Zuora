@@ -1,0 +1,11 @@
+extends layout.pug
+
+block content
+    h2= user.fullName
+    div
+        ul
+            li= `Bio: ${user.bio}`
+            li= `Credentials: ${user.credentials}`
+    div(class='py-4')
+        a(class='btn btn-primary' href=`/users/edit/${user.id}` role='button') Edit
+        a(class='btn btn-danger ml-2' href=`/users/delete/${user.id}` role='button') Delete

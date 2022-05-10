@@ -1,0 +1,10 @@
+include utils.pug
+
+input(type='hidden' name='_csrf' value=csrfToken)
++field('Full Name', 'fullName', user.fullName)
++field('Email Address', 'email', user.email)
++field('Bio', 'bio', user.bio)
++field('Credentials', 'credentials', user.credentials)
++field('Profile Picture URL', 'picSrc', user.picSrc)
++field('Password', 'password', user.password, 'password')
++field('Confirm Password', 'confirmPassword', '', 'password')
