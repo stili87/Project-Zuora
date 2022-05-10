@@ -275,7 +275,7 @@ router.post('/delete/:id(\\d+)', requireAuth, csrfProtection,
     }
     // checkPermissions(user, res.locals.user);
 
-    await user.destroy();
+    user.destroy();
     res.redirect('/users/register');
   }));
 
