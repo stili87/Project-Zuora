@@ -1,32 +1,24 @@
 const express = require('express');
 const router = express.Router();
+const { requireAuth } = require('../auth');
+const { csrfProtection, asyncHandler } = require('./utils');
+const db = require('../db/models');
 
-/* GET users listing. */
-router.post('/:questionId(\\d+)/like/add',
+router.post('/:questionId(\\d+)/like/add', requireAuth,
   asyncHandler(async (req, res) => {
     const questionId = parseInt(req.params.questionId, 10);
-    const question = await db.Question.findByPk(questionId);
-
-    const {
-      title,
-      content,
-      tagId,
-      userId,
-      media
-    } = req.body;
+    const userId = req.session.auth.userId
 
     const like = db.Like.build({
       userId,
       questionId,
-      answerId
     });
 
     await like.save();
-    res.redirect(`/question/${questionId}`);
   }));
 
 
-router.post('/like/delete/:id(\\d+)',
+router.post('/like/delete/:id(\\d+)', requireAuth,
   asyncHandler(async (req, res) => {
     const likeId = parseInt(req.params.id, 10);
     const like = await db.Like.findByPk(likeId);
@@ -34,26 +26,18 @@ router.post('/like/delete/:id(\\d+)',
   }));
 
 
-router.post('/:answerId(\\d+)/like/add',
+router.post('/:answerId(\\d+)/like/add', requireAuth,
   asyncHandler(async (req, res) => {
-    const answerId = parseInt(req.params.answerId, 10);
-    const answer = await db.Answer.findByPk(answerId);
-
-    const {
-      questionId,
-      userId,
-      streetCred,
-      content
-    } = req.body;
+   asyncHandler(async (req, res) => {
+    const answerId = parseInt(req.params.asnwerId, 10);
+    const userId = req.session.auth.userId
 
     const like = db.Like.build({
       userId,
-      questionId,
-      answerId
+      answerId,
     });
 
     await like.save();
-    res.redirect(`/answer/${answerId}`);
   }));
 
 module.exports = router;
