@@ -3,7 +3,7 @@ const { check, validationResult } = require('express-validator');
 const { csrfProtection, asyncHandler } = require('./utils');
 const { requireAuth } = require('../auth.js')
 const router = express.Router();
-const { Question, Answer, Comment } = require('../db/models');
+const { Answer } = require('../db/models');
 
 const checkAnswerFields = [
   check('content')
