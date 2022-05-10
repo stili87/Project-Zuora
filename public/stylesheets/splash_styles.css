@@ -6,22 +6,68 @@ body {
     justify-content: center;
     align-items: center;
     background-image: url('https://cdn.vox-cdn.com/thumbor/suYvgZ1flp3L5frTxkweHsfMyfo=/0x0:2400x1517/1900x1069/filters:focal(1008x567:1392x951):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/60039755/smash_illo.0.jpg');
-    background-size: 100%;
+    background-size:auto;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
+button {
+    cursor: pointer;
+    box-shadow: 2px 2px 3px black;
+    opacity: 100%;
+    
+}
+
+.splash-inner-h2 {
+    color: #DE6C3F;
+    text-shadow: 1px 1px black;
+}
+
+.splash-h1 {
+    color: #DE6C3F;
+    margin-top: 25px;
+    margin-bottom: 0px;
+    font-size: 34px;
+    text-shadow: 1px 1px black;
+}
+
+.splash-h2 {
+    margin: 0px;
+    padding: 0px;
+    font-size: 16px;
+    color: #7C8D88;
+    text-shadow: 1px 1px grey;
+}
+
+.splash-register-button {
+    padding: 8px;
+    font-size: 20px;
+    border-radius: 25px;
+    background-color: #A9C1C7;
+
+}
+.splash-register-link {
+    text-decoration: none;
+    color: black;
+}
+
+
 .splash-mid {
-    background-color: lightcoral;
+    background-color: #CAD2C5;
     height: 500px;
     width: 800px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 25px;
+    opacity: 90%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset; 
 }
-.splash_inner_container {
+.splash-inner-container {
     display: flex;
     width: 100%;
+    
 }
-.splash_inner {
+.splash-inner {
     height: 100%;
     width: 50%;
     margin: 10px;
@@ -30,5 +76,52 @@ body {
     justify-content: center;
     justify-self: flex-start;
     flex-direction: column;
-    background-color: antiquewhite;
+    border: 2px solid black;
+    border-radius: 25px;
+    
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-group {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 2fr;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+    
+}
+
+.label {
+    padding-right: 25px;
+    width: 50%;
+    justify-self: flex-end;
+
+
+}
+
+.form-control {
+ width: 75%;
+}
+
+.splash-button {
+    margin: 5px;
+    padding: 8px;
+    font-size: 20px;
+    border-radius: 25px;
+    background-color: #A9C1C7;
+}
+
+.try-button {
+    margin-top: 50px;
+    font-size: 20px;
+    padding: 8px;
+    border-radius: 25px;
+    background-color: #A9C1C7;
 }
