@@ -16,15 +16,16 @@ const checkAnswerFields = [
     .withMessage('Too many credentials!')
 ];
 
-/* GET answers form for specific question. */
+// GET ANSWER FORM FOR SPECIFIED QUESTION
+
 router.get('/questions/:id/answers', requireAuth, csrfProtection,
   asyncHandler(async function (req, res, next) {
     const questionId = req.params.id;
-    // const thisQuestion = await Question.findByPk(questionId);
-    // const answer = Answer.build();
     res.render('answers-form', { id: questionId, csrfToken: req.csrfToken() })
-  }
-  ));
+  })
+);
+
+// POST ANSWER
 
 router.post('/questions/:id/answers', requireAuth, checkAnswerFields, csrfProtection,
   asyncHandler(async function (req, res, next) {
@@ -45,6 +46,8 @@ router.post('/questions/:id/answers', requireAuth, checkAnswerFields, csrfProtec
   })
 );
 
+// GET ANSWER
+
 router.get('/questions/:questionId/answers/:answerId', requireAuth, csrfProtection,
   asyncHandler(async function (req, res, next) {
     const { questionId, answerId } = req.params;
@@ -57,6 +60,8 @@ router.get('/questions/:questionId/answers/:answerId', requireAuth, csrfProtecti
     }
   })
 );
+
+// EDIT ANSWER
 
 router.post('/questions/:questionId/answers/:answerId', requireAuth, checkAnswerFields, csrfProtection,
   asyncHandler(async function (req, res, next) {
@@ -77,6 +82,8 @@ router.post('/questions/:questionId/answers/:answerId', requireAuth, checkAnswer
     }
   })
 );
+
+// DELETE ANSWER
 
 router.post('/questions/:questionId/answers/:answerId/delete', requireAuth, csrfProtection,
   asyncHandler(async function (req, res, next) {
