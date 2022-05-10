@@ -7,3 +7,7 @@ block content
         +field('Qualifications', 'streetCred', answer.streetCred, 'text')
         +field('Answer', 'content', answer.content, 'textarea')
         button(type='submit') Submit
+    div
+        form(action=`/questions/${questionId}/answers/${answerId}/delete` method="POST")
+            input(type='hidden' name='_csrf' value=csrfToken)
+            button(type='submit') Delete
