@@ -4,7 +4,7 @@ const db = require('../db/models');
 const { csrfProtection, asyncHandler } = require('./utils');
 const bcrypt = require('bcryptjs')
 const router = express.Router();
-const { loginUser, logoutUser } = require('../auth');
+const { loginUser, logoutUser, requireAuth } = require('../auth');
 
 
 router.get('/register', csrfProtection, (req, res) => {
@@ -145,6 +145,86 @@ router.post('/register', csrfProtection, userValidators,
         csrfToken: req.csrfToken(),
       });
     }
+  }));
+
+router.get('/edit/:id(\\d+)', requireAuth, csrfProtection,
+  asyncHandler(async (req, res) => {
+    const userId = parseInt(req.params.id, 10);
+    const user = await db.User.findByPk(userId);
+
+    // checkPermissions(user, res.locals.user);
+
+    res.render('user-edit', {
+      title: 'Edit User',
+      user,
+      csrfToken: req.csrfToken(),
+    });
+  }));
+
+router.post('/edit/:id(\\d+)', requireAuth, csrfProtection, userValidators,
+  asyncHandler(async (req, res) => {
+    const userId = parseInt(req.params.id, 10);
+    const userToUpdate = await db.User.findByPk(userId);
+
+    // checkPermissions(userToUpdate, res.locals.user);
+
+    const {
+      email,
+      password,
+      fullName,
+      bio,
+      credentials,
+      picSrc
+    } = req.body;
+
+    const user = {
+      email,
+      password,
+      fullName,
+      bio,
+      credentials,
+      picSrc
+    };
+
+    const validatorErrors = validationResult(req);
+
+    if (validatorErrors.isEmpty()) {
+      await userToUpdate.update(user);
+      res.redirect(`/${userId}`);
+    } else {
+      const errors = validatorErrors.array().map((error) => error.msg);
+      res.render('user-edit', {
+        title: 'Edit User',
+        user: { ...user, id: userId },
+        errors,
+        csrfToken: req.csrfToken(),
+      });
+    }
+  }));
+
+router.get('/delete/:id(\\d+)', requireAuth, csrfProtection,
+  asyncHandler(async (req, res) => {
+    const userId = parseInt(req.params.id, 10);
+    const user = await db.User.findByPk(userId);
+
+    // checkPermissions(user, res.locals.user);
+
+    res.render('user-delete', {
+      title: 'Delete User',
+      user,
+      csrfToken: req.csrfToken(),
+    });
+  }));
+
+router.post('/delete/:id(\\d+)', requireAuth, csrfProtection,
+  asyncHandler(async (req, res) => {
+    const userId = parseInt(req.params.id, 10);
+    const user = await db.User.findByPk(userId);
+
+    // checkPermissions(user, res.locals.user);
+
+    await user.destroy();
+    res.redirect('/');
   }));
 
 module.exports = router;
