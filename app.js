@@ -34,11 +34,13 @@ app.use(restoreUser)
 //////PUT ALL ROUTERS HERE
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/answers', answersRouter);
-app.use(commentsRouter);
+
+app.use('/comments', commentsRouter);
 app.use('/likes', likesRouter);
 app.use('/questions', questionsRouter);
-app.use(tagsRouter);
+app.use('/tags', tagsRouter);
+app.use(answersRouter);
+
 
 
 
@@ -49,9 +51,9 @@ app.use((req, res, next) => {
     err.status = 404;
     next(err);
   });
-  
+
   // Custom error handlers.
-    
+
   // Error handler for 404 errors. NEED CUSTOM PUG PAGE FOR THIS.
   app.use((err, req, res, next) => {
     console.error(err);
@@ -64,13 +66,13 @@ app.use((req, res, next) => {
       next(err);
     }
   });
-  
+
   // Generic error handler.   NEED CUSTOM PUG PAGE FOR THIS.
   app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
-  
+
     // render the error page
     res.status(err.status || 500);
     res.render('error');
