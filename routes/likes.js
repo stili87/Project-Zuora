@@ -27,7 +27,6 @@ router.post('/like/delete/:id(\\d+)', requireAuth,
 
 
 router.post('/:answerId(\\d+)/like/add', requireAuth,
-  asyncHandler(async (req, res) => {
    asyncHandler(async (req, res) => {
     const answerId = parseInt(req.params.asnwerId, 10);
     const userId = req.session.auth.userId
