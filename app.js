@@ -34,11 +34,13 @@ app.use(restoreUser)
 //////PUT ALL ROUTERS HERE
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
 app.use('/comments', commentsRouter);
 app.use('/likes', likesRouter);
 app.use('/questions', questionsRouter);
 app.use('/tags', tagsRouter);
 app.use(answersRouter);
+
 
 
 
