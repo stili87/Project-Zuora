@@ -161,9 +161,53 @@ router.get('/edit/:id(\\d+)', requireAuth, csrfProtection,
     });
   }));
 
-router.post('/edit/:id(\\d+)', requireAuth, csrfProtection, userValidators,
+const userEditValidators = [
+  check('fullName')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for First Name')
+    .isLength({ max: 100 })
+    .withMessage('First Name must not be more than 100 characters long'),
+  check('email')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for Email Address')
+    .isLength({ max: 50 })
+    .withMessage('Email Address must not be more than 50 characters long')
+    .isEmail()
+    .withMessage('Email Address is not a valid email'),
+  check('bio')
+    .isLength({ max: 300 })
+    .withMessage('Bio must not be more than 300 characters long'),
+  check('credentials')
+    .isLength({ max: 100 })
+    .withMessage('Bio must not be more than 100 characters long'),
+  check('picSrc')
+    .isLength({ max: 300 })
+    .withMessage('Bio must not be more than 300 characters long'),
+  check('password')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for Password')
+    .isLength({ max: 50 })
+    .withMessage('Password must not be more than 50 characters long')
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, 'g')
+    .withMessage('Password must contain at least 1 lowercase letter, uppercase letter, number, and special character (i.e. "!@#$%^&*")'),
+  check('confirmPassword')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for Confirm Password')
+    .isLength({ max: 50 })
+    .withMessage('Confirm Password must not be more than 50 characters long')
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error('Confirm Password does not match Password');
+      }
+      return true;
+    })
+];
+
+router.post('/edit/:id(\\d+)', requireAuth, csrfProtection, userEditValidators,
   asyncHandler(async (req, res) => {
     const userId = parseInt(req.params.id, 10);
+    const userCompareId = req.session.auth.userId
+
     const userToUpdate = await db.User.findByPk(userId);
 
     // checkPermissions(userToUpdate, res.locals.user);
@@ -186,11 +230,15 @@ router.post('/edit/:id(\\d+)', requireAuth, csrfProtection, userValidators,
       picSrc
     };
 
+    if (userId !== userCompareId) {
+      res.redirect('/');
+    }
+
     const validatorErrors = validationResult(req);
 
     if (validatorErrors.isEmpty()) {
       await userToUpdate.update(user);
-      res.redirect(`/${userId}`);
+      res.redirect(`/users/${userId}`);
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render('user-edit', {
@@ -219,12 +267,16 @@ router.get('/delete/:id(\\d+)', requireAuth, csrfProtection,
 router.post('/delete/:id(\\d+)', requireAuth, csrfProtection,
   asyncHandler(async (req, res) => {
     const userId = parseInt(req.params.id, 10);
+    const userCompareId = req.session.auth.userId
     const user = await db.User.findByPk(userId);
 
+    if (userId !== userCompareId) {
+      res.redirect('/');
+    }
     // checkPermissions(user, res.locals.user);
 
     await user.destroy();
-    res.redirect('/');
+    res.redirect('/users/register');
   }));
 
 module.exports = router;
