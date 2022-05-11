@@ -36,7 +36,7 @@ form {
     width: 75%;
 }
 
-.comment-edit-inner-container {
+.question-edit-inner-container {
     display: flex;
     justify-content: center;
     width: 50%;
@@ -58,7 +58,7 @@ a {
     border: 2px solid black;
 }
 
-.comment-edit-button {
+.question-edit-button {
     margin-top: 10px;
     font-size: 17px;
     border-radius: 20px;
@@ -81,7 +81,7 @@ a {
     font-weight: bold;
 }
 
-.comment-delete-button {
+.question-delete-button {
     font-size: 17px;
     border-radius: 20px;
     background-color: #A9C1C7;
@@ -90,7 +90,7 @@ a {
     font-weight: 700;
 }
 
-.comment-edit-inner {
+.question-edit-inner {
     height: 100%;
     width: 100%;
     margin: 10px;
