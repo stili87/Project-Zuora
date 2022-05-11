@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Like, { as: 'likes', onDelete: 'CASCADE', hooks: true, foreignKey: 'userId' })
       User.hasMany(models.Answer, { as: 'answers', onDelete: 'CASCADE', hooks: true, foreignKey: 'userId' })
       User.hasMany(models.Comment, { as: 'comments', onDelete: 'CASCADE', hooks: true, foreignKey: 'userId' })
-      User.hasMany(models.Question, { as: 'question', onDelete: 'CASCADE', hooks: true, foreignKey: 'userId' })
+      User.hasMany(models.Question, { as: 'questions', onDelete: 'CASCADE', hooks: true, foreignKey: 'userId' })
     }
   }
   User.init({
