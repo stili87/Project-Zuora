@@ -5,6 +5,7 @@ html
     title="Project Zuora"
     link(rel='stylesheet' href='/stylesheets/question_edit_styles.css')
   body
+  h3 Edit a question
     +validationErrorSummary(errors)
     .question-edit-inner-container
         .question-edit-inner
@@ -19,7 +20,7 @@ html
                         option(value=tag.id)= tag.name
                 div(class='py-4')
                     button(type='submit' class='question-edit-button') Submit
-                    a(href='/' class='cancel-edit-button') Cancel
+                    a(href=`/questions/${questionId}` class='cancel-edit-button') Cancel
     .question-edit-inner-container
         .question-edit-inner
             form(action=`/questions/${questionId}/delete` method="POST")

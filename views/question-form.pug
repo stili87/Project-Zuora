@@ -8,23 +8,25 @@ html
   h3 Submit a question
   +validationErrorSummary(errors)
   .question-inner-container
-        .question-inner
-          form(action="/questions" method="post")
-            input(type='hidden' name='_csrf' value=csrfToken)
-            div
-              label(for="title") Title
-              input(type="text" name="title" value=question.title required)
-            div
-              label(for="content") Content
-              input(type="text" name="content" value=question.content required)
-            div
-              label(for="media") Image Url
-              input(type="text" name="media" placeholder="optional" value=question.media)
-            div
-              label(for="tagId") Choose Tag
-              select(name="tagId")
-                each tag in tags
-                  option(value=tag.id)= tag.name
-            div
-              button(type="submit" class='submit-question-button') Submit
-              a(href='/' class='cancel-question-button') Cancel
+    .question-inner
+      form(action="/questions" method="post")
+        input(type='hidden' name='_csrf' value=csrfToken)
+        div
+          label(for="title") Title
+          input(type="text" name="title" value=question.title required)
+        div
+          label(for="content") Content
+          textarea(name="content" rows="4" cols="50" value=question.content required)
+        div
+          label(for="media") Image Url
+          input(type="text" name="media" placeholder="optional" value=question.media)
+        div
+          label(for="tagId") Choose Tag
+          select(name="tagId")
+            each tag in tags
+              option(value=tag.id)= tag.name
+        div
+          button(type="submit" class='submit-question-button') Submit
+          a(href='/' class='cancel-question-button') Cancel
+  p Don't see a tag for your game? Click below and create a new tag
+  a(href='/tags' class='new-tag-form-button') Create Tag Page

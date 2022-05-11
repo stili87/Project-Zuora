@@ -64,6 +64,17 @@ a {
     border: 2px solid black;
 }
 
+.new-tag-form-button {
+    margin-top: 10px;
+    font-size: 17px;
+    border-radius: 20px;
+    background-color: #A9C1C7;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 3px;
+    font-weight: bold;
+}
+
 .submit-question-button {
     margin-top: 10px;
     font-size: 17px;

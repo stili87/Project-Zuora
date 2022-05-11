@@ -23,6 +23,15 @@ form {
     background-color: #7C8D88;
 }
 
+a {
+    cursor: pointer;
+    box-shadow: 2px 2px 3px black;
+    opacity: 100%;
+    text-decoration: none;
+    color: black;
+    border: 2px solid black;
+}
+
 .form-group {
     display: grid;
     width: 100%;
@@ -40,7 +49,7 @@ form {
     width: 75%;
 }
 
-.user-edit-inner-container {
+.user-delete-inner-container {
     display: flex;
     justify-content: center;
     width: 50%;
@@ -53,28 +62,15 @@ button {
     opacity: 100%;
 }
 
-a {
-    cursor: pointer;
-    box-shadow: 2px 2px 3px black;
-    opacity: 100%;
-    text-decoration: none;
-    color: black;
-    border: 2px solid black;
-}
-
-.user-edit-button {
-    margin-top: 10px;
+.delete-user-button {
     font-size: 17px;
     border-radius: 20px;
     background-color: #A9C1C7;
     padding-left: 25px;
     padding-right: 25px;
-    margin-right: 10px;
-    padding-top: 2px;
-    font-weight: 700;
 }
 
-.cancel-edit-button {
+.cancel-delete-button {
     margin-top: 10px;
     font-size: 17px;
     border-radius: 20px;
@@ -85,7 +81,7 @@ a {
     font-weight: bold;
 }
 
-.user-edit-inner {
+.user-delete-inner {
     height: 100%;
     width: 100%;
     margin: 10px;

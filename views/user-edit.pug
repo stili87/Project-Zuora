@@ -5,11 +5,12 @@ html
     title="Project Zuora"
     link(rel='stylesheet' href='/stylesheets/user_edit_styles.css')
   body
+  h3 Edit a user
   +validationErrorSummary(errors)
   .user-edit-inner-container
-        .user-edit-inner
-          form(action=`/users/edit/${user.id}` method='post')
-            include user-form.pug
-            div(class='py-4')
-            button(type='submit' class='user-edit-button') Update User
-            a(href=`/users/${user.id}` class='cancel-edit-button') Cancel
+    .user-edit-inner
+      form(action=`/users/edit/${user.id}` method='post')
+        include user-form.pug
+        div(class='py-4')
+          button(type='submit' class='user-edit-button') Update User
+          a(href=`/users/${user.id}` class='cancel-edit-button') Cancel

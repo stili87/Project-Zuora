@@ -9,9 +9,9 @@ html
     +validationErrorSummary(errors)
     .answer-inner-container
         .answer-inner
-            form(action=`/questions/${id}/answers` method="POST") Your Answer
+            form(action=`/questions/${questionId}/answers` method="POST") Your Answer
                 input(type='hidden' name='_csrf' value=csrfToken)
                 +field('Qualifications', 'streetCred', '', 'text', 'Type your credentials here...')
                 +field('Answer', 'content', '', 'textarea', 'Type your answer here...')
                 button(type='submit' class='submit-answer-button') Submit Answer
-                a(href='/' class='cancel-answer-button') Cancel
+                a(href=`/questions/${questionId}` class='cancel-answer-button') Cancel

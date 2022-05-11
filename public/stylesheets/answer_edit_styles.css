@@ -11,12 +11,25 @@ body {
     font-weight: 600;
 }
 
+h3 {
+    font-size: 35px;
+}
+
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #7C8D88;
+}
+
+a {
+    cursor: pointer;
+    box-shadow: 2px 2px 3px black;
+    opacity: 100%;
+    text-decoration: none;
+    color: black;
+    border: 2px solid black;
 }
 
 .form-group {
@@ -55,6 +68,17 @@ button {
     background-color: #A9C1C7;
     padding-left: 25px;
     padding-right: 25px;
+}
+
+.cancel-answer-edit-button {
+    margin-top: 10px;
+    font-size: 17px;
+    border-radius: 20px;
+    background-color: #A9C1C7;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 3px;
+    font-weight: bold;
 }
 
 .answer-delete-button {

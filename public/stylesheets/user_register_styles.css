@@ -40,7 +40,7 @@ form {
     width: 75%;
 }
 
-.user-edit-inner-container {
+.user-register-inner-container {
     display: flex;
     justify-content: center;
     width: 50%;
@@ -62,7 +62,7 @@ a {
     border: 2px solid black;
 }
 
-.user-edit-button {
+.register-button {
     margin-top: 10px;
     font-size: 17px;
     border-radius: 20px;
@@ -74,7 +74,7 @@ a {
     font-weight: 700;
 }
 
-.cancel-edit-button {
+.cancel-button {
     margin-top: 10px;
     font-size: 17px;
     border-radius: 20px;
@@ -85,7 +85,7 @@ a {
     font-weight: bold;
 }
 
-.user-edit-inner {
+.user-register-inner {
     height: 100%;
     width: 100%;
     margin: 10px;
