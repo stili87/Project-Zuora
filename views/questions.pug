@@ -1,17 +1,51 @@
-extends layout.pug
+doctype html
+html
+  head
+      block head
+        title="Project Zuora"
+        link(rel='stylesheet' href='/stylesheets/questions.css')
+        script
+          include ../public/javascript/question-page.js
 
-block content
-  table
-    thead
-      tr
-        th title
-        th content
-        th media
-
-    tbody
-      each question in questions
-        tr
-          td= question.title
-          td= question.content
-          td
-            img(src=question.media)
+  body
+    div.container
+      div.sideBar
+        ul.sideBarList
+          each tag in tags
+            li.listItem= tag.name
+          each tag in tags
+            li.listItem= tag.name
+          each tag in tags
+            li.listItem= tag.name
+          each tag in tags
+            li.listItem= tag.name
+          each tag in tags
+            li.listItem= tag.name
+          each tag in tags
+            li.listItem= tag.name
+          each tag in tags
+            li.listItem= tag.name
+      div.main
+        each question in questions
+          div.question
+            div.question_head
+              div.user_img
+                img(src=question.User.picSrc)
+              div.head_text
+                div.question_head_upper
+                  p= question.User.fullName
+                div.question_head_lower
+                  p= question.User.credentials
+            div.question_body
+              div.question_body_title
+                p= question.title
+              div.question_body_content
+                p= question.content
+              div.question_body_img
+                img(src=question.media)
+            div.question_footer
+              div.post_answer
+                button
+                  a(href="#") Post Answer
+              div
+                button.view_thread_btn View Thread
