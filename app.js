@@ -42,7 +42,9 @@ app.use(tagsRouter);
 app.use(answersRouter);
 
 
-
+app.get('/navbar', (req, res, next) => {
+  res.render('nav-bar')
+})
 
 // Catch unhandled requests and forward to error handler.
 // Maybe make a custom 404 page-------------------

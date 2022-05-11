@@ -1,0 +1,17 @@
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: #CAD2C5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+p, button, h1, img {
+    margin: 0;
+    padding: 0;
+}
