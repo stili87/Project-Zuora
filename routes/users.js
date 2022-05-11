@@ -31,14 +31,12 @@ router.get('/login', csrfProtection, (req, res) => {
 
 router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, res) => {
   const { email, password } = req.body
-  console.log(req.body)
   const validatorErrors = validationResult(req);
   if (validatorErrors.isEmpty()) {
     let user = await db.User.findOne({ where: { email } })
     if (user) {
       const result = await bcrypt.compare(password, user.hashedPassword.toString())
-      console.log(result)
-      if (result) {
+       if (result) {
         loginUser(req, res, user)
         res.redirect('/')
       } else {
