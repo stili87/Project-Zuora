@@ -15,11 +15,11 @@ const loginValidators = [
     .withMessage('Please provide a Password')
 ];
 
-router.get('/login', csrfProtection, (req, res) => {
+router.get('/users/login', csrfProtection, (req, res) => {
   res.render('user-login', { csrfToken: req.csrfToken(), title: "Login Page" })
 })
 
-router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, res) => {
+router.post('/users/login', csrfProtection, loginValidators, asyncHandler(async (req, res) => {
   const { email, password } = req.body
   const validatorErrors = validationResult(req);
   if (validatorErrors.isEmpty()) {
@@ -100,7 +100,7 @@ const userValidators = [
     })
 ];
 
-router.get('/register', csrfProtection, (req, res) => {
+router.get('/users/register', csrfProtection, (req, res) => {
   const user = db.User.build();
   res.render('user-register', {
     title: 'Register',
@@ -109,7 +109,7 @@ router.get('/register', csrfProtection, (req, res) => {
   });
 });
 
-router.post('/register', csrfProtection, userValidators,
+router.post('/users/register', csrfProtection, userValidators,
   asyncHandler(async (req, res) => {
     const {
       email,
@@ -190,7 +190,7 @@ router.post('/register', csrfProtection, userValidators,
   ];
 
 
-router.get('/edit/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, res, next) => {
+router.get('/users/edit/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, res, next) => {
     const userId = parseInt(req.params.id, 10);
     const authUserId = req.session.auth.userId;
     const user = await db.User.findByPk(userId);
@@ -210,7 +210,7 @@ router.get('/edit/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (r
 
 
 
-router.post('/edit/:id(\\d+)', requireAuth, csrfProtection, userEditValidators,
+router.post('/users/edit/:id(\\d+)', requireAuth, csrfProtection, userEditValidators,
   asyncHandler(async (req, res) => {
     const userId = parseInt(req.params.id, 10);
     const userCompareId = req.session.auth.userId
@@ -256,7 +256,7 @@ router.post('/edit/:id(\\d+)', requireAuth, csrfProtection, userEditValidators,
     }
   }));
 ////////DISABLING THIS BECAUSE IT DOES NOT WORK
-// router.get('/delete/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, res, next) => {
+// router.get('/users/delete/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, res, next) => {
 //     const userId = parseInt(req.params.id, 10);
 //     const user = await db.User.findByPk(userId);
 //     const userCompareId = req.session.auth.userId
@@ -274,7 +274,7 @@ router.post('/edit/:id(\\d+)', requireAuth, csrfProtection, userEditValidators,
 //     });
 //   }));
 ///////////DOES NOT WORK AND WHEN TRY TO FIX, BREAKS OTHER THINGS, DO NOT USE
-// router.post('/delete/:id(\\d+)', requireAuth, csrfProtection,  asyncHandler(async (req, res, next) => {
+// router.post('/users/delete/:id(\\d+)', requireAuth, csrfProtection,  asyncHandler(async (req, res, next) => {
 //     const userId = parseInt(req.params.id, 10);
 //     const user = await db.User.findByPk(userId);
 //     const userCompareId = req.session.auth.userId

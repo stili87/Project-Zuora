@@ -32,12 +32,12 @@ app.use(session({
 
 app.use(restoreUser)
 //////PUT ALL ROUTERS HERE
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use(indexRouter);
+app.use(usersRouter);
 
 app.use(commentsRouter);
-app.use('/likes', likesRouter);
-app.use('/questions', questionsRouter);
+app.use(likesRouter);
+app.use(questionsRouter);
 app.use(tagsRouter);
 app.use(answersRouter);
 
