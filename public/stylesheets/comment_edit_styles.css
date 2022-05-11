@@ -36,7 +36,7 @@ form {
     width: 75%;
 }
 
-.answer-edit-inner-container {
+.comment-edit-inner-container {
     display: flex;
     justify-content: center;
     width: 50%;
@@ -49,7 +49,13 @@ button {
     opacity: 100%;
 }
 
-.answer-edit-button {
+a {
+    cursor: pointer;
+    box-shadow: 4px 4px 6px black;
+    opacity: 100%;
+}
+
+.comment-edit-button {
     font-size: 17px;
     border-radius: 20px;
     background-color: #A9C1C7;
@@ -57,7 +63,8 @@ button {
     padding-right: 25px;
 }
 
-.answer-delete-button {
+.cancel-edit-button {
+    margin-top: 10px;
     font-size: 17px;
     border-radius: 20px;
     background-color: #A9C1C7;
@@ -65,7 +72,15 @@ button {
     padding-right: 25px;
 }
 
-.answer-edit-inner {
+.comment-delete-button {
+    font-size: 17px;
+    border-radius: 20px;
+    background-color: #A9C1C7;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.comment-edit-inner {
     height: 100%;
     width: 100%;
     margin: 10px;
