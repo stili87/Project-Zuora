@@ -12,6 +12,7 @@ const commentsRouter = require('./routes/comments');
 const likesRouter = require('./routes/likes');
 const questionsRouter = require('./routes/questions');
 const tagsRouter = require('./routes/tags');
+const profilesRouter = require('./routes/profile')
 const {restoreUser} = require('./auth.js')
 const app = express();
 
@@ -40,9 +41,12 @@ app.use(likesRouter);
 app.use(questionsRouter);
 app.use(tagsRouter);
 app.use(answersRouter);
+app.use(profilesRouter);
 
 
-
+app.get('/navbar', (req, res, next) => {
+  res.render('nav-bar')
+})
 
 // Catch unhandled requests and forward to error handler.
 // Maybe make a custom 404 page-------------------
@@ -61,6 +65,18 @@ app.use((req, res, next) => {
       res.status(404);
       res.render('page-not-found', {
         title: 'Page Not Found',
+      });
+    } else {
+      next(err);
+    }
+  });
+
+  app.use((err, req, res, next) => {
+    console.error(err);
+    if (err.status === 403) {
+      res.status(403);
+      res.render('page-forbidden', {
+        title: 'Forbidden',
       });
     } else {
       next(err);

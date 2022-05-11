@@ -1,0 +1,95 @@
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: #CAD2C5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+p, button, h1, img {
+    margin: 0;
+    padding: 0;
+}
+
+.middle {
+    align-self: center;
+    display: flex;
+    width: 50%;
+    border: 2px solid black;
+    height: 50%;
+    background-color: rgb(124, 141, 136);
+    border-radius: 25px;
+    box-shadow: 5px 5px 3px grey;
+}
+
+.left-middle {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 2px solid black;
+}
+
+.right-middle {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-middle > img {
+    width: 75%;
+    height: 75%;
+    border-radius: 10px;
+}
+
+.h1_404 {
+    font-size: 100px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+    font-weight: 900;
+    color: #de6c3f;
+    text-shadow: 5px 5px 3px grey;
+}
+
+.p_404_desc {
+    margin-bottom: 25px;
+    font-weight: 600;
+    font-size: 25px;
+    text-align: center;
+    color: #2f3e46;
+}
+
+.button_home {
+    margin: 5px;
+    padding: 8px;
+    font-size: 20px;
+    border-radius: 25px;
+    background-color: #A9C1C7;
+    text-decoration: none;
+}
+.home_link  {
+    text-decoration: none;
+    color: #2f3e46;
+}
+.gaurd_img {
+    height: 75%;
+}
+
+.error_div {
+    margin-top: 25px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}

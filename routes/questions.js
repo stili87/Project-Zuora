@@ -58,7 +58,7 @@ router.get('/questions/add', csrfProtection, requireAuth, asyncHandler(async(req
    });
 }));
 
-router.post('/', csrfProtection, questionValidators, requireAuth, asyncHandler(async(req, res) => {
+router.post('/questions/add', csrfProtection, questionValidators, requireAuth, asyncHandler(async(req, res) => {
   const { title, content, tagId, media } = req.body;
   const userId = req.session.auth.userId
   const question = db.Question.build({
