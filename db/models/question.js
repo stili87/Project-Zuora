@@ -10,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Question.belongsTo(models.User, {as: 'user', foreignKey: 'userId'})
-      Question.belongsTo(models.Tag, {as: 'tag', foreignKey: 'tagId'})
-      Question.hasMany(models.Like, {as: 'likes', foreignKey: 'questionId'})
-      Question.hasMany(models.Answer, {as: 'answers', foreignKey: 'questionId'})
+      Question.belongsTo(models.User, {foreignKey: 'userId'})
+      Question.belongsTo(models.Tag, {foreignKey: 'tagId'})
+      Question.hasMany(models.Like, {foreignKey: 'questionId'})
+      Question.hasMany(models.Answer, {foreignKey: 'questionId'})
     }
   }
   Question.init({

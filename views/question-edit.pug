@@ -1,0 +1,21 @@
+extends layout.pug
+
+include utils.pug
+
+block content
+    +validationErrorSummary(errors)
+    form(action=`/questions/${questionId}/edit` method='post')
+        input(type='hidden' name='_csrf' value=csrfToken)
+        +field('Title', 'title', question.title , "text")
+        +field('Content', 'content', question.content, "textarea")
+        +field('Media', 'media', question.media, "text")
+        label(for="tagId") Choose Tag
+        select(name="tagId")
+            each tag in tags
+                option(value=tag.id)= tag.name
+        div(class='py-4')
+            button(type='submit') Submit
+            a(href='/' class='btn btn-warning ml-2') Cancel
+    form(action=`/questions/${questionId}/delete` method="POST")
+        input(type='hidden' name='_csrf' value=csrfToken)
+        button(type='submit') Delete

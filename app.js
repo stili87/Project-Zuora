@@ -32,13 +32,13 @@ app.use(session({
 
 app.use(restoreUser)
 //////PUT ALL ROUTERS HERE
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use(indexRouter);
+app.use(usersRouter);
 
-app.use('/comments', commentsRouter);
-app.use('/likes', likesRouter);
-app.use('/questions', questionsRouter);
-app.use('/tags', tagsRouter);
+app.use(commentsRouter);
+app.use(likesRouter);
+app.use(questionsRouter);
+app.use(tagsRouter);
 app.use(answersRouter);
 
 
@@ -75,7 +75,7 @@ app.use((req, res, next) => {
 
     // render the error page
     res.status(err.status || 500);
-    res.render('error');
+    res.render('errors');
   });
 
 module.exports = app;

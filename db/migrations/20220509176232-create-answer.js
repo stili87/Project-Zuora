@@ -15,6 +15,7 @@ module.exports = {
           model: 'Questions',
           key: 'id'
         },
+      onDelete: 'CASCADE',
       },
       userId: {
         allowNull: false,
@@ -23,6 +24,7 @@ module.exports = {
           model: 'Users',
           key: 'id'
         },
+        onDelete: 'CASCADE',
       },
       streetCred: {
         type: Sequelize.STRING(200)
