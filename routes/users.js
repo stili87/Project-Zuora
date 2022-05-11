@@ -47,6 +47,11 @@ router.post('/users/login', csrfProtection, loginValidators, asyncHandler(async 
   }
 }))
 
+router.post('/users/logout', async (req, res) => {
+  logoutUser(req, res)
+  res.redirect('/')
+})
+
 
 
 
@@ -296,10 +301,12 @@ router.post('/users/edit/:id(\\d+)', requireAuth, csrfProtection, userEditValida
 //     res.redirect('/users/register');
 //   }));
 
-  // router.get('/:userId', requireAuth, csrfProtection,
+
+  // router.get('/users/:userId', requireAuth, csrfProtection,
   //   asyncHandler(async function (req, res) {
   //     const { userId } = req.params;
-  //     const user = await db.User.findByPk(userId, {include: ['questions', 'comments', 'answers']})
+  //     const user = await db.User.findByPk(userId, {include: ['Question', 'comments', 'answers']})
+
   //     console.log(user)
   //     res.render('user-detail', { csrfToken: req.csrfToken(), user })
   //   })
