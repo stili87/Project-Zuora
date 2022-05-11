@@ -47,6 +47,11 @@ router.post('/users/login', csrfProtection, loginValidators, asyncHandler(async 
   }
 }))
 
+router.post('/users/logout', async (req, res) => {
+  logoutUser(req, res)
+  res.redirect('/')
+})
+
 
 
 
