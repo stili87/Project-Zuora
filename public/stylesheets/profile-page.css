@@ -1,5 +1,11 @@
 body {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
     background-color: #CAD2C5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 .orange-buttons {
@@ -8,3 +14,90 @@ body {
     font-weight: bold;
 }
 
+.profile-box {
+    width: 65%;
+    background-color: #7C8D88;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    border: 3px solid #2F3E46;
+}
+
+.pic-name-cred {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin: 2px 0px 0px 25px;
+    border: 3px solid #2F3E46;
+    box-shadow: #2F3E46 -5px 5px, #49616E -10px 10px, #84a7b9 -15px 15px;
+    border-radius: 80px;
+}
+
+.name-cred-box {
+    background-color: #A9C1C7;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin: 2px 0px 0px 25px;
+    border-radius: 30px;
+    border: 3px solid #49616E;
+    box-shadow: #2F3E46 -5px 5px, #49616E -10px 10px, #84a7b9 -15px 15px;
+}
+
+.profile-name {
+    text-shadow: #2F3E46 -2px 2px 6px;
+    color: #2F3E46;
+}
+
+.bio-box {
+    margin: 20px 0px 0px 25px;
+    width: fit-content;
+    background-color: #A9C1C7;
+    border-radius: 18px;
+    border: 3px solid #49616E;
+    box-shadow: #2F3E46 -5px 5px, #49616E -10px 10px, #84a7b9 -15px 15px;
+}
+
+.bio {
+    padding: 0px 10px;
+    color: #2F3E46;
+    font-weight: 600;
+}
+
+.cred {
+    color: #2F3E46;
+    font-weight: 600;
+}
+
+/* .under-profile-toolbar {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    background-color: white;
+} */
+
+.feed-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 10px 0px 25px;
+    height: fit-content;
+    background-color: #A9C1C7;
+    border-radius: 18px;
+    border: 3px solid #49616E;
+    box-shadow: #2F3E46 -5px 5px, #49616E -10px 10px, #84a7b9 -15px 15px;
+}
+
+.feed-title {
+    padding: 0px 10px;
+    color: #2F3E46;
+    font-weight: 600;
+}
+
+.feed-content {
+
+}

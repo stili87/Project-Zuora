@@ -1,27 +1,26 @@
-extends layout.pug
+
 include utils.pug
-block content
-//-   div(class="splash-mid")
-//-     img(src=`${db.User.picSrc}`)
-//-     h1(class="splash-h1") Welcome to Project Zuora
-//-     h2(class="splash-h2") Where you can ask your Video Game Questions
-//-     .splash-inner-container
-//-       .splash-inner
-//-         h2(class="splash-inner-h2") Join Zuora Today
-//-         button(class='splash-register-button')
-//-           a(class='splash-register-link' href="/users/register") Click here to register
-//-       .splash-inner
-//-         h2(class="splash-inner-h2") Login to Zuora
-//-         form(action='/users/login' method='post')
-//-           input(type='hidden' name='_csrf' value=csrfToken)
-//-           +field('Email:', 'email', '', type="email")
-//-           +field('Password:', 'password', '', type="password")
-//-           div
-//-             button( class='splash-button' type='submit' class='btn btn-primary') Login
-//-         form(action='/users/login' method='post')
-//-           input(type='hidden' name='_csrf' value=csrfToken)
-//-           input(type='hidden' name='email' value='stili87@gmail.com')
-//-           input(type='hidden' name='password' value="LinkistheBest123*")
-//-           button(type='submit' class='splash-button') Click Here for demo user
-//-     button(class="try-button")
-//-       a(class='splash-register-link') Visit as Guest
+doctype html
+html
+    head
+        block head
+            title=`Project Zuora - ${user.fullName}`
+            link(rel='stylesheet' href='/stylesheets/profile-page.css')
+    body
+        div(class='profile-box')
+            div(class='pic-name-cred')
+                div(class='pic-box')
+                    img(class='profile-pic' src=`${user.picSrc}`)
+                div(class='name-cred-box')
+                    h1(class='profile-name')=`${user.fullName}`
+                    p(class='cred')=`${user.credentials}`
+            div(class='bio-box')
+                p(class='bio')=`${user.bio}`
+            //- div(class='under-profile-toolbar')
+            //-     button(type='button' id='feed')='Feed'
+            //-     button(type='button' id='questions')='My Questions'
+            //-     button(type='button' id='answers')='My Answers'
+            div(class='feed-box')
+                h2(class='feed-title')='My Feed'
+                div(class='feed-content')
+                    p='CONTENT IN MY FEED'

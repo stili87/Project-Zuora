@@ -3,6 +3,13 @@ const { check, validationResult } = require('express-validator');
 const { csrfProtection, asyncHandler } = require('./utils');
 const { requireAuth } = require('../auth.js')
 const router = express.Router();
-const { User, Answer, Question } = require('../db/models');
+const { User, Answer, Question, Comment } = require('../db/models');
 
-router.get('/users/')
+router.get('/users/:userId', asyncHandler(async function (req, res, next) {
+    const { userId } = req.params;
+    const user = await User.findByPk(userId, {include: [Question, Comment, Answer]})
+    res.render('user-detail', { user })
+    })
+)
+
+module.exports = router;

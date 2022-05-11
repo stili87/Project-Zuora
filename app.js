@@ -12,6 +12,7 @@ const commentsRouter = require('./routes/comments');
 const likesRouter = require('./routes/likes');
 const questionsRouter = require('./routes/questions');
 const tagsRouter = require('./routes/tags');
+const profilesRouter = require('./routes/profile')
 const {restoreUser} = require('./auth.js')
 const app = express();
 
@@ -40,6 +41,7 @@ app.use(likesRouter);
 app.use(questionsRouter);
 app.use(tagsRouter);
 app.use(answersRouter);
+app.use(profilesRouter);
 
 
 

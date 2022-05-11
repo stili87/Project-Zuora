@@ -296,13 +296,13 @@ router.post('/users/edit/:id(\\d+)', requireAuth, csrfProtection, userEditValida
 //     res.redirect('/users/register');
 //   }));
 
-  router.get('/:userId', requireAuth, csrfProtection,
-    asyncHandler(async function (req, res) {
-      const { userId } = req.params;
-      const user = await db.User.findByPk(userId, {include: ['questions', 'comments', 'answers']})
-      console.log(user)
-      res.render('user-detail', { csrfToken: req.csrfToken(), user })
-    })
-  );
+  // router.get('/:userId', requireAuth, csrfProtection,
+  //   asyncHandler(async function (req, res) {
+  //     const { userId } = req.params;
+  //     const user = await db.User.findByPk(userId, {include: ['questions', 'comments', 'answers']})
+  //     console.log(user)
+  //     res.render('user-detail', { csrfToken: req.csrfToken(), user })
+  //   })
+  // );
 
   module.exports = router;
