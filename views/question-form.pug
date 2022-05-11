@@ -1,0 +1,25 @@
+extends layout.pug
+
+include utils.pug
+
+block content
+  h3 Submit a question
+  +validationErrorSummary(errors)
+  form(action="/questions" method="post")
+    input(type='hidden' name='_csrf' value=csrfToken)
+    div
+      label(for="title") Title
+      input(type="text" name="title" required)
+    div
+      label(for="content") Content
+      input(type="text" name="content" required)
+    div
+      label(for="media") Image Url
+      input(type="text" name="media" placeholder="optional")
+    div
+      label(for="tagId") Choose Tag
+      select(name="tagId")
+        each tag in tags
+          option(value=tag.id)= tag.name
+    div
+      button(type="submit") Submit

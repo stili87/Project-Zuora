@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Question.belongsTo(models.User, {as: 'user', foreignKey: 'userId'})
       Question.belongsTo(models.Tag, {as: 'tag', foreignKey: 'tagId'})
-      Question.hasMany(models.Like, {as: 'likes', foreignKey: 'questionId'})
+      Question.hasMany(models.Like, {as: 'likes', foreignKey: 'questionId', onDelete: 'CASCADE', hooks: true})
       Question.hasMany(models.Answer, {as: 'answers', foreignKey: 'questionId'})
     }
   }

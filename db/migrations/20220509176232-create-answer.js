@@ -15,6 +15,7 @@ module.exports = {
           model: 'Questions',
           key: 'id'
         },
+      onDelete: 'CASCADE',
       },
       userId: {
         allowNull: false,

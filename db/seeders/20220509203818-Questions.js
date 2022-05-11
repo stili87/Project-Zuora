@@ -7,7 +7,7 @@ module.exports = {
      *
      * Example:
      */
-    await queryInterface.bulkInsert('People', [
+    await queryInterface.bulkInsert('Questions', [
       {
         title: "Water Temple",
         content: "How do I drain the water from inside the temple",
@@ -34,7 +34,7 @@ module.exports = {
      * Add commands to revert seed here.
      *
      * Example:
-     * await queryInterface.bulkDelete('People', null, {});
      */
+    await queryInterface.bulkDelete('Questions', null, {});
   }
 };
