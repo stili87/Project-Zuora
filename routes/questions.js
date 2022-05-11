@@ -11,18 +11,23 @@ const db = require('../db/models');
 const questionValidators = [
   check('title')
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a question title'),
+    .withMessage('Please provide a question title')
+    .isLength({ max: 100 })
+    .withMessage('Question title must not be more than 100 characters'),
   check('content')
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a value for Password')
-    .isLength({ max: 255 })
+    .withMessage('Please provide a value for Content')
+    .isLength({ max: 500 })
     .withMessage('Question body must not be more than 500 characters'),
   check('media')
     .isString(),
+  check('tagId')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a tag')
 ];
 
-router.get('/', csrfProtection, requireAuth, asyncHandler(async(req, res) => {
-  const questions = await db.Question.findAll();
+router.get('/', csrfProtection, asyncHandler(async(req, res) => {
+  const questions = await db.Question.findAll({include: [{model: db.Answer, include: [db.Comment]}]});
   const tags = await db.Tag.findAll();
   res.render('questions', {
     title: 'Questions',
@@ -33,25 +38,19 @@ router.get('/', csrfProtection, requireAuth, asyncHandler(async(req, res) => {
 
 
 router.get('/add', csrfProtection, requireAuth, asyncHandler(async(req, res) => {
-  const questions = await db.Question.findAll();
+  const question = await db.Question.build();
   const tags = await db.Tag.findAll();
   res.render('question-form', {
     title: 'Questions',
-    questions,
+    question,
     tags,
     csrfToken: req.csrfToken(),
    });
 }));
 
 router.post('/', csrfProtection, questionValidators, requireAuth, asyncHandler(async(req, res) => {
-
-
   const { title, content, tagId, media } = req.body;
-  console.log(req.body)
-
   const userId = req.session.auth.userId
-
-
   const question = db.Question.build({
     title,
     content,
@@ -60,18 +59,17 @@ router.post('/', csrfProtection, questionValidators, requireAuth, asyncHandler(a
     media
    });
 
-   const tags = db.Tag.findAll()
-
    const validatorErrors = validationResult(req);
 
    if (validatorErrors.isEmpty()) {
     await question.save();
-    res.redirect('/questions');
+    res.redirect('/');
   } else {
+    const tags = db.Tag.findAll()
     const errors = validatorErrors.array().map((error) => error.msg);
     res.render('question-form', {
       title: 'Submit Question',
-      // question,
+      question,
       errors,
       tags,
       csrfToken: req.csrfToken(),
@@ -80,90 +78,80 @@ router.post('/', csrfProtection, questionValidators, requireAuth, asyncHandler(a
 
 }));
 
-router.get('/questions', csrfProtection, requireAuth, asyncHandler(async(req, res) => {
-  const questions = await db.Question.findAll();
-  res.render('questions', {
-    questions,
-    csrfToken: req.csrfToken(),
-  })
-}));
 
-router.get('/:questionId/edit', csrfProtection, requireAuth, asyncHandler(async(req, res) => {
-
+router.get('/:questionId(\\d+)/edit', csrfProtection, requireAuth, asyncHandler(async(req, res, next) => {
+    const userId = req.session.auth.userId
     const questionId = parseInt(req.params.questionId, 10);
-    console.log('questionID below !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-    console.log(questionId)
-  const question = db.Question.findByPk(questionId);
+    const question = await db.Question.findByPk(questionId);
+    const tags = await db.Tag.findAll();
+
+    if(userId !== question.userId){
+      const newError = new Error("User did not create this question.")
+     newError.status = 403
+     next(newError)
+   }
 
   res.render('question-edit', {
-    title: "Question Edit",
-
-    csrfToken: req.csrfToken(),
-
+    title: 'Edit Question',
+     question,
+     questionId,
+     csrfToken: req.csrfToken(),
+     tags
   })
 
 }))
 
-router.post('/:questionId/edit', csrfProtection, requireAuth, questionValidators, asyncHandler(async(req, res) => {
-
+router.post('/:questionId(\\d+)/edit', csrfProtection, requireAuth, questionValidators, asyncHandler(async(req, res, next) => {
   const userId = req.session.auth.userId
-  console.log('REQ.PARAMS HERE')
-  console.log(req.params)
   const questionId = parseInt(req.params.questionId, 10);
-
-  console.log('question ID below')
-  console.log(questionId)
-
   const question = await db.Question.findByPk(questionId);
-
-  const { title, content, media } = req.body
-  console.log('WE MADE IT HERE')
-  console.log(question)
-
-  let editedQuestion = await question.update({ title, content, media })
-  console.log(editedQuestion)
+  const { title, content, media, tagId} = req.body
+  const editObj = {title, content, media, userId : question.userId, tagId}
 
   const validatorErrors = validationResult(req);
+  const errors = validatorErrors.array().map((error) => error.msg);
+
+  if(userId !== question.userId){
+     const newError = new Error("User did not create this question.")
+    newError.status = 403
+    next(newError)
+  }else if (!question){
+   errors.push("Question does not exist")
+  }
 
   if (validatorErrors.isEmpty()) {
-   await editedQuestion.save();
+   await question.update(editObj);
    res.redirect("/questions")
  } else {
-   const errors = validatorErrors.array().map((error) => error.msg);
+   const tags = await db.Tag.findAll();
    res.render('question-edit', {
      title: 'Edit Question',
      question,
      questionId,
      errors,
      csrfToken: req.csrfToken(),
+     tags
    });
  }
 }));
 
-
-router.get('/:questionId/delete', requireAuth, asyncHandler(async(req, res) => {
-  const id = req.params.questionId;
-  res.render('testing', {
-    id
-  })
-}))
-
-router.post('/:questionId/delete', requireAuth, questionValidators,
-  asyncHandler(async function (req, res) {
+router.post('/:questionId(\\d+)/delete', requireAuth, questionValidators, asyncHandler(async function (req, res, next) {
     const { questionId } = req.params;
     const question = await db.Question.findByPk(questionId);
-  // const validatorErrors = validationResult(req);
+    const userId = req.session.auth.userId
 
-  //  const errors = validatorErrors.array().map((error) => error.msg);
-
-    if (question){
-
-      await question.destroy()
-
-    } else {
-      console.log('it didnt work')
-    }
-    res.render('testing')
+    if(userId !== question.userId){
+      const newError = new Error("User did not create this question.");
+      newError.status = 403;
+      next(newError);
+    }else if (!question){
+      const newError = new Error("Question does not exist.");
+      newError.status = 404;
+      next(newError);
+    }else {
+      await question.destroy();
+      res.redirect('/');
+   }
   })
 );
 

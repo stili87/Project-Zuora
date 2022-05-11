@@ -24,6 +24,7 @@ module.exports = {
           model: 'Users',
           key: 'id'
         },
+        onDelete: 'CASCADE',
       },
       streetCred: {
         type: Sequelize.STRING(200)

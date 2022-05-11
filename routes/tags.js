@@ -16,16 +16,15 @@ const tagValidators = [
             return Promise.reject('The provided Tag is already in existance');
           }
         });
-    }),,
+    })
 ];
 
-router.get('/tags',csrfProtection, requireAuth, asyncHandler( async (req, res, next) =>  {
+router.get('/tags',csrfProtection, requireAuth,  asyncHandler( async (req, res, next) =>  {
   res.render('create-tags', {title: 'Create a Tag', csrfToken: req.csrfToken()} )
 }));
 
-router.post('/tags',csrfProtection, requireAuth, asyncHandler( async (req, res, next) =>  {
+router.post('/tags', csrfProtection, requireAuth, tagValidators, asyncHandler( async (req, res, next) =>  {
   const {name} = req.body
-
   const newTag = await db.Tag.build({
     name
   })

@@ -17,18 +17,18 @@ const commentValidators = [
 
 router.get('/answer/:id(\\d+)/comments', requireAuth, csrfProtection,  asyncHandler( async (req, res, next) => {
   const id = req.params.id
-  
-  res.render('comment-form', {title: 'Create New Comment', csrfToken: req.csrfToken(), id })
+  const comment = await db.Comment.build()
+  res.render('comment-form', {comment, title: 'Create New Comment', csrfToken: req.csrfToken(), id })
 }));
 
-router.post('/answer/:id(\\d+)/comments', requireAuth, csrfProtection, asyncHandler( async (req, res, next) => {
+router.post('/answer/:id(\\d+)/comments', requireAuth, csrfProtection, commentValidators, asyncHandler( async (req, res, next) => {
   const {content} = req.body
   const answerId = req.params.id
   const userId = req.session.auth.userId
   const comment = await db.Comment.build({
         content,
         answerId,
-        userId
+        userId,
     });
     const validatorErrors = validationResult(req);
         if (validatorErrors.isEmpty()) {
@@ -39,21 +39,11 @@ router.post('/answer/:id(\\d+)/comments', requireAuth, csrfProtection, asyncHand
         res.render('comment-form', {
             title: 'Create New Comment',
             csrfToken: req.csrfToken(),
-            errors
+            errors,
+            comment
           });
       }
 }));
-///This is only for testing.
-router.get('/comments/delete/:id(\\d+)',requireAuth, asyncHandler( async(req, res, next) =>{
-  const id = req.params.id
-  const userId = req.session.auth.userId
-  const deleteComment = await db.Comment.findByPk(id)
-  if(deleteComment && deleteComment.userId === userId){
-      res.render('delete-comment', {id})
-    }else {
-      res.redirect("/")
-    }
-} ))
 
 ///this works
 router.post('/comments/delete/:id(\\d+)', requireAuth, asyncHandler( async (req, res, next) =>{
@@ -73,7 +63,13 @@ router.get('/comments/edit/:id(\\d+)', requireAuth, csrfProtection, asyncHandler
   const userId = req.session.auth.userId;
   const editComment = await db.Comment.findByPk(id);
 
-  if(editComment && editComment.userId === userId){
+  if(userId !== editComment.userId){
+    const newError = new Error("User did not create this comment.")
+     newError.status = 403
+     next(newError)
+    }
+
+  if(editComment){
       res.render('edit-comment', {
         id,
         title: "Edit your comment",
@@ -95,30 +91,26 @@ router.post('/comments/edit/:id(\\d+)', requireAuth, commentValidators, csrfProt
     userId: editComment.userId,
     answerId: editComment.answerId
   }
-  console.log(updateComment)
+
+  if(userId !== editComment.userId){
+    const newError = new Error("User did not create this comment.")
+     newError.status = 403
+     next(newError)
+    }
+
   const validatorErrors = validationResult(req);
   
-  if (validatorErrors.isEmpty()) {
-    if(editComment && editComment.userId === userId){
+  if (validatorErrors.isEmpty() && editComment) {
       await editComment.update(updateComment)
       res.redirect("/")
-    }else{   
-      const errors = ["You are not the owner of this comment."]
-      res.render('edit-comment', {
-        id,
-        title: "Edit your comment",
-        editComment,
-        csrfToken: req.csrfToken(),
-        errors 
-      })
-    }
-  }else {
+  } else {
+    const errors = validatorErrors.array().map((error) => error.msg);
     res.render('edit-comment', {
-      id,
+      id: commentId,
       title: "Edit your comment",
       editComment,
       csrfToken: req.csrfToken(),
-      errors: validatorErrors
+      errors
     })
   }
 }))

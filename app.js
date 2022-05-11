@@ -35,10 +35,10 @@ app.use(restoreUser)
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-app.use('/comments', commentsRouter);
+app.use(commentsRouter);
 app.use('/likes', likesRouter);
 app.use('/questions', questionsRouter);
-app.use('/tags', tagsRouter);
+app.use(tagsRouter);
 app.use(answersRouter);
 
 
@@ -75,7 +75,7 @@ app.use((req, res, next) => {
 
     // render the error page
     res.status(err.status || 500);
-    res.render('error');
+    res.render('errors');
   });
 
 module.exports = app;
