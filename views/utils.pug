@@ -26,6 +26,8 @@ mixin navBar()
           a(href="" class="nav-link-anchor") Home
         li(class='nav-link-li')
           a(href="" class="nav-link-anchor") Profile
+        li(class='nav-link-li')
+          a(href="/questions/add" class="nav-link-anchor") Ask a Question 
         if locals.authenticated
           li(class='nav-link-li')
             form(action="/users/logout" method='post')
@@ -33,3 +35,5 @@ mixin navBar()
         else
           li(class='nav-link-li')
             a(href="/" class="nav-link-anchor login") Login
+          li(class='nav-link-li')
+            a(href="/users/register" class="nav-link-anchor") Register
