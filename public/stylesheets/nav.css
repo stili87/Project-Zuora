@@ -41,7 +41,8 @@
     font-size: 25px;
     font-weight: 400;
     background-color: #7c8D88;
-    border: none
+    border: none;
+    box-shadow: none;
 }
 
 .nav-link-anchor:hover {
@@ -52,7 +53,7 @@
     height: 70px;
     margin: 0px;
     padding: 0px;
-    border: 0px
+    border: none
 }
 
 .logo-text{
@@ -60,4 +61,6 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-shadow: 3px 2px 5px black;
     font-size: 30px;
+    border: none;
+    box-shadow: none;
 }

@@ -7,7 +7,9 @@ body {
     align-items: center;
     background-image: url('https://cdn.vox-cdn.com/thumbor/suYvgZ1flp3L5frTxkweHsfMyfo=/0x0:2400x1517/1900x1069/filters:focal(1008x567:1392x951):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/60039755/smash_illo.0.jpg');
     background-size:auto;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 button {

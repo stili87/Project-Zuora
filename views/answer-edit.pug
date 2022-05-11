@@ -4,7 +4,9 @@ html
   head
     title="Project Zuora"
     link(rel='stylesheet' href='/stylesheets/answer_edit_styles.css')
+    link(rel='stylesheet' href='/stylesheets/nav.css')
   body
+  +navBar()
   h3 Edit an answer
     +validationErrorSummary(errors)
     .answer-edit-inner-container

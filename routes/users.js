@@ -16,7 +16,7 @@ const loginValidators = [
 ];
 
 router.get('/users/login', csrfProtection, (req, res) => {
-  res.render('/', { csrfToken: req.csrfToken(), title: "Project Zuora" })
+  res.redirect('/')
 })
 
 router.post('/users/login', csrfProtection, loginValidators, asyncHandler(async (req, res) => {

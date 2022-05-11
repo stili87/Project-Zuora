@@ -4,7 +4,9 @@ html
   head
     title="Project Zuora"
     link(rel='stylesheet' href='/stylesheets/question_form_styles.css')
+    link(rel='stylesheet' href='/stylesheets/nav.css')
   body
+  +navBar()
   h3 Submit a question
   +validationErrorSummary(errors)
   .question-inner-container
