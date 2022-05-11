@@ -67,6 +67,18 @@ app.use((req, res, next) => {
     }
   });
 
+  app.use((err, req, res, next) => {
+    console.error(err);
+    if (err.status === 403) {
+      res.status(403);
+      res.render('page-forbidden', {
+        title: 'Forbidden',
+      });
+    } else {
+      next(err);
+    }
+  });
+
   // Generic error handler.   NEED CUSTOM PUG PAGE FOR THIS.
   app.use(function (err, req, res, next) {
     // set locals, only providing error in development
