@@ -19,7 +19,6 @@ module.exports = {
           model: 'Users',
           key: 'id'
         },
-        
       },
       answerId: {
         type: Sequelize.INTEGER,
