@@ -42,7 +42,9 @@ app.use(tagsRouter);
 app.use(answersRouter);
 
 
-
+app.get('/navbar', (req, res, next) => {
+  res.render('nav-bar')
+})
 
 // Catch unhandled requests and forward to error handler.
 // Maybe make a custom 404 page-------------------
@@ -61,6 +63,18 @@ app.use((req, res, next) => {
       res.status(404);
       res.render('page-not-found', {
         title: 'Page Not Found',
+      });
+    } else {
+      next(err);
+    }
+  });
+
+  app.use((err, req, res, next) => {
+    console.error(err);
+    if (err.status === 403) {
+      res.status(403);
+      res.render('page-forbidden', {
+        title: 'Forbidden',
       });
     } else {
       next(err);
