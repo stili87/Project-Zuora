@@ -1,11 +1,16 @@
-extends layout.pug
-
 include utils.pug
-
-block content
+doctype html
+html
+  head
+    title="Project Zuora"
+    link(rel='stylesheet' href='/stylesheets/user_register_styles.css')
+  body
+  h3 Register a user
   +validationErrorSummary(errors)
-  form(action='/users/register' method='post')
-    include user-form.pug
-    div(class='py-4')
-      button(type='submit' class='btn btn-primary') Register
-      a(href='/' class='btn btn-warning ml-2') Cancel
+  .user-register-inner-container
+    .user-register-inner
+      form(action='/users/register' method='post')
+        include user-form.pug
+        div(class='py-4')
+          button(type='submit' class='register-button') Register
+          a(href='/' class='cancel-button') Cancel

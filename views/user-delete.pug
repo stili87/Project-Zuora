@@ -1,11 +1,16 @@
-extends layout.pug
-
-block content
+include utils.pug
+doctype html
+html
+  head
+    title="Project Zuora"
+    link(rel='stylesheet' href='/stylesheets/user_delete_styles.css')
+  body
   h3= user.fullName
   div(class='py-4')
     p Proceed with deleting this user?
-  div
-    form(action=`/users/delete/${user.id}` method='post')
-      input(type='hidden' name='_csrf' value=csrfToken)
-      button(class='btn btn-danger' type='submit') Delete User
-      a(class='btn btn-warning ml-2' href=`/users/${user.id}` role='button') Cancel
+  .user-delete-inner-container
+        .user-delete-inner
+          form(action=`/users/delete/${user.id}` method='post')
+            input(type='hidden' name='_csrf' value=csrfToken)
+            button(class='delete-user-button' type='submit') Delete User
+            a(class='cancel-delete-button' href=`/users/${user.id}` role='button') Cancel

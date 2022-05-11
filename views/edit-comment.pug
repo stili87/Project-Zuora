@@ -1,15 +1,22 @@
-extends layout.pug
-
 include utils.pug
-
-block content
+doctype html
+html
+  head
+    title="Project Zuora"
+    link(rel='stylesheet' href='/stylesheets/comment_edit_styles.css')
+  body
+  h3 Edit a comment
     +validationErrorSummary(errors)
-    form(action=`/comments/edit/${id}` method='post')
-        input(type='hidden' name='_csrf' value=csrfToken)
-        +field('Content', 'content', editComment.content, type="textarea")
-        div(class='py-4')
-            button(type='submit' class='btn btn-primary') Submit Edited Comment
-            a(href='/' class='btn btn-warning ml-2') Cancel
-    form(action=`/comments/delete/${id}` method="POST")
-        input(type='hidden' name='_csrf' value=csrfToken)
-        button(type='submit') Delete
+    .comment-edit-inner-container
+        .comment-edit-inner
+            form(action=`/answer/${id}/comments/edit/${id}` method='post')
+                input(type='hidden' name='_csrf' value=csrfToken)
+                +field('Content', 'content', editComment.content, type="textarea")
+                button(type='submit' class='comment-edit-button') Submit Edited Comment
+                a(href=`/answer/${id}/comments` class='cancel-edit-button') Cancel
+    .comment-edit-inner-container
+        .comment-edit-inner
+            p Would you like to delete your comment permanently?
+            form(action=`/answer/${id}/comments/delete/${id}` method="POST")
+                input(type='hidden' name='_csrf' value=csrfToken)
+                button(type='submit' class='comment-delete-button') Delete
