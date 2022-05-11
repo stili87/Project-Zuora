@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Comment.belongsTo(models.User, {as: 'user', foreignKey: 'userId'})
-      Comment.belongsTo(models.Answer, {as: 'answer', foreignKey: 'answerId'})
+      Comment.belongsTo(models.Answer, {as: 'answer', foreignKey: 'answerId', onDelete: 'CASCADE', hooks: true})
     }
   }
   Comment.init({

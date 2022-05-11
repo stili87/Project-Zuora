@@ -1,18 +1,10 @@
-
-//- include utils.pug
-
-//- input(type='hidden' name='_csrf' value=csrfToken)
-//- +field('Visited On', 'visitedOn', question.title, 'text', 'ex: 2000-01-31')
-//- +field('Rating', 'rating', question.content)
-//- +field('Comments', 'comments', question.Tag.tagId, 'textarea')
-
 extends layout.pug
 
 include utils.pug
 
 block content
   h3 Submit a question
-  //- +validationErrorSummary(errors)
+  +validationErrorSummary(errors)
   form(action="/questions" method="post")
     input(type='hidden' name='_csrf' value=csrfToken)
     div
