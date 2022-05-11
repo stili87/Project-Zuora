@@ -23,12 +23,24 @@ const questionValidators = [
     .exists({ checkFalsy: true })
     .withMessage('Please provide a tag')
 ];
+router.get('/get-answers/:id', async(req, res) => {
+  let questionId = req.params.id;
+  let question = await db.Question.findByPk(questionId, {
+    include: [
+      db.Answer
+    ]
+  })
+  console.log(question)
+  res.send(question)
+})
 
 router.get('/questions', csrfProtection, asyncHandler(async(req, res) => {
-  const questions = await db.Question.findAll({include: [{model: db.Answer, include: [db.Comment]}]});
+  const questions = await db.Question.findAll({include: [{model: db.Answer, include: [db.Comment]},{model: db.Tag},{model: db.User}]});
   const tags = await db.Tag.findAll();
+
   res.render('questions', {
     title: 'Questions',
+    tags,
     questions,
     csrfToken: req.csrfToken(),
    });
