@@ -296,7 +296,7 @@ router.post('/users/edit/:id(\\d+)', requireAuth, csrfProtection, userEditValida
 //     res.redirect('/users/register');
 //   }));
 
-  router.get('/:userId', requireAuth, csrfProtection,
+  router.get('/users/:userId', requireAuth, csrfProtection,
     asyncHandler(async function (req, res) {
       const { userId } = req.params;
       const user = await db.User.findByPk(userId, {include: ['questions', 'comments', 'answers']})
