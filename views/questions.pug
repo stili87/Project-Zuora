@@ -1,13 +1,16 @@
+include utils.pug
 doctype html
 html
   head
       block head
         title="Project Zuora"
         link(rel='stylesheet' href='/stylesheets/questions.css')
+        link(rel='stylesheet' href='/stylesheets/nav.css')
         script
           include ../public/javascript/question-page.js
 
   body
+    +navBar()
     div.container
       div.sideBar
         ul.sideBarList
