@@ -17,6 +17,7 @@ body {
 }
 .container{
   display: flex;
+  margin-top: 20px;
 }
 .main{
 
@@ -26,9 +27,12 @@ body {
   /* margin-left: 300px; */
   background-color: #A9C1C7;
   width: 200px;
-  position: fixed;
-  left: 150px;
-  top: 20px;
+  position: absolute;
+  /* left: 150px;
+  top: 20px; */
+  left: 100px;
+  margin-top: 20px;
+  z-index: -1;
 
 }
 
