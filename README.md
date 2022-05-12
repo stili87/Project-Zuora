@@ -1,5 +1,12 @@
 # Project-Zuora
-  Project Zuora is a Quora clone for practice with Express, Pug, CSS, and front end vanilla DOM manipulation. The full stack app will have functionality to ask a question that other users can answer.  Then comments can be made on those answers.
+  > Project Zuora is a Quora clone for practice with Express, Pug, CSS, and front end vanilla DOM manipulation. The full stack app will have functionality to ask a question that other users can answer.  Then comments can be made on those answers.
+  
+# Technologies Used
+  > Express
+  > Pug
+  > CSS
+  > Front End Vanilla JavaScript
+  > Sequalize
   
 # MVP Features for Project Zuora
   1.) Asking Questions
