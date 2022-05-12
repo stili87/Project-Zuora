@@ -33,10 +33,12 @@ html
           div.question
             div.question_head
               div.user_img
+
                 if (question.User.picSrc)
-                  img(src=question.User.picSrc)
+                  img(src=question.User.picSrc class="user_profile_pic")
                 else
-                  img(src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
+                  img( class="user_profile_pic" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
+
               div.head_text
                 div.question_head_upper
                   a(href=`/users/${question.userId}`) 
@@ -55,7 +57,18 @@ html
                 img( class="questions_img" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
             div.question_footer
               div.post_answer
-                button
-                  a(href="#") Post Answer
+                button.post_answer Post Answer
               div
                 button.view_thread_btn View Thread
+            div.answers_section
+              div.answer
+                div.answer_head
+                  img(src=question.User.picSrc class="user_profile_pic")
+                div.answer_details
+                  p.answer_user_name= question.Answers[0].User.fullName
+                  p.answer_creds= question.Answers[0].streetCred
+                  p.answer_date= question.Answers[0].createdAt
+              div.answer_content
+                p.answer_content= question.Answers[0].content
+      div.right_img
+        img(src="https://freepngimg.com/thumb/the_legend_of_zelda/21249-6-zelda-link-hd.png")

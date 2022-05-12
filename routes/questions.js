@@ -35,8 +35,15 @@ router.get('/get-answers/:id', async(req, res) => {
 })
 
 router.get('/questions', csrfProtection, asyncHandler(async(req, res) => {
-  const questions = await db.Question.findAll({include: [{model: db.Answer, include: [db.Comment]},{model: db.Tag},{model: db.User}], order:[['createdAt', 'DESC']]});
+
+  const questions = await db.Question.findAll({include: [{model: db.Answer, include: [db.Comment, db.User]},{model: db.Tag},{model: db.User}]});
+
   const tags = await db.Tag.findAll();
+  // const answers = await db.Answer.findAll({model: db.User})
+  // const answers = await db.Answers.findAll({where: {
+
+  // }})
+  // questions.forEach(question => console.log('this is a question here!!!!', question.Answers[0].createdAt.split(' ').slice(1, 4).join(' ')))
 
   res.render('questions', {
     title: 'Questions',

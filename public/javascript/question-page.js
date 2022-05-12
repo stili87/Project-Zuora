@@ -11,6 +11,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const item = listItems[i];
 
     item.addEventListener('mouseover', ()=> {
+      console.log('whatsuyp?')
       item.style.backgroundColor = '#7C8D88';
     })
     item.addEventListener('mouseout', ()=> {
