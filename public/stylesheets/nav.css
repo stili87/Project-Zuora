@@ -11,6 +11,7 @@
     top: 0;
     border-bottom: 1px solid black;
     box-shadow: 2px 2px 52px black;
+    z-index: 100;
 }
 
 .nav-bar-left {

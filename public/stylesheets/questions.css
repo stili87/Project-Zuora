@@ -32,7 +32,7 @@ body {
   top: 20px; */
   left: 100px;
   margin-top: 20px;
-  z-index: -1;
+  /* z-index: -1; */
 
 }
 
@@ -79,9 +79,9 @@ body {
   width: 600px;
 
 }
-.user_img img{
-  width: 50px;
-  height: 50px;
+.user_profile_pic{
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   margin-right: 20px;
 }
@@ -109,4 +109,29 @@ body {
 .post_answer button a{
   text-decoration: none;
   color: black;
+}
+.right_img{
+  position: absolute;
+  right: -20px;
+  z-index: -1;
+  /* top: 200px; */
+}
+
+/* ANSWERS */
+.answer_details{
+  display: flex;
+}
+
+.answer_user_name{
+  font-weight: bold;
+}
+.answer{
+  display: flex;
+  padding: 15px;
+
+}
+
+.answer_content{
+  padding: 10px 35px;
+
 }
