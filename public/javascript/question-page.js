@@ -6,6 +6,64 @@ window.addEventListener('DOMContentLoaded', () => {
   let postAnswerBtns = document.querySelectorAll('.post_answer')
   let submitAnswerForms = document.querySelectorAll('.answer-inner-container')
   let userProfileLinks = document.querySelectorAll('.user_profile_link')
+  let submitAnswerButtons = document.querySelectorAll('.submit-answer-button')
+
+
+    // THIS is for submitting answers
+    for (let i = 0; i < submitAnswerButtons.length; i++) {
+      const subButton = submitAnswerButtons[i]
+      subButton.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const content = document.getElementById(`answer-content-${subButton.id}`)
+
+        if(!content.value){
+          return
+        }
+
+        const response = await fetch('/answers', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            questionId: subButton.id,
+            content: content.value,
+            userId: content.name
+          })
+        })
+
+        const data = await response.json()
+        
+        if(data.message === "Success"){
+          const answerSection =  document.getElementsByClassName(`answer-section-${subButton.id}`)[0]
+          const jUser = await fetch('/users', {
+            method: 'PATCH',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+              id: content.name
+            })
+          })
+
+          const user = await jUser.json()
+          
+          
+
+          const newHtml = `<div class="answer">
+          <div class="answer_head">
+          <img class="user_profile_pic" src=${user.picSrc}></div>
+          </div><p class="answer_user_name">${user.fullName}</p>
+          <p class="answer_creds"></p>
+          <p class="answer_date">${new Date()}</p>
+          <div class="answer_content"><p class="answer_content">${content.value}</p></div>
+          `
+
+         
+          answerSection.innerHTML = newHtml + answerSection.innerHTML
+          content.value = ''
+        }
+
+
+      })
+    }
+
 
 
 
