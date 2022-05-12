@@ -160,7 +160,7 @@ router.post('/questions/:questionId(\\d+)/delete', requireAuth, questionValidato
       next(newError);
     }else {
       await question.destroy();
-      res.redirect('/');
+      res.redirect('/questions');
    }
   })
 );

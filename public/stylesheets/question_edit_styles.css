@@ -23,6 +23,7 @@ form {
     align-items: center;
     justify-content: center;
     background-color: #7C8D88;
+    margin-top: 20px;
 }
 
 .form-group {
@@ -53,6 +54,7 @@ button {
     cursor: pointer;
     box-shadow: 2px 2px 3px black;
     opacity: 100%;
+    margin-bottom: 20px;
 }
 
 a {
