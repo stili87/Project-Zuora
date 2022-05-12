@@ -29,7 +29,7 @@ body {
   /* margin-left: 300px; */
   /* background-color: #A9C1C7; */
   width: 200px;
-  position: fixed;
+  /* position: fixed; */
   /* left: 150px;
   top: 20px; */
   left: 100px;
@@ -150,3 +150,48 @@ body {
 
   display: none;
 }
+
+
+/* ANSWER FORM */
+.answer-inner-container{
+  display: none;
+  padding-bottom: 15px;
+}
+.answer-inner{
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user_profile_pic_answer{
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-left: 15px;
+}
+.answer-popup-form{
+  margin-right: 50px;
+  width: 300px;
+  border-radius: 20px;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 10px;
+ padding-bottom: 10px;
+
+}
+.submit-answer-button{
+  /* align-self: flex-end; */
+  margin-right: 50px;
+}
+.inner-input-container{
+  display: flex;
+  align-content: space-around;
+}
+
+.submit-answer-button{
+  font-size: 15px;
+  border-radius: 5px;
+  margin: 3px 5px;
+  background-color: #DE6C3F;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;}

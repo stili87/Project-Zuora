@@ -36,6 +36,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
 
+
   /* HOVER EVENTS OVER SIDEBAR LIST ITEMS */
   for (let i = 0; i < listItems.length; i++) {
     const item = listItems[i];

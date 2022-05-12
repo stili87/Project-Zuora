@@ -42,6 +42,12 @@ router.get('/questions', csrfProtection, asyncHandler(async(req, res) => {
   // console.log(questions[0].User.id)
   // console.log(questions[0].User.id)
   const tags = await db.Tag.findAll();
+
+  const loggedInUserId = req.session.auth.userId
+
+  const loggedInUser = await db.User.findByPk(loggedInUserId)
+  console.log(loggedInUser.picSrc)
+
   // const answers = await db.Answer.findAll({model: db.User})
   // const answers = await db.Answers.findAll({where: {
 
@@ -53,6 +59,7 @@ router.get('/questions', csrfProtection, asyncHandler(async(req, res) => {
     tags,
     questions,
     csrfToken: req.csrfToken(),
+    loggedInUser,
    });
 }));
 
