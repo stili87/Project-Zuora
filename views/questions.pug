@@ -41,7 +41,7 @@ html
 
               div.head_text
                 div.question_head_upper
-                  a(href=`/users/${question.userId}`)
+                  a(href=`/users/${question.userId}`)= question.User.fullName
                 div.question_head_lower
                   p= question.User.credentials
             div.question_body
