@@ -29,7 +29,7 @@ router.get('/questions/:id(\\d+)/answers', requireAuth, csrfProtection,
 
 router.post('/questions/:id(\\d+)/answers', requireAuth, checkAnswerFields, csrfProtection,
   asyncHandler(async function (req, res, next) {
-    console.log(req.body)
+    
     const questionId = req.params.id;
     const userId = req.session.auth.userId;
     const { streetCred, content } = req.body
@@ -110,5 +110,13 @@ router.post('/questions/:questionId(\\d+)/answers/:answerId(\\d+)/delete', requi
 
 })
 );
+
+//FRONT END API ROUTE
+router.post('/answers', asyncHandler( async(req, res) => {
+  const {content, questionId, userId} = req.body
+  const answer = await Answer.build({ content, questionId, userId });
+  await answer.save();
+  res.json({message: 'Success'})
+}))
 
 module.exports = router;

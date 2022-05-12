@@ -270,6 +270,14 @@ router.post('/users/edit/:id(\\d+)', requireAuth, csrfProtection, userEditValida
       });
     }
   }));
+
+router.patch('/users', asyncHandler( async(req, res)=> {
+  const {id} = req.body
+  const user = await db.User.findByPk(id)
+  res.json(user)
+}))
+
+
 ////////DISABLING THIS BECAUSE IT DOES NOT WORK
 // router.get('/users/delete/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, res, next) => {
 //     const userId = parseInt(req.params.id, 10);
