@@ -16,36 +16,42 @@ const loginValidators = [
 ];
 
 router.get('/users/login', csrfProtection, (req, res) => {
-  res.redirect('/')
+  res.render('user-login')
 })
 
 router.post('/users/login', csrfProtection, loginValidators, asyncHandler(async (req, res) => {
   const { email, password } = req.body
   const validatorErrors = validationResult(req);
   if (validatorErrors.isEmpty()) {
-    let user = await db.User.findOne({ where: { email } })
+    const user = await db.User.findOne({ where: { email } })
+    console.log(user, '!!!!!!!!!!!!!!!!!!111')
     if (user) {
       const result = await bcrypt.compare(password, user.hashedPassword.toString())
       if (result) {
         loginUser(req, res, user)
         res.redirect('/questions')
       } else {
-        res.render('user-login', {
+        res.render('index', {
           title: 'Login Page',
           csrfToken: req.csrfToken(),
           errors: ["Email or Password did not match records."]
         });
       }
-    }
-  } else {
+    }else {
+      res.render('index', {
+        title: 'Login Page',
+        csrfToken: req.csrfToken(),
+        errors: ["Email or Password did not match records."]
+    })
+  } 
+  }else {
     const errors = validatorErrors.array().map((error) => error.msg);
-    res.render('user-login', {
+    res.render('index', {
       title: 'Login Page',
       csrfToken: req.csrfToken(),
       errors
     });
-  }
-}))
+}}))
 
 router.post('/users/logout', async (req, res) => {
   logoutUser(req, res)
@@ -141,7 +147,7 @@ router.post('/users/register', csrfProtection, userValidators,
       user.hashedPassword = hashedPassword;
       await user.save();
       loginUser(req, res, user);
-      res.redirect('/questions');
+      res.redirect('/');
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render('user-register', {

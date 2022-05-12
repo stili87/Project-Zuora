@@ -17,6 +17,7 @@ html
         button(class='splash-register-button') 
           a(class='splash-register-link' href="/users/register") Click here to register
       .splash-inner
+        +validationErrorSummary(errors)
         h2(class="splash-inner-h2") Login to Zuora
         form(action='/users/login' method='post')
           input(type='hidden' name='_csrf' value=csrfToken)
