@@ -7,7 +7,20 @@ window.addEventListener('DOMContentLoaded', () => {
   let submitAnswerForms = document.querySelectorAll('.answer-inner-container')
   let userProfileLinks = document.querySelectorAll('.user_profile_link')
   let submitAnswerButtons = document.querySelectorAll('.submit-answer-button')
+  let answerSection = document.querySelector('.answer_section')
+  let deleteButtons = document.querySelectorAll('.delete_answer_btn')
 
+  for (let i = 0; i < deleteButtons.length; i++) {
+    const deleteBtn = deleteButtons[i];
+    deleteBtn.addEventListener('click', async (e) => {
+      const response = await fetch(`/answers/delete/${deleteBtn.name}`, {
+        method: 'DELETE'
+      });
+      const resJas = await response.json()
+      const answer = document.getElementById(`answer-div-${deleteBtn.name}`);
+      answer.remove();
+    })
+  }
 
     // THIS is for submitting answers
     for (let i = 0; i < submitAnswerButtons.length; i++) {
@@ -31,8 +44,9 @@ window.addEventListener('DOMContentLoaded', () => {
         })
 
         const data = await response.json()
-        
+
         if(data.message === "Success"){
+          console.log(data.id)
           const answerSection =  document.getElementsByClassName(`answer-section-${subButton.id}`)[0]
           const jUser = await fetch('/users', {
             method: 'PATCH',
@@ -43,21 +57,25 @@ window.addEventListener('DOMContentLoaded', () => {
           })
 
           const user = await jUser.json()
-          
-          
 
-          const newHtml = `<div class="answer">
-          <div class="answer_head">
-          <img class="user_profile_pic" src=${user.picSrc}></div>
-          </div><p class="answer_user_name">${user.fullName}</p>
-          <p class="answer_creds"></p>
-          <p class="answer_date">${new Date()}</p>
-          <div class="answer_content"><p class="answer_content">${content.value}</p></div>
+
+
+          const newHtml = `<div class="answer" id="answer-div-${data.id}"><div class="answer_head"><img class="user_profile_pic" src=${user.picSrc}></div><div class="answer_details"></div><p class="answer_user_name">${user.fullName}</p><p class="answer_creds">${user.streetCred}</p><p class="answer_date">${new Date()}</p><div class="answer_content"><p class="answer_content">${content.value}</p><button class="delete_answer_btn" id="temp" name=${data.id}>Delete</button></div></div>
           `
 
-         
+
           answerSection.innerHTML = newHtml + answerSection.innerHTML
           content.value = ''
+
+          const newAnswer = document.getElementById('temp')
+          newAnswer.addEventListener('click', async (e) => {
+            const response = await fetch(`/answers/delete/${newAnswer.name}`, {
+              method: 'DELETE'
+            });
+            const resJas = await response.json()
+            const answer = document.getElementById(`answer-div-${newAnswer.name}`);
+            answer.remove();
+          })
         }
 
 

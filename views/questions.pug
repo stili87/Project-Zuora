@@ -54,19 +54,22 @@ html
                     //- a(href=`/questions/` class='cancel-answer-button') Cancel
             div.answer_section(class=`answer-section-${question.id}`)
               each answer in question.Answers
-                div.answer
+                div.answer(id=`answer-div-${answer.id}`)
                   div.answer_head
                     if(answer.User.picSrc)
                       img(src=answer.User.picSrc class="user_profile_pic")
                     else
                       img(class="questions_img" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
                   div.answer_details
-                if (question.Answers)
-                    p.answer_user_name= answer.User.fullName
-                    p.answer_creds= answer.streetCred
-                    p.answer_date= answer.createdAt
-                div.answer_content
-                  p.answer_content= answer.content
+                  if (question.Answers)
+                      p.answer_user_name= answer.User.fullName
+                      p.answer_creds= answer.streetCred
+                      p.answer_date= answer.createdAt
+                  div.answer_content
+                    p.answer_content= answer.content
+                    if(locals.authenticated)
+                      if(answer.userId===locals.user.id)
+                        button(class='delete_answer_btn' name=`${answer.id}`) Delete
       div.right_img
         img(src="https://freepngimg.com/thumb/the_legend_of_zelda/21249-6-zelda-link-hd.png")
         script
