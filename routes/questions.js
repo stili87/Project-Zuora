@@ -30,14 +30,17 @@ router.get('/get-answers/:id', async(req, res) => {
       db.Answer
     ]
   })
-  console.log(question)
+  // console.log(question)
   res.send(question)
 })
 
 router.get('/questions', csrfProtection, asyncHandler(async(req, res) => {
 
   const questions = await db.Question.findAll({include: [{model: db.Answer, include: [db.Comment, db.User]},{model: db.Tag},{model: db.User}]});
-
+  // console.log(questions)
+  console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+  // console.log(questions[0].User.id)
+  // console.log(questions[0].User.id)
   const tags = await db.Tag.findAll();
   // const answers = await db.Answer.findAll({model: db.User})
   // const answers = await db.Answers.findAll({where: {
