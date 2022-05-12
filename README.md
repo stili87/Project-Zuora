@@ -40,3 +40,14 @@
 # Other Features
 
     > Splash Page - with option to use a demo user.
+    
+# Challenges
+    > Challenged by getting all the database information on the front page with both Express and Front end API fetch requests. 
+      > Solved through a large amount of trial and error to make everything right. 
+    > Learning each person's strengths in coding and working together. 
+      > Adjusting to each other's personalities and working styles. 
+      
+# Best Code
+  > TO DO
+
+
