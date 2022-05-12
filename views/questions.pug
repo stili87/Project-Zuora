@@ -6,8 +6,6 @@ html
         title="Project Zuora"
         link(rel='stylesheet' href='/stylesheets/questions.css')
         link(rel='stylesheet' href='/stylesheets/nav.css')
-        script
-          include ../public/javascript/question-page.js
 
   body
     +navBar()
@@ -16,32 +14,18 @@ html
         ul.sideBarList
           each tag in tags
             li.listItem= tag.name
-          each tag in tags
-            li.listItem= tag.name
-          each tag in tags
-            li.listItem= tag.name
-          each tag in tags
-            li.listItem= tag.name
-          each tag in tags
-            li.listItem= tag.name
-          each tag in tags
-            li.listItem= tag.name
-          each tag in tags
-            li.listItem= tag.name
       div.main
         each question in questions
           div.question
             div.question_head
               div.user_img
-
                 if (question.User.picSrc)
                   img(src=question.User.picSrc class="user_profile_pic")
                 else
                   img( class="user_profile_pic" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
-
               div.head_text
                 div.question_head_upper
-                  a(href=`/users/${question.userId}`)= question.User.fullName
+                  a(href=`/users/${question.userId}` class='user_profile_link')= question.User.fullName
                 div.question_head_lower
                   p= question.User.credentials
             div.question_body
@@ -57,17 +41,20 @@ html
                 img(class="questions_img" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
             div.question_footer
               div.post_answer
-                button.post_answer Post Answer
+                button Post Answer
               div
                 button.view_thread_btn View Thread
-            div.answer
-              div.answer_head
-                img(src=question.User.picSrc class="user_profile_pic")
-              div.answer_details
-                p.answer_user_name= question.Answers[0].User.fullName
-                p.answer_creds= question.Answers[0].streetCred
-                p.answer_date= question.Answers[0].createdAt
-            div.answer_content
-              p.answer_content= question.Answers[0].content
+            div.answer_section
+              div.answer
+                div.answer_head
+                  img(src=question.User.picSrc class="user_profile_pic")
+                div.answer_details
+                  p.answer_user_name= question.Answers[0].User.fullName
+                  p.answer_creds= question.Answers[0].streetCred
+                  p.answer_date= question.Answers[0].createdAt
+              div.answer_content
+                p.answer_content= question.Answers[0].content
       div.right_img
         img(src="https://freepngimg.com/thumb/the_legend_of_zelda/21249-6-zelda-link-hd.png")
+        script
+          include ../public/javascript/question-page.js
