@@ -44,6 +44,14 @@ html
                 button Post Answer
               div
                 button.view_thread_btn View Thread
+            .answer-inner-container
+              .answer-inner
+                form(action=`/questions/${id}/answers` method="POST") Your Answer
+                  input(type='hidden' name='_csrf' value=csrfToken)
+                  +field('Qualifications:', 'streetCred', '', 'text', 'Type your credentials here...')
+                  +field('Answer:', 'content', '', 'textarea', 'Type your answer here...')
+                  button(type='submit' class='submit-answer-button') Submit Answer
+                  a(href=`/questions/` class='cancel-answer-button') Cancel
             div.answer_section
               each answer in question.Answers
                 div.answer
