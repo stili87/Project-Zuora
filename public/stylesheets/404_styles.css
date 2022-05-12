@@ -1,8 +1,8 @@
 body {
-    height: 100%;
+    min-height: 100%;
     width: 100%;
     margin: 0;
-    position: absolute;
+    /* position: absolute; */
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -11,15 +11,17 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
-p, button, h1, img {
+/* p, button, h1, img {
     margin: 0;
     padding: 0;
-}
+} */
 
 .middle {
     align-self: center;
     display: flex;
-    width: 50%;
+    align-items: center;
+    width: 75%;
+    min-height: 300px;
     border: 2px solid black;
     height: 50%;
     background-color: rgb(124, 141, 136);
@@ -66,6 +68,7 @@ p, button, h1, img {
     font-size: 25px;
     text-align: center;
     color: #2f3e46;
+    padding: 25px;
 }
 
 .button_home {

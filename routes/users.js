@@ -28,7 +28,7 @@ router.post('/users/login', csrfProtection, loginValidators, asyncHandler(async 
       const result = await bcrypt.compare(password, user.hashedPassword.toString())
       if (result) {
         loginUser(req, res, user)
-        res.redirect('/')
+        res.redirect('/questions')
       } else {
         res.render('user-login', {
           title: 'Login Page',
@@ -141,7 +141,7 @@ router.post('/users/register', csrfProtection, userValidators,
       user.hashedPassword = hashedPassword;
       await user.save();
       loginUser(req, res, user);
-      res.redirect('/');
+      res.redirect('/questions');
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render('user-register', {

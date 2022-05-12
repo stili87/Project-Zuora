@@ -35,7 +35,7 @@ router.get('/get-answers/:id', async(req, res) => {
 })
 
 router.get('/questions', csrfProtection, asyncHandler(async(req, res) => {
-  const questions = await db.Question.findAll({include: [{model: db.Answer, include: [db.Comment]},{model: db.Tag},{model: db.User}]});
+  const questions = await db.Question.findAll({include: [{model: db.Answer, include: [db.Comment]},{model: db.Tag},{model: db.User}], order:[['createdAt', 'DESC']]});
   const tags = await db.Tag.findAll();
 
   res.render('questions', {
@@ -73,7 +73,7 @@ router.post('/questions/add', csrfProtection, questionValidators, requireAuth, a
 
    if (validatorErrors.isEmpty()) {
     await question.save();
-    res.redirect('/');
+    res.redirect('/questions');
   } else {
     const tags = db.Tag.findAll()
     const errors = validatorErrors.array().map((error) => error.msg);

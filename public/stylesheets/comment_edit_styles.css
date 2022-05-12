@@ -1,7 +1,7 @@
 body {
     height: 100%;
     width: 100%;
-    position: absolute;
+    /* position: absolute; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,6 +15,7 @@ body {
 
 h3 {
     font-size: 35px;
+    text-align: center;
 }
 
 form {
@@ -23,6 +24,8 @@ form {
     align-items: center;
     justify-content: center;
     background-color: #7C8D88;
+    font-size: 25px;
+    margin-top: 15px;
 }
 
 .form-group {
@@ -85,6 +88,7 @@ a {
     padding-right: 25px;
     padding-bottom: 3px;
     font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .comment-delete-button {
@@ -94,6 +98,7 @@ a {
     padding-left: 25px;
     padding-right: 25px;
     font-weight: 700;
+    margin-bottom: 10px;
 }
 
 .comment-edit-inner {

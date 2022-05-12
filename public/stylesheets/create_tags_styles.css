@@ -1,7 +1,7 @@
 body {
     height: 100%;
     width: 100%;
-    position: absolute;
+    /* position: absolute; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,6 +15,7 @@ body {
 
 h3 {
     font-size: 35px;
+    text-align: center;
 }
 
 form {
@@ -36,10 +37,15 @@ form {
 
 .label {
     padding-right: 20px;
+    margin-top: 30px;
+    text-align: center;
+    align-self: center;
+    justify-self: center;
 }
 
 .form-control {
     width: 75%;
+    
 }
 
 .create-tag-inner-container {
@@ -53,6 +59,7 @@ button {
     cursor: pointer;
     box-shadow: 2px 2px 3px black;
     opacity: 100%;
+    margin-bottom: 10px;
 }
 
 a {
@@ -99,4 +106,8 @@ a {
     border: 2px solid black;
     border-radius: 25px;
     background-color: #7C8D88;
+}
+
+#name {
+    margin-top: 30px;
 }

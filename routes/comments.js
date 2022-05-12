@@ -17,6 +17,7 @@ const commentValidators = [
 
 router.get('/answer/:id(\\d+)/comments', requireAuth, csrfProtection, asyncHandler(async (req, res, next) => {
   const id = req.params.id
+  console.log(id, '!!!!!!!!!!!!!!!!!!!!!!!!!!!')
   const comment = await db.Comment.build()
   res.render('comment-form', { comment, title: 'Create New Comment', csrfToken: req.csrfToken(), id })
 }));
@@ -33,7 +34,7 @@ router.post('/answer/:id(\\d+)/comments', requireAuth, csrfProtection, commentVa
   const validatorErrors = validationResult(req);
   if (validatorErrors.isEmpty()) {
     await comment.save();
-    res.redirect('/');
+    res.redirect('/questions');
   } else {
     const errors = validatorErrors.array().map((error) => error.msg);
     res.render('comment-form', {
@@ -45,16 +46,16 @@ router.post('/answer/:id(\\d+)/comments', requireAuth, csrfProtection, commentVa
   }
 }));
 
-///this works
+///this works delteing comment
 router.post('/answer/:id(\\d+)/comments/delete/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
   const commentId = req.params.id
   const userId = req.session.auth.userId
   const deleteComment = await db.Comment.findByPk(commentId)
   if (deleteComment && deleteComment.userId === userId) {
     deleteComment.destroy()
-    res.redirect("/")
+    res.redirect("/questions")
   } else {   //Redirects if the author of the comment does not match the current logged in user
-    res.redirect("/")
+    res.redirect("/questions")
   }
 }))
 
@@ -77,7 +78,7 @@ router.get('/answer/:id(\\d+)/comments/edit/:id(\\d+)', requireAuth, csrfProtect
       csrfToken: req.csrfToken()
     })
   } else {
-    res.redirect("/")
+    res.redirect("/questions")
   }
 }))
 
@@ -102,7 +103,7 @@ router.post('/answer/:id(\\d+)/comments/edit/:id(\\d+)', requireAuth, commentVal
 
   if (validatorErrors.isEmpty() && editComment) {
     await editComment.update(updateComment)
-    res.redirect("/")
+    res.redirect("/questions")
   } else {
     const errors = validatorErrors.array().map((error) => error.msg);
     res.render('edit-comment', {

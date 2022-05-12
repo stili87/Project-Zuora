@@ -1,7 +1,7 @@
 body {
     height: 100%;
     width: 100%;
-    position: absolute;
+    /* position: absolute; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -55,6 +55,7 @@ button {
     cursor: pointer;
     box-shadow: 2px 2px 3px black;
     opacity: 100%;
+    margin-bottom: 10px;
 }
 
 a {

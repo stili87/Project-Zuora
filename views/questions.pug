@@ -33,10 +33,13 @@ html
           div.question
             div.question_head
               div.user_img
-                img(src=question.User.picSrc)
+                if (question.User.picSrc)
+                  img(src=question.User.picSrc)
+                else
+                  img(src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
               div.head_text
                 div.question_head_upper
-                  p= question.User.fullName
+                  a(href=`/users/${question.userId}`) 
                 div.question_head_lower
                   p= question.User.credentials
             div.question_body
@@ -44,8 +47,12 @@ html
                 p= question.title
               div.question_body_content
                 p= question.content
-              div.question_body_img
-                img(src=question.media)
+              if (question.media)
+                div.question_body_img
+                img(class="questions_img" src=question.media)
+              else 
+                div.question_body_img
+                img( class="questions_img" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
             div.question_footer
               div.post_answer
                 button

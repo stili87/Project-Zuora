@@ -1,26 +1,29 @@
+include utils.pug
 doctype html
 html
   head
       block head
         title="Project Zuora"
         link(rel='stylesheet' href='/stylesheets/404_styles.css')
-body
- h1(class="h1_404") 500!
- .middle
-  .left-middle
+        link(rel='stylesheet' href='/stylesheets/nav.css')
+  body
+  +navBar()
+  h1(class="h1_404") 500!
+  .middle
+   .left-middle
     img(src="/images/Broken.jpeg", alt="Link with Broken Sword", class="gaurd_img")
-  .right-middle
+   .right-middle
    
-   p(class="p_404_desc") An unexpected error occurred on the server. See Below for Error Message.
+    p(class="p_404_desc") An unexpected error occurred on the server. See Below for Error Message.
   
-   button(class="button_home")
-    a(href='/' class="home_link") Return to Home Page
+    button(class="button_home")
+     a(href='/' class="home_link") Return to Home Page
 
 
     
- .error_div
-   p Error Message
-   p= message || 'Error Unknown'
- if stack
-   h3 Stack Trace
-   pre= stack
+  .error_div
+    p Error Message
+    p= message || 'Error Unknown'
+  if stack
+    h3 Stack Trace
+    pre= stack

@@ -32,7 +32,7 @@ router.post('/tags', csrfProtection, requireAuth, tagValidators, asyncHandler( a
   const validatorErrors = validationResult(req);
         if (validatorErrors.isEmpty()) {
           await newTag.save();
-          res.redirect('/');
+          res.redirect('/questions');
       } else {
         const errors = validatorErrors.array().map((error) => error.msg);
         res.render('create-tags', {
@@ -41,7 +41,6 @@ router.post('/tags', csrfProtection, requireAuth, tagValidators, asyncHandler( a
             errors
           });
       }
-
 }));
 
 module.exports = router;

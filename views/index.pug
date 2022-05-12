@@ -1,12 +1,13 @@
+include utils.pug
 doctype html
 html
   head
       block head
         title="Project Zuora"
         link(rel='stylesheet' href='/stylesheets/splash_styles.css')
+        link(rel='stylesheet' href='/stylesheets/nav.css')
   body
-include utils.pug
-block content
+  +navBar()
   div(class="splash-mid")
     h1(class="splash-h1") Welcome to Project Zuora
     h2(class="splash-h2") Where you can ask your Video Game Questions
@@ -29,4 +30,4 @@ block content
           input(type='hidden' name='password' value="LinkistheBest123*")
           button(type='submit' class='splash-button') Click Here for demo user
     button(class="try-button") 
-      a(class='splash-register-link') Visit as Guest
+      a(class='splash-register-link' href="/questions") Visit as Guest

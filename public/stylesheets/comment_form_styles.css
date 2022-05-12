@@ -1,7 +1,7 @@
 body {
     height: 100%;
     width: 100%;
-    position: absolute;
+    /* position: absolute; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,6 +15,7 @@ body {
 
 h3 {
     font-size: 35px;
+    text-align: center;
 }
 
 form {
@@ -23,6 +24,8 @@ form {
     align-items: center;
     justify-content: center;
     background-color: #7C8D88;
+    font-size: 25px;
+    margin-top: 15px;
 }
 
 .form-group {
@@ -45,7 +48,7 @@ form {
 .comment-inner-container {
     display: flex;
     justify-content: center;
-    width: 50%;
+    width: 500px;
     margin: 5px;
 }
 
@@ -53,6 +56,7 @@ button {
     cursor: pointer;
     box-shadow: 2px 2px 3px black;
     opacity: 100%;
+    margin-bottom: 15px;
 }
 
 a {
