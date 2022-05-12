@@ -45,10 +45,10 @@ html
             .answer-inner-container
               .answer-inner
                 img(src=loggedInUser.picSrc class='user_profile_pic_answer')
-                form(action=`/questions/${id}/answers` method="POST")
+                form(action=`/questions/${question.User.id}/answers` method="POST")
                   input(type='hidden' name='_csrf' value=csrfToken)
                   div.inner-input-container
-                    input(type='text' id='answer' name='Answer' value='' placeholder='Your answer here' class='answer-popup-form')
+                    input(type='text' id='answer' name='content' value='' placeholder='Your answer here' class='answer-popup-form')
                     button(type='submit' class='submit-answer-button') Submit Answer
                   //- a(href=`/questions/` class='cancel-answer-button') Cancel
             div.answer_section

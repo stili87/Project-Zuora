@@ -29,9 +29,10 @@ router.get('/questions/:id(\\d+)/answers', requireAuth, csrfProtection,
 
 router.post('/questions/:id(\\d+)/answers', requireAuth, checkAnswerFields, csrfProtection,
   asyncHandler(async function (req, res, next) {
+    console.log(req.body)
     const questionId = req.params.id;
     const userId = req.session.auth.userId;
-    const {streetCred, content} = req.body
+    const { streetCred, content } = req.body
     const answer = await Answer.build({ streetCred, content, questionId, userId });
     const validatorErrors = validationResult(req);
 
@@ -56,8 +57,8 @@ router.get('/questions/:questionId(\\d+)/answers/:answerId(\\d+)', requireAuth, 
       res.render('answer-edit', { questionId, answerId, answer, csrfToken: req.csrfToken() });
     } else {
       const newError = new Error("User did not create this question.")
-     newError.status = 403
-     next(newError)
+      newError.status = 403
+      next(newError)
     }
   })
 );
@@ -65,48 +66,49 @@ router.get('/questions/:questionId(\\d+)/answers/:answerId(\\d+)', requireAuth, 
 // EDIT ANSWER
 
 router.post('/questions/:questionId(\\d+)/answers/:answerId(\\d+)', requireAuth, checkAnswerFields, csrfProtection, asyncHandler(async function (req, res, next) {
-    const streetCred = req.body.streetCred;
-    const content = req.body.content;
-    const { questionId, answerId } = req.params;
-    const userId = req.session.auth.userId;
-    const answer = await Answer.findByPk(answerId);
-    const editedAnswer = { streetCred, content, questionId, userId };
-    const validatorErrors = validationResult(req);
+  const streetCred = req.body.streetCred;
+  const content = req.body.content;
+  const { questionId, answerId } = req.params;
+  const userId = req.session.auth.userId;
+  const answer = await Answer.findByPk(answerId);
+  const editedAnswer = { streetCred, content, questionId, userId };
+  const validatorErrors = validationResult(req);
 
 
-    if(userId !== answer.userId){
+  if (userId !== answer.userId) {
     const newError = new Error("User did not create this question.")
-     newError.status = 403
-     next(newError)
-    }
+    newError.status = 403
+    next(newError)
+  }
 
-    if (validatorErrors.isEmpty()) {
-      await answer.update(editedAnswer);
-      res.redirect('/questions')
-    } else {
-      const errors = validatorErrors.array().map((error) => error.msg);
-      res.render('answer-edit', { questionId, errors, answerId, answer, csrfToken: req.csrfToken() });
-    }
-  })
+  if (validatorErrors.isEmpty()) {
+    await answer.update(editedAnswer);
+    res.redirect('/questions')
+  } else {
+    const errors = validatorErrors.array().map((error) => error.msg);
+    res.render('answer-edit', { questionId, errors, answerId, answer, csrfToken: req.csrfToken() });
+  }
+})
 );
 
 // DELETE ANSWER
 
 router.post('/questions/:questionId(\\d+)/answers/:answerId(\\d+)/delete', requireAuth, csrfProtection, asyncHandler(async function (req, res, next) {
-    const { questionId, answerId } = req.params;
-    const answer = await Answer.findByPk(answerId);
-    const userId = req.session.auth.userId;
-    if(userId !== answer.userId){
-      const newError = new Error("User did not create this question.")
-       newError.status = 403
-       next(newError)
-      }
+  const { questionId, answerId } = req.params;
+  const answer = await Answer.findByPk(answerId);
+  const userId = req.session.auth.userId;
+  if (userId !== answer.userId) {
+    const newError = new Error("User did not create this question.")
+    newError.status = 403
+    next(newError)
+  }
 
-    if (answer) {
-      await answer.destroy()
-      res.redirect(`/questions`)}
-    
-  })
+  if (answer) {
+    await answer.destroy()
+    res.redirect(`/questions`)
+  }
+
+})
 );
 
 module.exports = router;
