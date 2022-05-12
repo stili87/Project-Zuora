@@ -30,17 +30,18 @@ html
         div(class='feed-box')
             h2(class='feed-title')='My Feed'
             div(class='feed-content-div')
-                if(user.Questions)
+                if !user.Questions[0]
+                    p='You haven\'t asked any questions yet.'
+                else
                     each question in user.Questions
-                        if question
                         div(class='feed-content')
                             p=question.title
                             p=question.content
-                                p(class='answers')='Answers:'
+                            p(class='answers')='Answers:'
                                 each answer in question.Answers
-                                    if answer
+                                    if answer.content
                                         p(class='answers')=answer.content
                                             p(class='comments')='Comments:'
                                             each comment in answer.Comments
-                                                if comment
+                                                if comment.content
                                                     p(class='comments')=comment.content
