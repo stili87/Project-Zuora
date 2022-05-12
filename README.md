@@ -24,9 +24,12 @@
     > The user that made the comment will be able to delete it on a separate page. 
     > The user that made the comment will be able to edit it on a separate page. 
     
-# Bonus Features
-
-    > Splash Page - with option to use a demo user.
+   4.) User functionality
+   
     > Create a user with all functionality of the seeded users. 
     > Site is secured that the logged in user can only edit/delete things that they created.
-    > Site has a profile page with all the users questions and answers.
+    > Site has a profile page with all the users questions and answers. 
+    
+# Other Features
+
+    > Splash Page - with option to use a demo user.
