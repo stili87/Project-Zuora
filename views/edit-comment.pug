@@ -4,19 +4,21 @@ html
   head
     title="Project Zuora"
     link(rel='stylesheet' href='/stylesheets/comment_edit_styles.css')
+    link(rel='stylesheet' href='/stylesheets/nav.css')
   body
+  +navBar()
   h3 Edit a comment
-    +validationErrorSummary(errors)
-    .comment-edit-inner-container
-        .comment-edit-inner
-            form(action=`/answer/${id}/comments/edit/${id}` method='post')
-                input(type='hidden' name='_csrf' value=csrfToken)
-                +field('Content', 'content', editComment.content, type="textarea")
-                button(type='submit' class='comment-edit-button') Submit Edited Comment
-                a(href=`/answer/${id}/comments` class='cancel-edit-button') Cancel
-    .comment-edit-inner-container
-        .comment-edit-inner
-            p Would you like to delete your comment permanently?
-            form(action=`/answer/${id}/comments/delete/${id}` method="POST")
-                input(type='hidden' name='_csrf' value=csrfToken)
-                button(type='submit' class='comment-delete-button') Delete
+  +validationErrorSummary(errors)
+  .comment-edit-inner-container
+      .comment-edit-inner
+          form(action=`/answer/${id}/comments/edit/${id}` method='post')
+              input(type='hidden' name='_csrf' value=csrfToken)
+              +field('Content:', 'content', editComment.content, type="textarea")
+              button(type='submit' class='comment-edit-button') Submit Edited Comment
+              a(href=`/answer/${id}/comments` class='cancel-edit-button') Cancel
+  .comment-edit-inner-container
+      .comment-edit-inner
+          p Would you like to delete your comment permanently?
+          form(action=`/answer/${id}/comments/delete/${id}` method="POST")
+              input(type='hidden' name='_csrf' value=csrfToken)
+              button(type='submit' class='comment-delete-button') Delete

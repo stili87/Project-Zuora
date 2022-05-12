@@ -14,7 +14,10 @@ html
     div(class='profile-box')
         div(class='pic-name-cred')
             div(class='pic-box')
-                img(class='profile-pic' src=`${user.picSrc}`)
+                if(user.picSrc)
+                    img(class='profile-pic' src=`${user.picSrc}`)
+                else
+                    img(class='profile-pic' src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
             div(class='name-cred-box')
                 h1(class='profile-name')=`${user.fullName}`
                 p(class='cred')=`${user.credentials}`
@@ -27,16 +30,17 @@ html
         div(class='feed-box')
             h2(class='feed-title')='My Feed'
             div(class='feed-content-div')
-                each question in user.Questions
-                    if question
-                    div(class='feed-content')
-                        p=question.title
-                        p=question.content
-                            p(class='answers')='Answers:'
-                            each answer in question.Answers
-                                if answer
-                                    p(class='answers')=answer.content
-                                        p(class='comments')='Comments:'
-                                        each comment in answer.Comments
-                                            if comment
-                                                p(class='comments')=comment.content
+                if(user.Questions)
+                    each question in user.Questions
+                        if question
+                        div(class='feed-content')
+                            p=question.title
+                            p=question.content
+                                p(class='answers')='Answers:'
+                                each answer in question.Answers
+                                    if answer
+                                        p(class='answers')=answer.content
+                                            p(class='comments')='Comments:'
+                                            each comment in answer.Comments
+                                                if comment
+                                                    p(class='comments')=comment.content

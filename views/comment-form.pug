@@ -4,14 +4,16 @@ html
   head
     title="Project Zuora"
     link(rel='stylesheet' href='/stylesheets/comment_form_styles.css')
+    link(rel='stylesheet' href='/stylesheets/nav.css')
   body
+  +navBar()
   h3 Submit a comment
-    +validationErrorSummary(errors)
-    .comment-inner-container
-        .comment-inner
-            form(action=`/answer/${id}/comments` method='post')
-                input(type='hidden' name='_csrf' value=csrfToken)
-                +field('Content', 'content', comment.content , type="textarea")
-                div(class='py-4')
-                    button(type='submit' class='submit-comment-button') Submit Comment
-                    a(href=`/answer/${id}` class='cancel-comment-button') Cancel
+  +validationErrorSummary(errors)
+  .comment-inner-container
+      .comment-inner
+          form(action=`/answer/${id}/comments` method='post')
+              input(type='hidden' name='_csrf' value=csrfToken)
+              +field('Content:', 'content', comment.content , type="textarea")
+              div(class='py-4')
+                  button(type='submit' class='submit-comment-button') Submit Comment
+                  a(href=`/answer/${id}` class='cancel-comment-button') Cancel

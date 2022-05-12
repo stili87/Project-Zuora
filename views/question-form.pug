@@ -4,12 +4,14 @@ html
   head
     title="Project Zuora"
     link(rel='stylesheet' href='/stylesheets/question_form_styles.css')
+    link(rel='stylesheet' href='/stylesheets/nav.css')
   body
+  +navBar()
   h3 Submit a question
   +validationErrorSummary(errors)
   .question-inner-container
     .question-inner
-      form(action="/questions" method="post")
+      form(action="/questions/add" method="post")
         input(type='hidden' name='_csrf' value=csrfToken)
         div
           label(for="title") Title

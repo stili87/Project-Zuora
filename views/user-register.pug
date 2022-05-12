@@ -4,7 +4,9 @@ html
   head
     title="Project Zuora"
     link(rel='stylesheet' href='/stylesheets/user_register_styles.css')
+    link(rel='stylesheet' href='/stylesheets/nav.css')
   body
+  +navBar()
   h3 Register a user
   +validationErrorSummary(errors)
   .user-register-inner-container

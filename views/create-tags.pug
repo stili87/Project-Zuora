@@ -4,14 +4,16 @@ html
   head
     title="Project Zuora"
     link(rel='stylesheet' href='/stylesheets/create_tags_styles.css')
+    link(rel='stylesheet' href='/stylesheets/nav.css')
   body
+  +navBar()
   h3 Create a tag
-    +validationErrorSummary(errors)
-    .create-tag-inner-container
-        .create-tag-inner
-            form(action=`/tags` method='post')
-                input(type='hidden' name='_csrf' value=csrfToken)
-                +field('Tag Name', 'name', '', type="input")
-                div(class='py-4')
-                    button(type='submit' class='create-tag-button') Submit Tag
-                    a(href='/questions' class='cancel-create-button') Cancel
+  +validationErrorSummary(errors)
+  .create-tag-inner-container
+      .create-tag-inner
+          form(action=`/tags` method='post')
+              input(type='hidden' name='_csrf' value=csrfToken)
+              +field('Tag Name:', 'name', '', type="input")
+              div(class='py-4')
+                  button(type='submit' class='create-tag-button') Submit Tag
+                  a(href='/questions' class='cancel-create-button') Cancel

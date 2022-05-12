@@ -1,10 +1,13 @@
+include utils.pug
 doctype html
 html
   head
       block head
         title="Project Zuora"
         link(rel='stylesheet' href='/stylesheets/404_styles.css')
+        link(rel='stylesheet' href='/stylesheets/nav.css')
 body
+ +navBar()
  h1(class="h1_404") 404!
  .middle
   .left-middle

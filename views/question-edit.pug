@@ -4,8 +4,10 @@ html
   head
     title="Project Zuora"
     link(rel='stylesheet' href='/stylesheets/question_edit_styles.css')
+    link(rel='stylesheet' href='/stylesheets/nav.css')
   body
-  h3 Edit a question
+    +navBar()
+    h3 Edit a question
     +validationErrorSummary(errors)
     .question-edit-inner-container
         .question-edit-inner
@@ -23,6 +25,7 @@ html
                     a(href=`/questions/${questionId}` class='cancel-edit-button') Cancel
     .question-edit-inner-container
         .question-edit-inner
+            p Would you like to delete your question permanently?
             form(action=`/questions/${questionId}/delete` method="POST")
                 input(type='hidden' name='_csrf' value=csrfToken)
                 button(type='submit' class='question-delete-button') Delete

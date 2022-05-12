@@ -35,7 +35,9 @@ router.get('/get-answers/:id', async(req, res) => {
 })
 
 router.get('/questions', csrfProtection, asyncHandler(async(req, res) => {
+
   const questions = await db.Question.findAll({include: [{model: db.Answer, include: [db.Comment, db.User]},{model: db.Tag},{model: db.User}]});
+
   const tags = await db.Tag.findAll();
   // const answers = await db.Answer.findAll({model: db.User})
   // const answers = await db.Answers.findAll({where: {
@@ -78,7 +80,7 @@ router.post('/questions/add', csrfProtection, questionValidators, requireAuth, a
 
    if (validatorErrors.isEmpty()) {
     await question.save();
-    res.redirect('/');
+    res.redirect('/questions');
   } else {
     const tags = db.Tag.findAll()
     const errors = validatorErrors.array().map((error) => error.msg);
@@ -165,7 +167,7 @@ router.post('/questions/:questionId(\\d+)/delete', requireAuth, questionValidato
       next(newError);
     }else {
       await question.destroy();
-      res.redirect('/');
+      res.redirect('/questions');
    }
   })
 );

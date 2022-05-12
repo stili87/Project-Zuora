@@ -4,20 +4,22 @@ html
   head
     title="Project Zuora"
     link(rel='stylesheet' href='/stylesheets/answer_edit_styles.css')
+    link(rel='stylesheet' href='/stylesheets/nav.css')
   body
+  +navBar()
   h3 Edit an answer
-    +validationErrorSummary(errors)
-    .answer-edit-inner-container
-        .answer-edit-inner
-            form(action=`/questions/${questionId}/answers/${answerId}` method="POST") Edit Your Answer
-                input(type='hidden' name='_csrf' value=csrfToken)
-                +field('Qualifications', 'streetCred', answer.streetCred, 'text')
-                +field('Answer', 'content', answer.content, 'textarea')
-                button(class='answer-edit-button' type='submit') Submit
-                a(href=`/questions/${questionId}/answers` class='cancel-answer-edit-button') Cancel
-    .answer-edit-inner-container
-        .answer-edit-inner
-            p Would you like to delete your answer permanently?
-            form(action=`/questions/${questionId}/answers/${answerId}/delete` method="POST")
-                input(type='hidden' name='_csrf' value=csrfToken)
-                button(class='answer-delete-button' type='submit') Delete
+  +validationErrorSummary(errors)
+  .answer-edit-inner-container
+      .answer-edit-inner
+          form(action=`/questions/${questionId}/answers/${answerId}` method="POST") Edit Your Answer
+              input(type='hidden' name='_csrf' value=csrfToken)
+              +field('Qualifications', 'streetCred', answer.streetCred, 'text')
+              +field('Answer', 'content', answer.content, 'textarea')
+              button(class='answer-edit-button' type='submit') Submit
+              a(href=`/questions/${questionId}/answers` class='cancel-answer-edit-button') Cancel
+  .answer-edit-inner-container
+      .answer-edit-inner
+          p Would you like to delete your answer permanently?
+          form(action=`/questions/${questionId}/answers/${answerId}/delete` method="POST")
+              input(type='hidden' name='_csrf' value=csrfToken)
+              button(class='answer-delete-button' type='submit') Delete

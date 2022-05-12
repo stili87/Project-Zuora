@@ -4,14 +4,16 @@ html
   head
     title="Project Zuora"
     link(rel='stylesheet' href='/stylesheets/answer_form_styles.css')
+    link(rel='stylesheet' href='/stylesheets/nav.css')
   body
+  +navBar()
   h3 Submit an answer
     +validationErrorSummary(errors)
     .answer-inner-container
         .answer-inner
-            form(action=`/questions/${questionId}/answers` method="POST") Your Answer
+            form(action=`/questions/${id}/answers` method="POST") Your Answer
                 input(type='hidden' name='_csrf' value=csrfToken)
-                +field('Qualifications', 'streetCred', '', 'text', 'Type your credentials here...')
-                +field('Answer', 'content', '', 'textarea', 'Type your answer here...')
+                +field('Qualifications:', 'streetCred', '', 'text', 'Type your credentials here...')
+                +field('Answer:', 'content', '', 'textarea', 'Type your answer here...')
                 button(type='submit' class='submit-answer-button') Submit Answer
-                a(href=`/questions/${questionId}` class='cancel-answer-button') Cancel
+                a(href=`/questions/` class='cancel-answer-button') Cancel

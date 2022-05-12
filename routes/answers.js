@@ -37,7 +37,7 @@ router.post('/questions/:id(\\d+)/answers', requireAuth, checkAnswerFields, csrf
 
     if (validatorErrors.isEmpty()) {
       await answer.save();
-      res.redirect('/')
+      res.redirect('/questions')
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render('answers-form', { id: questionId, errors, csrfToken: req.csrfToken() })
@@ -82,7 +82,7 @@ router.post('/questions/:questionId(\\d+)/answers/:answerId(\\d+)', requireAuth,
 
     if (validatorErrors.isEmpty()) {
       await answer.update(editedAnswer);
-      res.redirect('/')
+      res.redirect('/questions')
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render('answer-edit', { questionId, errors, answerId, answer, csrfToken: req.csrfToken() });
@@ -104,7 +104,7 @@ router.post('/questions/:questionId(\\d+)/answers/:answerId(\\d+)/delete', requi
 
     if (answer) {
       await answer.destroy()
-      res.redirect(`/questions/${questionId}/answers`)}
+      res.redirect(`/questions`)}
     
   })
 );
