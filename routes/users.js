@@ -16,7 +16,7 @@ const loginValidators = [
 ];
 
 router.get('/users/login', csrfProtection, (req, res) => {
-  res.render('user-login')
+  res.redirect('/')
 })
 
 router.post('/users/login', csrfProtection, loginValidators, asyncHandler(async (req, res) => {
