@@ -41,9 +41,16 @@ html
                 img(class="questions_img" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
             div.question_footer
               div.post_answer
-                button Post Answer
-              div
-                button.view_thread_btn View Thread
+                button View Thread
+            .answer-inner-container
+              .answer-inner
+                img(src=loggedInUser.picSrc class='user_profile_pic_answer')
+                form(action=`/questions/${question.User.id}/answers` method="POST")
+                  input(type='hidden' name='_csrf' value=csrfToken)
+                  div.inner-input-container
+                    input(type='text' id='answer' name='content' value='' placeholder='Your answer here' class='answer-popup-form')
+                    button(type='submit' class='submit-answer-button') Submit Answer
+                  //- a(href=`/questions/` class='cancel-answer-button') Cancel
             div.answer_section
               each answer in question.Answers
                 div.answer
