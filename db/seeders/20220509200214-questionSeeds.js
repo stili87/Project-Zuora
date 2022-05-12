@@ -12,7 +12,7 @@ module.exports = {
       content: "I just finished the Water Temple. I have been bouncing around the map trying to find out where to get the hover boots. I think the only place I haven't been yet is the Spirit Temple. Is it safe to assume that's where I'll find them?",
       tagId: 1,
       userId: 1,
-      media: "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/7/7e/OoT3D_Hover_Boots_Render.png/revision/latest/scale-to-width-down/320?cb=20171119231202",
+      media: "https://play.jumpcutonline.co.uk/wp-content/uploads/2021/02/links.jpg",
       createdAt: new Date(),
       updatedAt: new Date()
     },
