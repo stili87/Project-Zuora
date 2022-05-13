@@ -7,6 +7,8 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #CAD2C5;
+    background-image: url('/images/form-background.jpg');
+    background-size: cover;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 600;
     margin: 0;
@@ -15,6 +17,9 @@ body {
 
 h3 {
     font-size: 35px;
+    text-align: center;
+    color: #de6c3f;
+    text-shadow: 4px 4px 4px black;
 }
 
 form {
@@ -23,6 +28,7 @@ form {
     align-items: center;
     justify-content: center;
     background-color: #7C8D88;
+    margin: 5px;
 }
 
 .form-group {
