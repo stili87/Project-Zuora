@@ -77,9 +77,9 @@ html
 
                div.comment_section
                  if(answer.Comments.length > 0)
-                   p(class="answers_header") Comments
+                   p(class="answers_header" id=`comment_head_${answer.id}`) Comments
                  each comment in answer.Comments
-                  div.total_comment
+                  div.total_comment(id=`comment_answer_${answer.id}`)
                    div.comment_head
                      if(answer.Comments)
                          img(src=answer.User.picSrc class="user_profile_pic_comment")

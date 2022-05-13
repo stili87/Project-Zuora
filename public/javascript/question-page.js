@@ -18,7 +18,15 @@ window.addEventListener('DOMContentLoaded', () => {
       });
       const resJas = await response.json()
       const answer = document.getElementById(`answer-div-${deleteBtn.name}`);
-      answer.remove();
+      const answerComments = document.getElementById(`comment_answer_${deleteBtn.name}`);
+      const commentHead = document.getElementById(`comment_head_${deleteBtn.name}`);
+      if(commentHead){
+        commentHead.remove();
+      }
+      if(answerComments){
+        answerComments.remove();
+      }
+      answer.remove();;
     })
   }
 
@@ -47,7 +55,6 @@ window.addEventListener('DOMContentLoaded', () => {
       const data = await response.json()
 
       if (data.message === "Success") {
-        console.log(data.id, '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1')
         const answerSection = document.getElementsByClassName(`answer-section-${subButton.id}`)[0]
         const jUser = await fetch('/users', {
           method: 'PATCH',
@@ -58,30 +65,61 @@ window.addEventListener('DOMContentLoaded', () => {
         })
 
         const user = await jUser.json()
-        const newHtml = `<div class="answer" id="answer-div-${data.id}">
-          <div class="answer_head">
-          <img class="user_profile_pic" src="${user.picSrc}">
-          <div class="answer_details">
-          <p class="answer_user_name">${user.fullName}</p>
-          <p class="answer_date">${new Date()}</p>
-          </div></div><div class="answer_content"><p class="answer_content">
-          ${content.value}</p><button class="show_comments_btn">Reply</button>
-          <button class="delete_answer_btn" id="temp" name="${data.id}">Delete</button></div></div>
-          `
+        const newHtml = `<div class="answer" id="answer-div-${data.id}"><div class="answer_head">
+        <img class="user_profile_pic" src=${user.picSrc}>
+        <div class="answer_details"><p class="answer_user_name">${user.fullName}</p>
+        <p class="answer_date">${new Date()}</p></div></div><div class="answer_content">
+        <p class="p_answer_content" id="answer_content_${data.id}">${content.value}</p><button class="show_comments_btn reply_answer_btn">Reply</button>
+        <button class="edit_answer_btn" id="temp_edit" name=${data.id}>Edit</button><button class="delete_answer_btn" name=${data.id} id="temp">Delete</button></div></div>`
+ 
         answerSection.innerHTML = newHtml + answerSection.innerHTML
         content.value = ''
-
-        const newAnswer = document.getElementById('temp')
-        newAnswer.addEventListener('click', async (e) => {
-          const response = await fetch(`/answers/delete/${newAnswer.name}`, {
+        const newDeleteButton = document.getElementById('temp')
+        newDeleteButton.addEventListener('click', async (e) => {
+          const response = await fetch(`/answers/delete/${newDeleteButton.name}`, {
             method: 'DELETE'
           });
           const resJas = await response.json()
-          const answer = document.getElementById(`answer-div-${newAnswer.name}`);
-          answer.remove();
+          const answer = document.getElementById(`answer-div-${newDeleteButton.name}`);
+          const answerComments = document.getElementById(`comment_answer_${newDeleteButton.name}`);
+          const commentHead = document.getElementById(`comment_head_${newDeleteButton.name}`);
+          if(commentHead){
+            commentHead.remove();
+          }
+          if(answerComments){
+            answerComments.remove();
+          }
+          answer.remove();;
         })
       }
 
+      const newEditButton = document.getElementById('temp_edit')
+      newEditButton.addEventListener('click', (e) =>{
+        const answerContent = document.getElementById(`answer_content_${newEditButton.name}`);
+        const answerInnerText = answerContent.innerText;
+        answerContent.innerHTML = `<input type="text" id="edit_box_${newEditButton.name}" value="${answerInnerText}"></input><button class="edit_answer_btn" id="edit_button_${newEditButton.name}">Submit Edit</button>`;
+        newEditButton.style.display = 'none';
+
+
+        const submitEditButton = document.getElementById(`edit_button_${newEditButton.name}`);
+        submitEditButton.addEventListener('click', async (e) => {
+          const newContent = document.getElementById(`edit_box_${newEditButton.name}`).value;
+          if (!newContent) {
+            alert('Please enter an answer')
+          } else {
+            answerContent.innerHTML = newContent;
+            newEditButton.style.display = 'block';
+            const response = await fetch(`/answers/edit/${newEditButton.name}`, {
+              method: 'PATCH',
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                content: newContent
+              })
+            })
+          }
+      })
+
+      })
 
     })
   }
