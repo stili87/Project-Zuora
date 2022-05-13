@@ -1,11 +1,11 @@
 1. create delete button for every comment
   -create element for the button    DONE
   -find element (DOM manip)         DONE
-  -create unique identifiers for buttons    
-  -delete the comment
-  -identify comment to delete
-  -create fetch request to delete from database
-  -crate route
+  -create unique identifiers for buttons    DONE
+  -delete the comment                 DONE
+  -identify comment to delete         DONE
+  -create fetch request to delete from database DONE
+  -crate route                        DONE
 
 
 2. create edit button for every comment

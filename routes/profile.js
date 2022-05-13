@@ -10,7 +10,7 @@ router.get('/users/:userId(\\d+)', asyncHandler(async function (req, res, next) 
 
     const user = await User.findByPk(userId, {include: [{model: Question, include: [{model: Answer, include: [{model: Comment}]}]}]});
     const questions = await Question.findAll({include: [{model: Answer, include: [Comment, User]},{model: Tag},{model: User}]});
-    console.log(user)
+    console.log(user.Questions[0].Answers)
     res.render('user-detail', { user, questions })
     })
 )

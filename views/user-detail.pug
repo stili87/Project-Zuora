@@ -25,48 +25,47 @@ html
             p(class='bio')=`${user.bio}`
         div(class='feed-box')
             h2(class='feed-title')='My Feed'
-        //-     div.main
-        //- each question in questions
-        //-   div.question
-        //-     div.question_head
-        //-       div.user_img
-        //-         if (question.User.picSrc)
-        //-           img(src=question.User.picSrc class="user_profile_pic")
-        //-         else
-        //-           img( class="user_profile_pic" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
-        //-       div.head_text
-        //-         div.question_head_upper
-        //-           a(href=`/users/${question.userId}` class='user_profile_link')= question.User.fullName
-        //-         div.question_head_lower
-        //-           p= question.User.credentials
-        //-     div.question_body
-        //-       div.question_body_title
-        //-         p= question.title
-        //-       div.question_body_content
-        //-         p= question.content
-        //-       if (question.media)
-        //-         div.question_body_img
-        //-           img(class="questions_img" src=question.media)
-        //-       else
-        //-         div.question_body_img
-        //-         img(class="questions_img" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
-        //-     div.question_footer
-        //-       div.post_answer
-        //-         button Post Answer
-        //-       div
-        //-         button.view_thread_btn View Thread
-        //-     div.answer_section
-        //-       each answer in question.Answers
-        //-         div.answer
-        //-           div.answer_head
-        //-             if(answer.User.picSrc)
-        //-               img(src=answer.User.picSrc class="user_profile_pic")
-        //-             else
-        //-               img(class="questions_img" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
-        //-           div.answer_details
-        //-         if (question.Answers)
-        //-             p.answer_user_name= answer.User.fullName
-        //-             p.answer_creds= answer.streetCred
-        //-             p.answer_date= answer.createdAt
-        //-         div.answer_content
-        //-           p.answer_content= answer.content
+            each question in user.Questions
+                div.questions_box
+                    //- div.question_head
+                    //-     div.user_img
+                    //-     if (question.User.picSrc)
+                    //-         img(src=question.User.picSrc class="user_profile_pic")
+                    //-     else
+                    //-         img( class="user_profile_pic" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
+                    //-     div.head_text
+                    //-     div.question_head_upper
+                    //-         a(href=`/users/${question.userId}` class='user_profile_link')= question.User.fullName
+                    //-     div.question_head_lower
+                    //-         p= question.User.credentials
+                    div.question_body
+                        div.question_body_title
+                        p= question.title
+                        div.question_body_content
+                        p= question.content
+                        if (question.media)
+                            div.question_body_img
+                                img(class="questions_img" src=question.media)
+                        else
+                            div.question_body_img
+                                img(class="questions_img" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
+                    div.question_footer
+                        div.post_answer
+                        button Post Answer
+                        div
+                        button.view_thread_btn View Thread
+                    div.answer_section
+                    each answer in question.Answers
+                        div.answer
+                            div.answer_head
+                                //- if(answer.user.picSrc)
+                                //-     img(src=answer.User.picSrc class="user_profile_pic")
+                                //- else
+                                //-     img(class="questions_img" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
+                                //- p.answer_user_name= answer.User.fullName
+                            div.answer_details
+                            if (question.Answers)
+                                p.answer_creds= answer.streetCred
+                            div.answer_content
+                                p.answer_content= answer.content
+                                p.answer_date= answer.createdAt
