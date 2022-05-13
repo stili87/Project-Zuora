@@ -138,18 +138,34 @@ body {
   font-weight: bold;
 }
 .answer{
-  display: flex;
+  /* display: flex; */
   padding: 15px;
 
 }
+.answer_head{
+  display: flex;
+}
 
 .answer_content{
-  padding: 10px 35px;
+  /* padding: 10px 35px; */
+  margin-top: 10px;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+
+
 }
 .answer_section{
 
   display: none;
 }
+.delete_answer_btn{
+  font-size: 15px;
+  height: max-content;
+  border-radius: 5px;
+  margin: 3px 5px;
+  background-color: #DE6C3F;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;}
 
 
 /* ANSWER FORM */
@@ -158,7 +174,7 @@ body {
   padding-bottom: 15px;
 }
 .answer-inner{
-
+  /* width: 100%; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -171,27 +187,78 @@ body {
   margin-left: 15px;
 }
 .answer-popup-form{
-  margin-right: 50px;
-  width: 300px;
+  /* margin-right: 50px; */
+  /* width: 300px; */
+  height: max-content;
+  width: 90%;
   border-radius: 20px;
   text-align: center;
   vertical-align: middle;
   padding-top: 10px;
  padding-bottom: 10px;
+ margin-left: 20px;
 
 }
 .submit-answer-button{
   /* align-self: flex-end; */
-  margin-right: 50px;
+  /* margin-right: 50px; */
+  width: max-content;
 }
 .inner-input-container{
-  display: flex;
-  align-content: space-around;
+  /* display: flex; */
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  margin: auto 0;
+  /* margin-left: 50px; */
+  /* align-content: space-between; */
+  align-items: center;
 }
 
 .submit-answer-button{
+  height: max-content;
   font-size: 15px;
   border-radius: 5px;
-  margin: 3px 5px;
+  /* margin: 3px 5px; */
   background-color: #DE6C3F;
   box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;}
+
+
+  /* COMMENT SECTION */
+  .user_profile_pic_comment{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-left: 15px;
+  }
+  .comment_section{
+    margin-left: 50px;
+  }
+  .comment_head{
+    display: flex;
+    /* padding: 15px; */
+    align-items: center;
+
+  }
+
+  .comment_body{
+  padding: 15px;
+  /* padding: 10px 35px; */
+  display: flex;
+  justify-content: space-between;
+
+
+  }
+  .user_comment_details{
+    display: flex;
+    padding: 15px;
+  }
+  .user_of_comment{
+    font-weight: bold;
+  }
+
+  .show_comments_btn{
+    background-color: #DE6C3F;
+    height: max-content;
+    justify-self: flex-end;
+    border-radius: 5px;
+  }

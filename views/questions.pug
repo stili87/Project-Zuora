@@ -60,16 +60,28 @@ html
                       img(src=answer.User.picSrc class="user_profile_pic")
                     else
                       img(class="questions_img" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
-                  div.answer_details
-                  if (question.Answers)
-                      p.answer_user_name= answer.User.fullName
-                      p.answer_creds= answer.streetCred
-                      p.answer_date= answer.createdAt
+                    if (question.Answers)
+                      div.answer_details
+                        p.answer_user_name= answer.User.fullName
+                        p.answer_date= answer.createdAt
                   div.answer_content
                     p.answer_content= answer.content
-                    if(locals.authenticated)
-                      if(answer.userId===locals.user.id)
-                        button(class='delete_answer_btn' name=`${answer.id}`) Delete
+                    if(answer.Comments)
+                      button.show_comments_btn Reply
+                      if(locals.authenticated)
+                        if(answer.userId===locals.user.id)
+                          button(class='delete_answer_btn' name=`${answer.id}`) Delete
+                div.comment_section
+                  each comment in answer.Comments
+                    div.comment_head
+                      if(answer.Comments)
+                          img(src=answer.User.picSrc class="user_profile_pic_comment")
+                          div.user_comment_details
+                            p.user_of_comment= comment.User.fullName
+                            p= comment.createdAt
+                    div.comment_body
+                      p= comment.content
+                      button.show_comments_btn Reply
       div.right_img
         img(src="https://freepngimg.com/thumb/the_legend_of_zelda/21249-6-zelda-link-hd.png")
         script

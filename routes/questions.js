@@ -36,9 +36,15 @@ router.get('/get-answers/:id', async(req, res) => {
 
 router.get('/questions', csrfProtection, asyncHandler(async(req, res) => {
 
-  const questions = await db.Question.findAll({include: [{model: db.Answer, include: [db.Comment, db.User]},{model: db.Tag},{model: db.User}]});
+  // const questions = await db.Question.findAll({include: [{model: db.Answer, include: [db.Comment, db.User]},{model: db.Tag},{model: db.User}]});
   const tags = await db.Tag.findAll();
+  const questions = await db.Question.findAll({include: [{model: db.Answer, include: [{model: db.Comment, include:[db.User]}, db.User]},{model: db.Tag},{model: db.User}]});
+  // for(let i = 0; i < 3; i++){
+  //   let ques = questions[i]
+    // questions[0].Answers.forEach(answer => answer.Comments[0].content)
 
+    // }
+    questions.forEach(question => question.Answers.forEach(answer => answer.Comments.forEach(comment => console.log(comment))))
   if(req.session.auth){
   const loggedInUserId = req.session.auth.userId
   const loggedInUser = await db.User.findByPk(loggedInUserId)
