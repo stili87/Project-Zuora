@@ -199,7 +199,7 @@ for (let i = 0; i < editButtons.length; i++) {
 
   /* EDIT FOR COMMENTS */
   const editCommentBtns = document.querySelectorAll('.edit_comment_btn')
-  console.log(editCommentBtns.length)
+
   for (let i = 0; i < editCommentBtns.length; i++) {
     const editCommentBtn = editCommentBtns[i];
 
@@ -207,12 +207,44 @@ for (let i = 0; i < editButtons.length; i++) {
     const commentContent = document.getElementById(`comment_content_${editCommentBtn.name}`);
     const commentInnerText = commentContent.innerText;
 
-    commentContent.innerHTML = `<input type="text" id="edit_box_${editCommentBtn.name}" value="${commentInnerText}"></input><button class="edit_answer_btn" id="edit_button_${editCommentBtn.name}">Submit Edit</button>`;
+    commentContent.innerHTML = `<input type="text" id="edit_box_${editCommentBtn.name}" value="${commentInnerText}"></input><button class="edit_comment_btn" id="edit_button_${editCommentBtn.name}">Submit Edit</button>`;
     editCommentBtn.style.display = 'none';
+
+    const submitCommentEditBtn = document.getElementById(`edit_button_${editCommentBtn.name}`);
+    submitCommentEditBtn.addEventListener('click', async () => {
+      const newComment = document.getElementById(`edit_box_${editCommentBtn.name}`).value;
+      if (!newComment) {
+        alert('Please enter a comment.')
+      } else {
+        commentContent.innerHTML = newComment;
+        editCommentBtn.style.display = 'block';
+
+        const response = await fetch(`/comments/edit/${editCommentBtn.name}`, {
+          method: 'PATCH',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            content: newComment
+          })
+        })
+      }
+    })
     })
   }
 
+// DELETE COMMENT
+const deleteCommentButtons = document.getElementsByClassName('delete_comment_btn')
 
+for (let i = 0; i < deleteCommentButtons.length; i++) {
+  const deleteCommentBtn = deleteCommentButtons[i];
 
+  deleteCommentBtn.addEventListener('click', async () => {
+    const commentToDelete = document.querySelector(`.total_comment_${deleteCommentBtn.name}`)
+    commentToDelete.remove()
+
+    const response = await fetch(`/comments/delete/${deleteCommentBtn.name}`, {
+      method: 'DELETE'
+    })
+  })
+}
 
 })

@@ -116,5 +116,19 @@ router.post('/answer/:id(\\d+)/comments/edit/:id(\\d+)', requireAuth, commentVal
   }
 }))
 
+// edit comment
+router.patch('/comments/edit/:id', requireAuth, asyncHandler(async (req, res) => {
+  const { content } = req.body;
+  const comment = await db.Comment.findByPk(req.params.id);
+  await comment.update({ content });
+  res.json({ message: 'Success' });
+}))
+
+// delete comment
+router.delete('/comments/delete/:id', requireAuth, asyncHandler(async (req, res) => {
+  const comment = await db.Comment.findByPk(req.params.id);
+  await comment.destroy();
+  res.json({ message: 'Success' });
+}))
 
 module.exports = router;
