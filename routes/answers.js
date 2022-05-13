@@ -112,17 +112,26 @@ router.post('/questions/:questionId(\\d+)/answers/:answerId(\\d+)/delete', requi
 );
 
 //FRONT END API ROUTE
-router.post('/answers', asyncHandler( async(req, res) => {
-  const {content, questionId, userId} = req.body
+router.post('/answers', asyncHandler(async (req, res) => {
+  const { content, questionId, userId } = req.body
   const answer = await Answer.build({ content, questionId, userId });
   const newAnswer = await answer.save();
-  res.json({message: 'Success', id: newAnswer.id})
+  res.json({ message: 'Success', id: newAnswer.id })
 }))
 
-router.delete('/answers/delete/:id', asyncHandler( async (req, res) => {
+router.delete('/answers/delete/:id', asyncHandler(async (req, res) => {
   const answer = await Answer.findByPk(req.params.id)
   await answer.destroy();
-  res.json({message: 'Success'});
+  res.json({ message: 'Success' });
+}))
+
+
+// PATCH ROUTE
+router.patch('/answers/edit/:id', asyncHandler(async (req, res) => {
+  const answer = await Answer.findByPk(req.params.id);
+  const { content } = req.body;
+  await answer.update({ content });
+  res.json({ message: 'Success' });
 }))
 
 module.exports = router;
