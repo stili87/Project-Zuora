@@ -181,7 +181,7 @@ body {
   display: flex;
   align-items: center;
   width: 100%;
-  
+
 }
 
 .p_answer_content{
@@ -229,6 +229,7 @@ body {
   padding: 2px;
   margin-right: 5px;
 }
+
 
 
 /* ANSWER FORM */
@@ -341,4 +342,25 @@ body {
     height: max-content;
     justify-self: flex-end;
     border-radius: 5px;
+  }
+
+  .edit_comment_btn{
+    font-size: 15px;
+    height: max-content;
+    border-radius: 5px;
+    margin: 3px 5px;
+    background-color: #DE6C3F;
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+    padding: 2px;
+    margin-right: 5px;
+  }
+  .delete_comment_btn{
+    font-size: 15px;
+    height: max-content;
+    border-radius: 5px;
+    margin: 3px 5px;
+    background-color: #DE6C3F;
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+    padding: 2px;
+    margin-right: 5px;
   }

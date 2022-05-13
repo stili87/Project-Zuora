@@ -87,7 +87,13 @@ html
                            p.user_of_comment= comment.User.fullName
                            p= comment.createdAt
                    div.comment_body
-                     p= comment.content
+                     p.comment_content(id=`comment_content_${comment.id}`)= comment.content
+                     if locals.authenticated
+                      if(comment.userId===locals.user.id)
+                        button(class='edit_comment_btn' name=`${comment.id}`) Edit
+                      if(comment.userId===locals.user.id)
+                        button(class='delete_comment_btn' name=`${comment.id}`) Delete
+
       div.right_img
         img(src="https://freepngimg.com/thumb/the_legend_of_zelda/21249-6-zelda-link-hd.png")
         script
