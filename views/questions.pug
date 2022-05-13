@@ -67,14 +67,14 @@ html
                        p.answer_user_name= answer.User.fullName
                        p.answer_date= answer.createdAt
                  div.answer_content
-                   p.p_answer_content= answer.content
+                   p.p_answer_content(id=`answer_content_${answer.id}`)= answer.content
                    if locals.authenticated
                      button.show_comments_btn.reply_answer_btn Reply
                        if(answer.userId===locals.user.id)
                         button(class='edit_answer_btn' name=`${answer.id}`) Edit
                        if(answer.userId===locals.user.id)
                         button(class='delete_answer_btn' name=`${answer.id}`) Delete
-                    
+
                div.comment_section
                  if(answer.Comments.length > 0)
                    p(class="answers_header") Comments
