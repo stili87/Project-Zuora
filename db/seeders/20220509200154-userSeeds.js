@@ -37,7 +37,7 @@ module.exports = {
       fullName: 'Waseem Alame',
       bio: 'Do NOT copy my NFT it is mine you cannot steal it.',
       credentials: 'Masters in copy/paste.',
-      picSrc: 'https://www.albawaba.com/sites/default/files/styles/d08_standard/public/im_new/payton/AN.jpg?h=79104f28&itok=YAcqww-s',
+      picSrc: 'https://media.discordapp.net/attachments/961320861493780601/961328875776933919/42.png?width=563&height=563',
       createdAt: new Date(),
       updatedAt: new Date()
     },

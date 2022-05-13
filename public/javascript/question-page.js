@@ -71,7 +71,7 @@ window.addEventListener('DOMContentLoaded', () => {
         <p class="answer_date">${new Date()}</p></div></div><div class="answer_content">
         <p class="p_answer_content" id="answer_content_${data.id}">${content.value}</p><button class="show_comments_btn reply_answer_btn">Reply</button>
         <button class="edit_answer_btn" id="temp_edit" name=${data.id}>Edit</button><button class="delete_answer_btn" name=${data.id} id="temp">Delete</button></div></div>`
- 
+
         answerSection.innerHTML = newHtml + answerSection.innerHTML
         content.value = ''
         const newDeleteButton = document.getElementById('temp')
@@ -119,71 +119,71 @@ window.addEventListener('DOMContentLoaded', () => {
           }
       })
 
-      })
-
     })
-  }
 
-  /* HOVER EVENT OVER USERNAMES */
-  for (let i = 0; i < userProfileLinks.length; i++) {
-    const link = userProfileLinks[i];
-    link.addEventListener('mouseover', function () {
-      link.style.textDecoration = 'underline'
-    })
-    link.addEventListener('mouseout', function () {
-      link.style.textDecoration = ''
-    })
-  }
+  })
+}
+
+/* HOVER EVENT OVER USERNAMES */
+for (let i = 0; i < userProfileLinks.length; i++) {
+  const link = userProfileLinks[i];
+  link.addEventListener('mouseover', function () {
+    link.style.textDecoration = 'underline'
+  })
+  link.addEventListener('mouseout', function () {
+    link.style.textDecoration = ''
+  })
+}
 
 
-  /* POSTING & VIEWING ANSWERS */
-  for (let i = 0; i < answerSections.length; i++) {
-    let clicked = false;
-    postAnswerBtns[i].addEventListener('click', function (event) {
-      if (clicked === false) {
-        submitAnswerForms[i].style.display = 'flex';
-        answerSections[i].style.display = 'block';
-        clicked = true;
+/* POSTING & VIEWING ANSWERS */
+for (let i = 0; i < answerSections.length; i++) {
+  let clicked = false;
+  postAnswerBtns[i].addEventListener('click', function (event) {
+    if (clicked === false) {
+      submitAnswerForms[i].style.display = 'flex';
+      answerSections[i].style.display = 'block';
+      clicked = true;
+    } else {
+      submitAnswerForms[i].style.display = 'none';
+      answerSections[i].style.display = 'none';
+      clicked = false;
+    }
+  })
+}
+
+
+
+/* HOVER EVENTS OVER SIDEBAR LIST ITEMS */
+for (let i = 0; i < listItems.length; i++) {
+  const item = listItems[i];
+
+  item.addEventListener('mouseover', () => {
+    item.style.backgroundColor = '#7C8D88';
+  })
+  item.addEventListener('mouseout', () => {
+    item.style.backgroundColor = '';
+  })
+}
+
+///Editing answer button
+for (let i = 0; i < editButtons.length; i++) {
+  const editButton = editButtons[i];
+
+  editButton.addEventListener('click', async (e) => {
+    const answerContent = document.getElementById(`answer_content_${editButton.name}`);
+    const answerInnerText = answerContent.innerText;
+    answerContent.innerHTML = `<input type="text" id="edit_box_${editButton.name}" value="${answerInnerText}"></input><button class="edit_answer_btn" id="edit_button_${editButton.name}">Submit Edit</button>`;
+    editButton.style.display = 'none';
+
+
+    const submitEditButton = document.getElementById(`edit_button_${editButton.name}`);
+    submitEditButton.addEventListener('click', async (e) => {
+      const newContent = document.getElementById(`edit_box_${editButton.name}`).value;
+      if (!newContent) {
+        alert('Please enter an answer')
       } else {
-        submitAnswerForms[i].style.display = 'none';
-        answerSections[i].style.display = 'none';
-        clicked = false;
-      }
-    })
-  }
-
-
-
-  /* HOVER EVENTS OVER SIDEBAR LIST ITEMS */
-  for (let i = 0; i < listItems.length; i++) {
-    const item = listItems[i];
-
-    item.addEventListener('mouseover', () => {
-      item.style.backgroundColor = '#7C8D88';
-    })
-    item.addEventListener('mouseout', () => {
-      item.style.backgroundColor = '';
-    })
-  }
-
-  ///Editing answer button
-  for (let i = 0; i < editButtons.length; i++) {
-    const editButton = editButtons[i];
-
-    editButton.addEventListener('click', async (e) => {
-      const answerContent = document.getElementById(`answer_content_${editButton.name}`);
-      const answerInnerText = answerContent.innerText;
-      answerContent.innerHTML = `<input type="text" id="edit_box_${editButton.name}" value="${answerInnerText}"></input><button class="edit_answer_btn" id="edit_button_${editButton.name}">Submit Edit</button>`;
-      editButton.style.display = 'none';
-
-
-      const submitEditButton = document.getElementById(`edit_button_${editButton.name}`);
-      submitEditButton.addEventListener('click', async (e) => {
-        const newContent = document.getElementById(`edit_box_${editButton.name}`).value;
-        if (!newContent) {
-          alert('Please enter an answer')
-        } else {
-          answerContent.innerHTML = newContent;
+        answerContent.innerHTML = newContent;
           editButton.style.display = 'block';
           const response = await fetch(`/answers/edit/${editButton.name}`, {
             method: 'PATCH',
@@ -197,7 +197,54 @@ window.addEventListener('DOMContentLoaded', () => {
     })
   }
 
+  /* EDIT FOR COMMENTS */
+  const editCommentBtns = document.querySelectorAll('.edit_comment_btn')
 
+  for (let i = 0; i < editCommentBtns.length; i++) {
+    const editCommentBtn = editCommentBtns[i];
 
+    editCommentBtn.addEventListener('click', () => {
+    const commentContent = document.getElementById(`comment_content_${editCommentBtn.name}`);
+    const commentInnerText = commentContent.innerText;
+
+    commentContent.innerHTML = `<input type="text" id="edit_box_${editCommentBtn.name}" value="${commentInnerText}"></input><button class="edit_comment_btn" id="edit_button_${editCommentBtn.name}">Submit Edit</button>`;
+    editCommentBtn.style.display = 'none';
+
+    const submitCommentEditBtn = document.getElementById(`edit_button_${editCommentBtn.name}`);
+    submitCommentEditBtn.addEventListener('click', async () => {
+      const newComment = document.getElementById(`edit_box_${editCommentBtn.name}`).value;
+      if (!newComment) {
+        alert('Please enter a comment.')
+      } else {
+        commentContent.innerHTML = newComment;
+        editCommentBtn.style.display = 'block';
+
+        const response = await fetch(`/comments/edit/${editCommentBtn.name}`, {
+          method: 'PATCH',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            content: newComment
+          })
+        })
+      }
+    })
+    })
+  }
+
+// DELETE COMMENT
+const deleteCommentButtons = document.getElementsByClassName('delete_comment_btn')
+
+for (let i = 0; i < deleteCommentButtons.length; i++) {
+  const deleteCommentBtn = deleteCommentButtons[i];
+
+  deleteCommentBtn.addEventListener('click', async () => {
+    const commentToDelete = document.querySelector(`.total_comment_${deleteCommentBtn.name}`)
+    commentToDelete.remove()
+
+    const response = await fetch(`/comments/delete/${deleteCommentBtn.name}`, {
+      method: 'DELETE'
+    })
+  })
+}
 
 })
