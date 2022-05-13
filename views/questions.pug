@@ -15,6 +15,8 @@ html
           each tag in tags
             li.listItem= tag.name
       div.main
+        if(locals.authenticated)
+          a(href= "/questions/add" class="question_link") Ask a Question
         each question in questions
           div.question
             div.question_head
@@ -38,7 +40,7 @@ html
                   img(class="questions_img" src=question.media)
               else
                 div.question_body_img
-                img(class="questions_img" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
+                  img(class="questions_img" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
             div.question_footer
               div.post_answer
                 button View Thread
@@ -53,35 +55,39 @@ html
                       button(type='submit'  id=question.id data-id=locals.user.id class='submit-answer-button') Submit Answer
                     //- a(href=`/questions/` class='cancel-answer-button') Cancel
             div.answer_section(class=`answer-section-${question.id}`)
-              each answer in question.Answers
-                div.answer(id=`answer-div-${answer.id}`)
-                  div.answer_head
-                    if(answer.User.picSrc)
-                      img(src=answer.User.picSrc class="user_profile_pic")
-                    else
-                      img(class="questions_img" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
-                    if (question.Answers)
-                      div.answer_details
-                        p.answer_user_name= answer.User.fullName
-                        p.answer_date= answer.createdAt
-                  div.answer_content
-                    p.answer_content= answer.content
-                    if(answer.Comments)
-                      button.show_comments_btn Reply
-                      if(locals.authenticated)
-                        if(answer.userId===locals.user.id)
-                          button(class='delete_answer_btn' name=`${answer.id}`) Delete
-                div.comment_section
-                  each comment in answer.Comments
-                    div.comment_head
-                      if(answer.Comments)
-                          img(src=answer.User.picSrc class="user_profile_pic_comment")
-                          div.user_comment_details
-                            p.user_of_comment= comment.User.fullName
-                            p= comment.createdAt
-                    div.comment_body
-                      p= comment.content
-                      button.show_comments_btn Reply
+             each answer in question.Answers
+               div.answer(id=`answer-div-${answer.id}`)
+                 div.answer_head
+                   if(answer.User.picSrc)
+                    img(src=answer.User.picSrc class="user_profile_pic")
+                   else
+                     img(class="questions_img" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
+                   if (question.Answers)
+                     div.answer_details
+                       p.answer_user_name= answer.User.fullName
+                       p.answer_date= answer.createdAt
+                 div.answer_content
+                   p.p_answer_content= answer.content
+                   if locals.authenticated
+                     button.show_comments_btn.reply_answer_btn Reply
+                       if(answer.userId===locals.user.id)
+                        button(class='edit_answer_btn' name=`${answer.id}`) Edit
+                       if(answer.userId===locals.user.id)
+                        button(class='delete_answer_btn' name=`${answer.id}`) Delete
+                    
+               div.comment_section
+                 if(answer.Comments.length > 0)
+                   p(class="answers_header") Comments
+                 each comment in answer.Comments
+                  div.total_comment
+                   div.comment_head
+                     if(answer.Comments)
+                         img(src=answer.User.picSrc class="user_profile_pic_comment")
+                         div.user_comment_details
+                           p.user_of_comment= comment.User.fullName
+                           p= comment.createdAt
+                   div.comment_body
+                     p= comment.content
       div.right_img
         img(src="https://freepngimg.com/thumb/the_legend_of_zelda/21249-6-zelda-link-hd.png")
         script
