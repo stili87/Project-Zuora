@@ -87,10 +87,10 @@ const userValidators = [
     .withMessage('Bio must not be more than 300 characters long'),
   check('credentials')
     .isLength({ max: 100 })
-    .withMessage('Bio must not be more than 100 characters long'),
+    .withMessage('Credentials must not be more than 100 characters long'),
   check('picSrc')
     .isLength({ max: 300 })
-    .withMessage('Bio must not be more than 300 characters long'),
+    .withMessage('Picture Source must not be more than 300 characters long'),
   check('password')
     .exists({ checkFalsy: true })
     .withMessage('Please provide a value for Password')

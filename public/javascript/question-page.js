@@ -19,7 +19,7 @@ window.addEventListener('DOMContentLoaded', () => {
       });
       const resJas = await response.json()
       const answer = document.getElementById(`answer-div-${deleteBtn.name}`);
-      const answerComments = document.getElementById(`comment_answer_${deleteBtn.name}`);
+      const answerComments = document.getElementById(`full_comment_${deleteBtn.id}`);
       const commentHead = document.getElementById(`comment_head_${deleteBtn.name}`);
       if(commentHead){
         commentHead.remove();
@@ -88,7 +88,7 @@ window.addEventListener('DOMContentLoaded', () => {
           });
           const resJas = await response.json()
           const answer = document.getElementById(`answer-div-${newDeleteButton.name}`);
-          const answerComments = document.getElementById(`comment_answer_${newDeleteButton.name}`);
+          const answerComments = document.getElementById(`full_comment_${data.id}`);
           const commentHead = document.getElementById(`comment_head_${newDeleteButton.name}`);
           if(commentHead){
             commentHead.remove();
@@ -171,8 +171,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 userId
             })
           })
+
           const data = await res.json()
-    
           const jUser = await fetch('/users', {
               method: 'PATCH',
               headers: { "Content-Type": "application/json" },
@@ -204,13 +204,15 @@ window.addEventListener('DOMContentLoaded', () => {
             </div>
             </div>
           `
-    
+            
             newTotalComment.innerHTML = newCommentDivInner
             commentsSection.prepend(newTotalComment)
     
     
             const deleteCommentButton = document.getElementById(`tempDelete_${data.id}`)
-            deleteCommentButton.addEventListener('click', async () => {
+
+              deleteCommentButton.addEventListener('click', async () => {
+
                 const commentToDelete = document.querySelector(`.total_comment_${data.id}`)
                 commentToDelete.remove()
                 const response = await fetch(`/comments/delete/${data.id}`, {
@@ -220,7 +222,6 @@ window.addEventListener('DOMContentLoaded', () => {
             
               const editCommentBtn = document.getElementById(`tempEdit_${data.id}`)
               editCommentBtn.addEventListener('click', () => {
-                console.log('here')
                 const commentContent = document.getElementById(`comment_content_${data.id}`);
                 const commentInnerText = commentContent.innerText;
             
