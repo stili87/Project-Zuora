@@ -116,7 +116,7 @@ router.post('/answers', asyncHandler(async (req, res) => {
   const { content, questionId, userId } = req.body
   const answer = await Answer.build({ content, questionId, userId });
   const newAnswer = await answer.save();
-  res.json({ message: 'Success', id: newAnswer.id })
+  res.json({ message: 'Success', id: newAnswer.id, userId: newAnswer.userId })
 }))
 
 router.delete('/answers/delete/:id', asyncHandler(async (req, res) => {
