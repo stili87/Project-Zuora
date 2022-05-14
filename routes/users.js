@@ -269,7 +269,9 @@ router.post('/users/edit/:id(\\d+)', requireAuth, csrfProtection, userEditValida
       });
     }
   }));
-
+  
+//Bad code incorrectly using patch to retrieve information.  It is necessary for the site to work
+//but breaks convetion. 
 router.patch('/users', asyncHandler( async(req, res)=> {
   const {id} = req.body
   const user = await db.User.findByPk(id)
@@ -322,8 +324,6 @@ router.patch('/users', asyncHandler( async(req, res)=> {
   //   asyncHandler(async function (req, res) {
   //     const { userId } = req.params;
   //     const user = await db.User.findByPk(userId, {include: ['Question', 'comments', 'answers']})
-
-  //     console.log(user)
   //     res.render('user-detail', { csrfToken: req.csrfToken(), user })
   //   })
   // );

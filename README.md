@@ -48,6 +48,30 @@
       > Adjusting to each other's personalities and working styles. 
       
 # Best Code
-  > TO DO
+  > Stili - Although the nav bar is not that big of a deal I am proud of it.  As for the API routes and event listeners, I was happy with those too. Except where I had to copy and paste. 
 
+    `mixin navBar()
+    .nav-bar-full
+      .nav-bar-left
+        img(src="/images/logo.jpeg", alt="Zuora Logo" id="logo-img")
+        a(href="/" class='logo-text') Project Zuora
+      .nav-bar-right
+        ul(class='nav-link-list')
+          li(class='nav-link-li')
+            a(href="/questions" class="nav-link-anchor") Questions List
 
+          if locals.authenticated
+            li(class='nav-link-li')
+              a(href=`/users/${locals.user.id}` class="nav-link-anchor") Profile
+          if locals.authenticated
+            li(class='nav-link-li')
+              a(href="/questions/add" class="nav-link-anchor") Ask a Question 
+          if locals.authenticated
+            li(class='nav-link-li')
+              form(action="/users/logout" method='post')
+                button(type="submit" class="nav-link-anchor logout") Logout
+          else
+            li(class='nav-link-li')
+              a(href="/" class="nav-link-anchor login") Login
+            li(class='nav-link-li')
+              a(href="/users/register" class="nav-link-anchor") Register`
