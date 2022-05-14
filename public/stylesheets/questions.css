@@ -21,8 +21,10 @@ body {
   display: flex;
   margin-top: 20px;
 }
-.main{
-
+.question_edit{
+  text-decoration: none;
+  color: black;
+  padding: 1px;
 }
 /* SIDEBAR START - Wass*/
 .sideBar{
@@ -121,7 +123,7 @@ body {
 .question_footer{
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   justify-content: flex-end;
 }
 
