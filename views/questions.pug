@@ -69,30 +69,31 @@ html
                  div.answer_content
                    p.p_answer_content(id=`answer_content_${answer.id}`)= answer.content
                    if locals.authenticated
-                     button.show_comments_btn.reply_answer_btn Reply
+                     button.show_comments_btn.reply_answer_btn(id=`${answer.id}` name=`${locals.user.id}`) Reply
                        if(answer.userId===locals.user.id)
                         button(class='edit_answer_btn' name=`${answer.id}`) Edit
                        if(answer.userId===locals.user.id)
                         button(class='delete_answer_btn' name=`${answer.id}`) Delete
 
                div.comment_section
-                 if(answer.Comments.length > 0)
-                   p(class="answers_header" id=`comment_head_${answer.id}`) Comments
-                 each comment in answer.Comments
-                  div.total_comment(id=`comment_answer_${answer.id}` class=`total_comment_${comment.id}` name=`${comment.id}`)
-                   div.comment_head
-                     if(answer.Comments)
-                         img(src=answer.User.picSrc class="user_profile_pic_comment")
-                         div.user_comment_details
-                           p.user_of_comment= comment.User.fullName
-                           p= comment.createdAt
-                   div.comment_body
-                     p.comment_content(id=`comment_content_${comment.id}`)= comment.content
-                     if locals.authenticated
-                      if(comment.userId===locals.user.id)
-                        button(class='edit_comment_btn' name=`${comment.id}`) Edit
-                      if(comment.userId===locals.user.id)
-                        button(class='delete_comment_btn' name=`${comment.id}`) Delete
+                if(answer.Comments.length > 0)
+                  p(class="answers_header" id=`comment_head_${answer.id}`) Comments
+                .entire_comments(id=`full_comment_${answer.id}`)
+                  each comment in answer.Comments
+                    div.total_comment(id=`comment_answer_${answer.id}` class=`total_comment_${comment.id}` name=`${comment.id}`)
+                      div.comment_head
+                        if(answer.Comments)
+                            img(src=comment.User.picSrc class="user_profile_pic_comment")
+                            div.user_comment_details
+                              p.user_of_comment= comment.User.fullName
+                              p= comment.createdAt
+                      div.comment_body
+                        p.comment_content(id=`comment_content_${comment.id}`)= comment.content
+                        if locals.authenticated
+                          if(comment.userId===locals.user.id)
+                            button(class='edit_comment_btn' name=`${comment.id}`) Edit
+                          if(comment.userId===locals.user.id)
+                            button(class='delete_comment_btn' name=`${comment.id}`) Delete
 
       div.right_img
         img(src="https://freepngimg.com/thumb/the_legend_of_zelda/21249-6-zelda-link-hd.png")
