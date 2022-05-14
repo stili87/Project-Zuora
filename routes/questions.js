@@ -23,6 +23,7 @@ const questionValidators = [
     .exists({ checkFalsy: true })
     .withMessage('Please provide a tag')
 ];
+// UNUSED ROUTE
 router.get('/get-answers/:id', async(req, res) => {
   let questionId = req.params.id;
   let question = await db.Question.findByPk(questionId, {
@@ -30,14 +31,12 @@ router.get('/get-answers/:id', async(req, res) => {
       db.Answer
     ]
   })
-  // console.log(question)
   res.send(question)
 })
 
 router.get('/questions', csrfProtection, asyncHandler(async(req, res) => {
   const tags = await db.Tag.findAll();
   const questions = await db.Question.findAll({include: [{model: db.Answer, include: [{model: db.Comment, include:[db.User]}, db.User]},{model: db.Tag},{model: db.User}]});
-  questions.forEach(question => question.Answers.forEach(answer => answer.Comments.forEach(comment => console.log(comment))))
   if(req.session.auth){
   const loggedInUserId = req.session.auth.userId
   const loggedInUser = await db.User.findByPk(loggedInUserId)
@@ -57,15 +56,12 @@ router.get('/questions', csrfProtection, asyncHandler(async(req, res) => {
 
      });
   }
-
-
 }));
 
 router.get('/questions/tag/:id', csrfProtection, asyncHandler(async(req, res, next) => {
   const tagId = req.params.id
   const tags = await db.Tag.findAll();
   const questions = await db.Question.findAll({where: {tagId},include: [{model: db.Answer, include: [{model: db.Comment, include:[db.User]}, db.User]},{model: db.Tag},{model: db.User}]});
-  questions.forEach(question => question.Answers.forEach(answer => answer.Comments.forEach(comment => console.log(comment))))
   const tag = await db.Tag.findByPk(tagId)
  
 
@@ -140,7 +136,7 @@ router.post('/questions/add', csrfProtection, questionValidators, requireAuth, a
 
 }));
 
-
+// UNUSED ROUTE
 router.get('/questions/:questionId(\\d+)/edit', csrfProtection, requireAuth, asyncHandler(async(req, res, next) => {
     const userId = req.session.auth.userId
     const questionId = parseInt(req.params.questionId, 10);
@@ -162,7 +158,7 @@ router.get('/questions/:questionId(\\d+)/edit', csrfProtection, requireAuth, asy
   })
 
 }))
-
+// UNUSED ROUTE
 router.post('/questions/:questionId(\\d+)/edit', csrfProtection, requireAuth, questionValidators, asyncHandler(async(req, res, next) => {
   const userId = req.session.auth.userId
   const questionId = parseInt(req.params.questionId, 10);

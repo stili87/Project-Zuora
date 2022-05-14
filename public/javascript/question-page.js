@@ -274,7 +274,6 @@ for (let i = 0; i < userProfileLinks.length; i++) {
 /* POSTING & VIEWING ANSWERS */
 for (let i = 0; i < answerSections.length; i++) {
   const answerSect = answerSections[i]
-  console.log(answerSect.id)
   const postAnswerBtn = document.getElementById(`post_answer_${answerSect.id}`)
   const submitAnswerForm = document.getElementById(`inner_container_${answerSect.id}`)
   let clicked = false;
@@ -479,7 +478,6 @@ for (let i = 0; i < addCommentButtons.length; i++) {
         
           const editCommentBtn = document.getElementById(`tempEdit_${data.id}`)
           editCommentBtn.addEventListener('click', () => {
-            console.log('here')
             const commentContent = document.getElementById(`comment_content_${data.id}`);
             const commentInnerText = commentContent.innerText;
         

@@ -9,45 +9,17 @@ router.get('/users/:userId(\\d+)', requireAuth, asyncHandler(async function (req
     const loggedInUserId = req.session.auth.userId
     const loggedInUser = await User.findByPk(loggedInUserId)
     const { userId } = req.params;
-
     const questions = await Question.findAll({include: [{model: Answer, include: [{model: Comment, include:[User]}, User]},{model: Tag},{model: User}]});
     const user = await User.findByPk(userId, {include: [{model: Question, include: [{model: Answer, include: [{model: Comment, include: {model:User}},{model: User}]}]}]});
+
     for (let i = 0; i < user.Questions.length; i++) {
         const question = user.Questions[i];
 
-        for (let i = 0; i < question.Answers.length; i++) {
-            const answer = question.Answers[i];
-            console.log(answer.Comments.User)
-            console.log('ASNSWER')
-            console.log('ASNSWER')
-            console.log('ASNSWER')
-            console.log('ASNSWER')
-            console.log('ASNSWER')
-            console.log('ASNSWER')
-            console.log('ASNSWER')
-            console.log('ASNSWER')
-            console.log('ASNSWER')
-            console.log('ASNSWER')
-            console.log('ASNSWER')
-            console.log('ASNSWER')
-            console.log('ASNSWER')
-            console.log('ASNSWER')
-            console.log('ASNSWER')
-            console.log('ASNSWER')
-            console.log('ASNSWER')
-            console.log('ASNSWER')
-            // for (let i = 0; i < answer.Comments.length; i++) {
-            //     const element = answer.Comments[i];
-
-            // }
-        }
+        // for (let i = 0; i < question.Answers.length; i++) {
+        //     const answer = question.Answers[i];
+        // }
 
     }
-    // user.Questions.forEach(question => question.Answers.forEach(answer => console.log(answer.User.id)))
-    // const questions = await Question.findAll({include: [{model: Answer, include: [Comment, User]},{model: Tag},{model: User}]});
-    // console.log(user.fullName)
-    // console.log(user.Questions)
-    // console.log(user.Questions[0].Answers)
     res.render('user-detail', { user, questions, loggedInUser })
     })
 )

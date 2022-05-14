@@ -14,13 +14,14 @@ const commentValidators = [
 ];
 
 
-
+//Unused Route
 router.get('/answer/:id(\\d+)/comments', requireAuth, csrfProtection, asyncHandler(async (req, res, next) => {
   const id = req.params.id
   const comment = await db.Comment.build()
   res.render('comment-form', { comment, title: 'Create New Comment', csrfToken: req.csrfToken(), id })
 }));
 
+//Unused Route
 router.post('/answer/:id(\\d+)/comments', requireAuth, csrfProtection, commentValidators, asyncHandler(async (req, res, next) => {
   const { content } = req.body
   const answerId = req.params.id
@@ -46,6 +47,7 @@ router.post('/answer/:id(\\d+)/comments', requireAuth, csrfProtection, commentVa
 }));
 
 ///this works delteing comment
+//Unused Route
 router.post('/answer/:id(\\d+)/comments/delete/:id(\\d+)', requireAuth, asyncHandler(async (req, res, next) => {
   const commentId = req.params.id
   const userId = req.session.auth.userId
@@ -58,6 +60,7 @@ router.post('/answer/:id(\\d+)/comments/delete/:id(\\d+)', requireAuth, asyncHan
   }
 }))
 
+//Unused Route
 router.get('/answer/:id(\\d+)/comments/edit/:id(\\d+)', requireAuth, csrfProtection, asyncHandler(async (req, res, next) => {
   const id = req.params.id;
   const userId = req.session.auth.userId;
@@ -81,6 +84,7 @@ router.get('/answer/:id(\\d+)/comments/edit/:id(\\d+)', requireAuth, csrfProtect
   }
 }))
 
+//Unused Route
 router.post('/answer/:id(\\d+)/comments/edit/:id(\\d+)', requireAuth, commentValidators, csrfProtection, asyncHandler(async (req, res, next) => {
   const commentId = req.params.id;
   const userId = req.session.auth.userId;
@@ -115,7 +119,7 @@ router.post('/answer/:id(\\d+)/comments/edit/:id(\\d+)', requireAuth, commentVal
   }
 }))
 
-// edit comment
+// edit comment API
 router.patch('/comments/edit/:id', requireAuth, asyncHandler(async (req, res) => {
   const { content } = req.body;
   const comment = await db.Comment.findByPk(req.params.id);
@@ -123,13 +127,14 @@ router.patch('/comments/edit/:id', requireAuth, asyncHandler(async (req, res) =>
   res.json({ message: 'Success' });
 }))
 
-// delete comment
+// delete comment API
 router.delete('/comments/delete/:id', requireAuth, asyncHandler(async (req, res) => {
   const comment = await db.Comment.findByPk(req.params.id);
   await comment.destroy();
   res.json({ message: 'Success' });
 }))
 
+// add comment API
 router.post('/comments/add', requireAuth, asyncHandler(async (req, res) => {
   const {content, answerId, userId} = req.body
   const comment = await db.Comment.create({

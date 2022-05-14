@@ -16,8 +16,8 @@ const checkAnswerFields = [
     .withMessage('Too many credentials!')
 ];
 
-// GET ANSWER FORM FOR SPECIFIED QUESTION
-
+// GET ANSWER FORM FOR SPECIFIED QUESTION  //Unused Route
+    //Unused Route
 router.get('/questions/:id(\\d+)/answers', requireAuth, csrfProtection,
   asyncHandler(async function (req, res, next) {
     const questionId = req.params.id;
@@ -25,8 +25,8 @@ router.get('/questions/:id(\\d+)/answers', requireAuth, csrfProtection,
   })
 );
 
-// POST ANSWER
-
+// POST ANSWER FORM //Unused Route
+  //Unused Route
 router.post('/questions/:id(\\d+)/answers', requireAuth, checkAnswerFields, csrfProtection,
   asyncHandler(async function (req, res, next) {
 
@@ -46,8 +46,8 @@ router.post('/questions/:id(\\d+)/answers', requireAuth, checkAnswerFields, csrf
   })
 );
 
-// GET ANSWER
-
+// GET ANSWER   //Unused Route
+//Unused Route
 router.get('/questions/:questionId(\\d+)/answers/:answerId(\\d+)', requireAuth, csrfProtection,
   asyncHandler(async function (req, res, next) {
     const { questionId, answerId } = req.params;
@@ -63,8 +63,8 @@ router.get('/questions/:questionId(\\d+)/answers/:answerId(\\d+)', requireAuth, 
   })
 );
 
-// EDIT ANSWER
-
+// EDIT ANSWER    //Unused Route
+//Unused Route
 router.post('/questions/:questionId(\\d+)/answers/:answerId(\\d+)', requireAuth, checkAnswerFields, csrfProtection, asyncHandler(async function (req, res, next) {
   const streetCred = req.body.streetCred;
   const content = req.body.content;
@@ -93,7 +93,7 @@ router.post('/questions/:questionId(\\d+)/answers/:answerId(\\d+)', requireAuth,
 
 // DELETE ANSWER
 
-router.post('/questions/:questionId(\\d+)/answers/:answerId(\\d+)/delete', requireAuth, csrfProtection, asyncHandler(async function (req, res, next) {
+ router.post('/questions/:questionId(\\d+)/answers/:answerId(\\d+)/delete', requireAuth, csrfProtection, asyncHandler(async function (req, res, next) {
   const { questionId, answerId } = req.params;
   const answer = await Answer.findByPk(answerId);
   const userId = req.session.auth.userId;
