@@ -7,7 +7,6 @@ html
         link(rel='stylesheet' href='/stylesheets/questions.css')
         link(rel='stylesheet' href='/stylesheets/nav.css')
 
-
   body
     +navBar()
     div.container
@@ -44,8 +43,7 @@ html
                   img(class="questions_img" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
             div.question_footer
               div.post_answer
-                button
-                  img(src="https://img.icons8.com/ios/50/000000/topic.png" class="icon")
+                button View Thread
             .answer-inner-container
               if(locals.authenticated)
                 .answer-inner
@@ -54,8 +52,7 @@ html
                     input(type='hidden' name='_csrf' value=csrfToken)
                     div.inner-input-container
                       input(type='text' id=`answer-content-${question.id}` name=locals.user.id value='' placeholder='Your answer here' class='answer-popup-form')
-                      button(type='submit'  id=question.id data-id=locals.user.id class='submit-answer-button')
-                        img(src="https://img.icons8.com/fluency-systems-regular/48/000000/send-letter.png" class="icon")
+                      button(type='submit'  id=question.id data-id=locals.user.id class='submit-answer-button') Submit Answer
                     //- a(href=`/questions/` class='cancel-answer-button') Cancel
             div.answer_section(class=`answer-section-${question.id}`)
              each answer in question.Answers
@@ -72,15 +69,11 @@ html
                  div.answer_content
                    p.p_answer_content(id=`answer_content_${answer.id}`)= answer.content
                    if locals.authenticated
-
-                     button.show_comments_btn.reply_answer_btn
-                      img(class="icon" src="https://img.icons8.com/ios/50/000000/reply-arrow--v1.png")
-                      if(answer.userId===locals.user.id)
-                       button(class='edit_answer_btn' name=`${answer.id}`)
-                        img(class="icon" src="https://img.icons8.com/material-outlined/24/000000/edit--v1.png")
-                      if(answer.userId===locals.user.id)
-                       button(class='delete_answer_btn' name=`${answer.id}`)
-                         img(class="icon" src="https://img.icons8.com/material-outlined/24/000000/filled-trash.png")
+                     button.show_comments_btn.reply_answer_btn(id=`${answer.id}` name=`${locals.user.id}`) Reply
+                       if(answer.userId===locals.user.id)
+                        button(class='edit_answer_btn' name=`${answer.id}`) Edit
+                       if(answer.userId===locals.user.id)
+                        button(class='delete_answer_btn' name=`${answer.id}`) Delete
 
                div.comment_section
                 if(answer.Comments.length > 0)
@@ -106,8 +99,3 @@ html
         img(src="https://freepngimg.com/thumb/the_legend_of_zelda/21249-6-zelda-link-hd.png")
         script
           include ../public/javascript/question-page.js
-
-        //- img(src="https://img.icons8.com/material-rounded/24/000000/filled-trash.png"/)
-
-      //- img(class="questions_img" src="https://img.icons8.com/material-outlined/24/000000/reply.png")
-//- <img src="https://img.icons8.com/material-outlined/24/000000/edit--v1.png"/>
