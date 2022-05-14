@@ -7,14 +7,25 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #CAD2C5;
+    background-image: url('/images/form-background.jpg');
+    background-size: cover;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 600;
     margin: 0;
     padding: 0;
 }
 
+p {
+    font-size: 30px;
+    color: #de6c3f;
+    text-shadow: 4px 4px 4px black;
+}
+
 h3 {
     font-size: 35px;
+    text-align: center;
+    color: #de6c3f;
+    text-shadow: 4px 4px 4px black;
 }
 
 form {

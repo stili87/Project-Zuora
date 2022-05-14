@@ -1,0 +1,23 @@
+1. create delete button for every comment
+  -create element for the button    DONE
+  -find element (DOM manip)         DONE
+  -create unique identifiers for buttons    
+  -delete the comment
+  -identify comment to delete
+  -create fetch request to delete from database
+  -crate route
+
+
+2. create edit button for every comment
+  -create element for the button
+  -find element (DOM manip)
+  -create unique identifiers for buttons
+  -delete the comment
+  -identify comment to delete
+  -create fetch request to delete from database
+  -crate route
+
+
+3. then() do Add last
+
+// routes and requests

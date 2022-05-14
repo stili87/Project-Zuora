@@ -17,7 +17,6 @@ const commentValidators = [
 
 router.get('/answer/:id(\\d+)/comments', requireAuth, csrfProtection, asyncHandler(async (req, res, next) => {
   const id = req.params.id
-  console.log(id, '!!!!!!!!!!!!!!!!!!!!!!!!!!!')
   const comment = await db.Comment.build()
   res.render('comment-form', { comment, title: 'Create New Comment', csrfToken: req.csrfToken(), id })
 }));
@@ -116,5 +115,29 @@ router.post('/answer/:id(\\d+)/comments/edit/:id(\\d+)', requireAuth, commentVal
   }
 }))
 
+// edit comment
+router.patch('/comments/edit/:id', requireAuth, asyncHandler(async (req, res) => {
+  const { content } = req.body;
+  const comment = await db.Comment.findByPk(req.params.id);
+  await comment.update({ content });
+  res.json({ message: 'Success' });
+}))
+
+// delete comment
+router.delete('/comments/delete/:id', requireAuth, asyncHandler(async (req, res) => {
+  const comment = await db.Comment.findByPk(req.params.id);
+  await comment.destroy();
+  res.json({ message: 'Success' });
+}))
+
+router.post('/comments/add', requireAuth, asyncHandler(async (req, res) => {
+  const {content, answerId, userId} = req.body
+  const comment = await db.Comment.create({
+    content,
+    answerId,
+    userId,
+  });
+  res.json(comment);
+}))
 
 module.exports = router;
