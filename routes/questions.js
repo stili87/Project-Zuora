@@ -35,21 +35,14 @@ router.get('/get-answers/:id', async(req, res) => {
 })
 
 router.get('/questions', csrfProtection, asyncHandler(async(req, res) => {
-
-  // const questions = await db.Question.findAll({include: [{model: db.Answer, include: [db.Comment, db.User]},{model: db.Tag},{model: db.User}]});
   const tags = await db.Tag.findAll();
   const questions = await db.Question.findAll({include: [{model: db.Answer, include: [{model: db.Comment, include:[db.User]}, db.User]},{model: db.Tag},{model: db.User}]});
-  // for(let i = 0; i < 3; i++){
-  //   let ques = questions[i]
-    // questions[0].Answers.forEach(answer => answer.Comments[0].content)
-
-    // }
-    questions.forEach(question => question.Answers.forEach(answer => answer.Comments.forEach(comment => console.log(comment))))
+  questions.forEach(question => question.Answers.forEach(answer => answer.Comments.forEach(comment => console.log(comment))))
   if(req.session.auth){
   const loggedInUserId = req.session.auth.userId
   const loggedInUser = await db.User.findByPk(loggedInUserId)
   res.render('questions', {
-    title: 'Questions',
+    title: 'All Questions',
     tags,
     questions,
     csrfToken: req.csrfToken(),
@@ -63,6 +56,43 @@ router.get('/questions', csrfProtection, asyncHandler(async(req, res) => {
       csrfToken: req.csrfToken(),
 
      });
+  }
+
+
+}));
+
+router.get('/questions/tag/:id', csrfProtection, asyncHandler(async(req, res, next) => {
+  const tagId = req.params.id
+  const tags = await db.Tag.findAll();
+  const questions = await db.Question.findAll({where: {tagId},include: [{model: db.Answer, include: [{model: db.Comment, include:[db.User]}, db.User]},{model: db.Tag},{model: db.User}]});
+  questions.forEach(question => question.Answers.forEach(answer => answer.Comments.forEach(comment => console.log(comment))))
+  const tag = await db.Tag.findByPk(tagId)
+ 
+
+  if(!tag){
+    const newError = new Error("Tag does not exist.");
+      newError.status = 404;
+      next(newError);
+  }
+    const tagName = tag.name
+
+    if(req.session.auth){
+    const loggedInUserId = req.session.auth.userId
+    const loggedInUser = await db.User.findByPk(loggedInUserId)
+    res.render('questions', {
+      title: `Questions about ${tagName}`,
+      tags,
+      questions,
+      csrfToken: req.csrfToken(),
+      loggedInUser,
+    });
+  }else{
+      res.render('questions', {
+        title: `Questions about ${tagName}`,
+        tags,
+        questions,
+        csrfToken: req.csrfToken(),
+      });
   }
 
 

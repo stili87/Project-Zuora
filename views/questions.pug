@@ -9,11 +9,14 @@ html
 
   body
     +navBar()
+    h1(id='title-of-page') Project Zuora #{title}
     div.container
       div.sideBar
         ul.sideBarList
+          p(class='side-bar-title') List of games
           each tag in tags
-            li.listItem= tag.name
+            li.listItem
+              a(href=`/questions/tag/${tag.id}` class="tag-link")= tag.name
       div.main
         if(locals.authenticated)
           a(href= "/questions/add" class="question_link") Ask a Question
@@ -31,6 +34,9 @@ html
                 div.question_head_lower
                   p= question.User.credentials
             div.question_body
+              div.question_body_title
+                p= (`Game: ${question.Tag.name}`)
+                br
               div.question_body_title
                 p= question.title
               div.question_body_content
