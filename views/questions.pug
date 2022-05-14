@@ -10,6 +10,9 @@ html
   body
     +navBar()
     h1(id='title-of-page') Project Zuora #{title}
+    if(locals.authenticated)
+      .ask_container
+        a(href="/questions/add" id="ask-button") Ask a Question
     div.container
       div.sideBar
         ul.sideBarList

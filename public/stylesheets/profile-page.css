@@ -16,6 +16,19 @@ body {
   padding: 0;
 }
 
+.edit-button {
+  font-size: 18px;
+  align-self: flex-end;
+  justify-self: center;
+  margin-top: 50px;
+  border: 2px black solid;
+  background-color:#DE6C3F;
+  padding: 5px;
+  border-radius: 25px;
+  text-decoration: none;
+  color: #2F3E46;
+}
+
 .profile-box {
   width: 75%;
   background-color: #7C8D88;
@@ -58,6 +71,8 @@ body {
   border: 3px solid #49616E;
   box-shadow: #2F3E46 -5px 5px, #49616E -10px 10px;
   transition: box-shadow .6s;
+  display: flex;
+  flex-direction: column;
 }
 
 .profile-name {

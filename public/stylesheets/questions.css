@@ -54,6 +54,25 @@ body {
   font-size: 60px;
   text-shadow: 3px 2px 5px black;
 }
+.ask_container {
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#ask-button {
+  text-align: center;
+  padding: 10px;
+  text-shadow: 3px 2px 5px black;
+  font-size: 30px;
+  text-decoration: none;
+  color: #DE6C3F;
+  background-color: #7c8D88;
+  border: 2px solid black;
+  border-radius: 25px;
+  
+}
 
 .sideBar ul li{
   padding: 20px;

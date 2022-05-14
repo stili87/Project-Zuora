@@ -24,7 +24,6 @@ router.post('/users/login', csrfProtection, loginValidators, asyncHandler(async 
   const validatorErrors = validationResult(req);
   if (validatorErrors.isEmpty()) {
     const user = await db.User.findOne({ where: { email } })
-    console.log(user, '!!!!!!!!!!!!!!!!!!111')
     if (user) {
       const result = await bcrypt.compare(password, user.hashedPassword.toString())
       if (result) {
@@ -147,7 +146,7 @@ router.post('/users/register', csrfProtection, userValidators,
       user.hashedPassword = hashedPassword;
       await user.save();
       loginUser(req, res, user);
-      res.redirect('/');
+      res.redirect('/questions');
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render('user-register', {
