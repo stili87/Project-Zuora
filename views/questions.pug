@@ -44,6 +44,11 @@ html
             div.question_footer
               div.post_answer
                 button View Thread
+              if(locals.authenticated)
+                if(question.userId===locals.user.id)
+                  div.post_answer
+                    button 
+                      a(href=`/questions/${question.id}/edit` class="question_edit") Edit Question
             .answer-inner-container
               if(locals.authenticated)
                 .answer-inner
