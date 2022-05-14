@@ -258,7 +258,7 @@ router.post('/users/edit/:id(\\d+)', requireAuth, csrfProtection, userEditValida
 
     if (validatorErrors.isEmpty()) {
       await userToUpdate.update(user);
-      res.redirect(`/users/${userId}(\\d+)`);
+      res.redirect(`/users/${userId}`);
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
       res.render('user-edit', {

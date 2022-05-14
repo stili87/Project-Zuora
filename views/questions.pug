@@ -51,14 +51,14 @@ html
                 div.question_body_img
                   img(class="questions_img" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
             div.question_footer
-              div.post_answer
+              div.post_answer(id=`post_answer_${question.id}`)
                 button View Thread
               if(locals.authenticated)
                 if(question.userId===locals.user.id)
                   div.post_answer
                     button 
                       a(href=`/questions/${question.id}/edit` class="question_edit") Edit Question
-            .answer-inner-container
+            .answer-inner-container(id=`inner_container_${question.id}`)
               if(locals.authenticated)
                 .answer-inner
                   img(src=loggedInUser.picSrc class='user_profile_pic_answer')
@@ -66,9 +66,10 @@ html
                     input(type='hidden' name='_csrf' value=csrfToken)
                     div.inner-input-container
                       input(type='text' id=`answer-content-${question.id}` name=locals.user.id value='' placeholder='Your answer here' class='answer-popup-form')
-                      button(type='submit'  id=question.id data-id=locals.user.id class='submit-answer-button') Submit Answer
-                    //- a(href=`/questions/` class='cancel-answer-button') Cancel
-            div.answer_section(class=`answer-section-${question.id}`)
+                      button(type='submit'  data-id=locals.user.id class='submit-answer-button') Submit Answer
+            div.answer_section(class=`answer-section` id=`${question.id}`)
+             if(question.Answers.length < 1)
+              p(class=`no_answers`) No Answers Submitted
              each answer in question.Answers
                div.answer(id=`answer-div-${answer.id}`)
                  div.answer_head

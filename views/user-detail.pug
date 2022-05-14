@@ -19,8 +19,8 @@ html
             div(class='name-cred-box')
                 h1(class='profile-name')=`${user.fullName}`
                 p(class='cred')=`${user.credentials}`
-                if(locals.authenticated)
-                  if(user.id === locals.user.id)
+                if locals.authenticated
+                  if (user.id === locals.user.id)
                     a(href=`/users/edit/${user.id}` class="edit-button") Edit Profile
         div(class='bio-box')
             p(class='bio')=`${user.bio}`

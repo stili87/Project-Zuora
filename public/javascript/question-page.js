@@ -7,7 +7,6 @@ window.addEventListener('DOMContentLoaded', () => {
   let submitAnswerForms = document.querySelectorAll('.answer-inner-container')
   let userProfileLinks = document.querySelectorAll('.user_profile_link')
   let submitAnswerButtons = document.querySelectorAll('.submit-answer-button')
-  let answerSection = document.querySelector('.answer_section')
   let deleteButtons = document.querySelectorAll('.delete_answer_btn')
   let editButtons = document.querySelectorAll('.edit_answer_btn');
 
@@ -274,14 +273,18 @@ for (let i = 0; i < userProfileLinks.length; i++) {
 
 /* POSTING & VIEWING ANSWERS */
 for (let i = 0; i < answerSections.length; i++) {
+  const answerSect = answerSections[i]
+  console.log(answerSect.id)
+  const postAnswerBtn = document.getElementById(`post_answer_${answerSect.id}`)
+  const submitAnswerForm = document.getElementById(`inner_container_${answerSect.id}`)
   let clicked = false;
-  postAnswerBtns[i].addEventListener('click', function (event) {
+  postAnswerBtn.addEventListener('click', function (event) {
     if (clicked === false) {
-      submitAnswerForms[i].style.display = 'flex';
-      answerSections[i].style.display = 'block';
+      submitAnswerForm.style.display = 'flex';
+      answerSect.style.display = 'block';
       clicked = true;
     } else {
-      submitAnswerForms[i].style.display = 'none';
+      submitAnswerForm.style.display = 'none';
       answerSections[i].style.display = 'none';
       clicked = false;
     }
