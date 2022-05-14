@@ -81,6 +81,7 @@ html
                         button(class='delete_answer_btn' name=`${answer.id}`) Delete
 
                div.comment_section
+
                 if(answer.Comments.length > 0)
                   p(class="answers_header" id=`comment_head_${answer.id}`) Comments
                 .entire_comments(id=`full_comment_${answer.id}`)
@@ -99,6 +100,7 @@ html
                             button(class='edit_comment_btn' name=`${comment.id}`) Edit
                           if(comment.userId===locals.user.id)
                             button(class='delete_comment_btn' name=`${comment.id}`) Delete
+
 
       div.right_img
         img(src="https://freepngimg.com/thumb/the_legend_of_zelda/21249-6-zelda-link-hd.png")
