@@ -36,7 +36,7 @@ window.addEventListener('DOMContentLoaded', () => {
     subButton.addEventListener('click', async (e) => {
       e.preventDefault();
       const content = document.getElementById(`answer-content-${subButton.id}`)
-
+      
       if (!content.value) {
         alert("You must answer the question")
         return

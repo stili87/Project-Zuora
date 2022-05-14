@@ -66,8 +66,8 @@ html
                     input(type='hidden' name='_csrf' value=csrfToken)
                     div.inner-input-container
                       input(type='text' id=`answer-content-${question.id}` name=locals.user.id value='' placeholder='Your answer here' class='answer-popup-form')
-                      button(type='submit'  data-id=locals.user.id class='submit-answer-button') Submit Answer
-            div.answer_section(class=`answer-section` id=`${question.id}`)
+                      button(type='submit' id=`${question.id}` data-id=locals.user.id class='submit-answer-button') Submit Answer
+            div.answer_section(class=`answer-section-${question.id}` id=`${question.id}`)
              if(question.Answers.length < 1)
               p(class=`no_answers`) No Answers Submitted
              each answer in question.Answers
