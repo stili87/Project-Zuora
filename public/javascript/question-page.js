@@ -40,7 +40,7 @@ window.addEventListener('DOMContentLoaded', () => {
       if (!content.value) {
         alert("You must answer the question")
         return
-      }else if(newContent.length > 1000){
+      }else if(content.length > 1000){
         alert('Answer is too long')
         return
       }
@@ -242,7 +242,7 @@ window.addEventListener('DOMContentLoaded', () => {
                   if (!newComment) {
                     alert('Please enter a comment.')
                     return
-                  }else if (content.length > 500){
+                  }else if (newComment.length > 500){
                     alert("Your comment is too long")
                     return
                   } else {
@@ -370,7 +370,7 @@ for (let i = 0; i < editButtons.length; i++) {
       if (!newComment) {
         alert('Please enter a comment.')
         return
-      }else if (content.length > 500){
+      }else if (newComment.length > 500){
         alert("Your comment is too long")
         return
       } else {
@@ -512,7 +512,7 @@ for (let i = 0; i < addCommentButtons.length; i++) {
               if (!newComment) {
                 alert('Please enter a comment.')
                 return
-              }else if (content.length > 500){
+              }else if (newComment.length > 500){
                 alert("Your comment is too long")
                 return
               } else {
