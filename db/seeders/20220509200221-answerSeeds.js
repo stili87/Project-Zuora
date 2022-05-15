@@ -2,11 +2,6 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     */
    await queryInterface.bulkInsert('Answers', [{
     userId : 1,
     questionId : 1,
@@ -42,11 +37,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     */
     await queryInterface.bulkDelete('Answers', null, {});
   }
 };
