@@ -40,6 +40,9 @@ window.addEventListener('DOMContentLoaded', () => {
       if (!content.value) {
         alert("You must answer the question")
         return
+      }else if(newContent.length > 1000){
+        alert('Answer is too long')
+        return
       }
 
       const response = await fetch('/answers', {
@@ -110,7 +113,9 @@ window.addEventListener('DOMContentLoaded', () => {
             const newContent = document.getElementById(`edit_box_${newEditButton.name}`).value;
             if (!newContent) {
               alert('Please enter an answer')
-            } else {
+            } else if(newContent.length > 1000){
+              alert('Answer is too long')
+            }else {
               answerContent.innerHTML = newContent;
               newEditButton.style.display = 'block';
               const response = await fetch(`/answers/edit/${newEditButton.name}`, {
@@ -159,17 +164,21 @@ window.addEventListener('DOMContentLoaded', () => {
             if (!content) {
               alert("You must type a comment")
               return
+            }else if (content.length > 500){
+              alert("Your comment is too long")
+              return
+            }else{
+              const res = await fetch(`/comments/add`, {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  answerId,
+                  content,
+                  userId
+              })
+            })
             }
 
-            const res = await fetch(`/comments/add`, {
-              method: "POST",
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                answerId,
-                content,
-                userId
-            })
-          })
 
           const data = await res.json()
           const jUser = await fetch('/users', {
@@ -232,6 +241,9 @@ window.addEventListener('DOMContentLoaded', () => {
                   const newComment = document.getElementById(`edit_box_${data.id}`).value;
                   if (!newComment) {
                     alert('Please enter a comment.')
+                    return
+                  }else if (content.length > 500){
+                    alert("Your comment is too long")
                     return
                   } else {
                     commentContent.innerHTML = newComment;
@@ -320,6 +332,10 @@ for (let i = 0; i < editButtons.length; i++) {
       const newContent = document.getElementById(`edit_box_${editButton.name}`).value;
       if (!newContent) {
         alert('Please enter an answer')
+        return
+      }else if(newContent.length > 1000){
+        alert('Answer is too long')
+        return
       } else {
         answerContent.innerHTML = newContent;
           editButton.style.display = 'block';
@@ -353,6 +369,9 @@ for (let i = 0; i < editButtons.length; i++) {
       const newComment = document.getElementById(`edit_box_${editCommentBtn.name}`).value;
       if (!newComment) {
         alert('Please enter a comment.')
+        return
+      }else if (content.length > 500){
+        alert("Your comment is too long")
         return
       } else {
         commentContent.innerHTML = newComment;
@@ -418,6 +437,9 @@ for (let i = 0; i < addCommentButtons.length; i++) {
         const userId = replyButton.name
         if (!content) {
           alert("You must type a comment")
+          return
+        }else if (content.length > 500){
+          alert("Your comment is too long")
           return
         }
         const res = await fetch(`/comments/add`, {
@@ -489,6 +511,9 @@ for (let i = 0; i < addCommentButtons.length; i++) {
               const newComment = document.getElementById(`edit_box_${data.id}`).value;
               if (!newComment) {
                 alert('Please enter a comment.')
+                return
+              }else if (content.length > 500){
+                alert("Your comment is too long")
                 return
               } else {
                 commentContent.innerHTML = newComment;
