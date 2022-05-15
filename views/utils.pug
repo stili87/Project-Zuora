@@ -1,7 +1,7 @@
 
 mixin validationErrorSummary(errors)
   if errors
-    div(class='alert alert-danger' role='alert')
+    div(class='missing_inputs_errors' role='alert')
       p The following error(s) occurred:
       ul
         each error in errors
@@ -30,7 +30,7 @@ mixin navBar()
             a(href=`/users/${locals.user.id}` class="nav-link-anchor") Profile
         if locals.authenticated
           li(class='nav-link-li')
-            a(href="/questions/add" class="nav-link-anchor") Ask a Question 
+            a(href="/questions/add" class="nav-link-anchor") Ask a Question
         if locals.authenticated
           li(class='nav-link-li')
             form(action="/users/logout" method='post')
