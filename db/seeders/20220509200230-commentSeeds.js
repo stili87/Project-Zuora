@@ -2,11 +2,6 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     */
    await queryInterface.bulkInsert('Comments', [{
     content: "I've never seen a more false statement in my 23 years of playing this game!",
     userId: '1',
@@ -38,11 +33,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     */
     await queryInterface.bulkDelete('Comments', null, {});
   }
 };
