@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
       });
       const resJas = await response.json()
       const answer = document.getElementById(`answer-div-${deleteBtn.name}`);
-      const answerComments = document.getElementById(`full_comment_${deleteBtn.id}`);
+      const answerComments = document.getElementById(`full_comment_${deleteBtn.name}`);
       const commentHead = document.getElementById(`comment_head_${deleteBtn.name}`);
       if(commentHead){
         commentHead.remove();
@@ -90,7 +90,7 @@ window.addEventListener('DOMContentLoaded', () => {
           });
           const resJas = await response.json()
           const answer = document.getElementById(`answer-div-${newDeleteButton.name}`);
-          const answerComments = document.getElementById(`full_comment_${data.id}`);
+          const answerComments = document.getElementById(`full_comment_${newDeleteButton.name}`);
           const commentHead = document.getElementById(`comment_head_${newDeleteButton.name}`);
           if(commentHead){
             commentHead.remove();
