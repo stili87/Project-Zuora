@@ -58,6 +58,8 @@ window.addEventListener('DOMContentLoaded', () => {
       const data = await response.json()
 
       if (data.message === "Success") {
+        const noAnswers = document.getElementById(`no_answers_question_${subButton.id}`)
+        if(noAnswers) noAnswers.remove()
         const answerSection = document.getElementsByClassName(`answer-section-${subButton.id}`)[0]
         const jUser = await fetch('/users', {
           method: 'PATCH',
