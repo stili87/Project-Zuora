@@ -47,7 +47,7 @@ html
               if (question.media)
                 div.question_body_img
                   img(class="questions_img" src=question.media)
-              else
+              //- else
                 div.question_body_img
                   img(class="questions_img" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
             div.question_footer
@@ -73,7 +73,7 @@ html
              each answer in question.Answers
                div.answer(id=`answer-div-${answer.id}`)
                  div.answer_head
-                   if(answer.User.picSrc)
+                   if (answer.User.picSrc)
                     img(src=answer.User.picSrc class="user_profile_pic")
                    else
                      img(class="questions_img" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
