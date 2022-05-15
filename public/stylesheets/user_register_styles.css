@@ -106,3 +106,17 @@ a {
     border-radius: 25px;
     background-color: #7C8D88;
 }
+
+.missing_inputs_errors {
+    height: 100%;
+    margin: 10px;
+    padding-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: flex-start;
+    flex-direction: column;
+    border: 2px solid black;
+    border-radius: 25px;
+    background-color: #7C8D88;
+}
