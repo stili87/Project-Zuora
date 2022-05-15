@@ -69,7 +69,7 @@ html
                       button(type='submit' id=`${question.id}` data-id=locals.user.id class='submit-answer-button') Submit Answer
             div.answer_section(class=`answer-section-${question.id}` id=`${question.id}`)
              if(question.Answers.length < 1)
-              p(class=`no_answers`) No Answers Submitted
+              p(class=`no_answers` id=`no_answers_question_${question.id}`) No Answers Submitted
              each answer in question.Answers
                div.answer(id=`answer-div-${answer.id}`)
                  div.answer_head
