@@ -102,7 +102,10 @@ html
                     div.total_comment(id=`comment_answer_${answer.id}` class=`total_comment_${comment.id}` name=`${comment.id}`)
                       div.comment_head
                         if(answer.Comments)
-                            img(src=comment.User.picSrc class="user_profile_pic_comment")
+                            if(comment.User.picSrc)
+                              img(src=comment.User.picSrc class="user_profile_pic_comment")
+                            else
+                              img(class="user_profile_pic" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
                             div.user_comment_details
                               p.user_of_comment= comment.User.fullName
                               p= comment.createdAt
