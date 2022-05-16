@@ -75,6 +75,8 @@
               a(href="/" class="nav-link-anchor login") Login
             li(class='nav-link-li')
               a(href="/users/register" class="nav-link-anchor") Register`
+              
+              
   > John ALlan - It might sound abnormal, but I'm honestly most proud of the seed data I provided. Just makes me feel like a sound programmer and that I'm proficient in the fundementals.
 
     'use strict';
@@ -119,3 +121,21 @@
         await queryInterface.bulkDelete('Answers', null, {});
       }
     };
+    
+    
+> Jeffrey - I was very please with writing this bit of code! It finds the delete button on a specific comment and deletes that comment from the DOM and the database.
+
+`const deleteCommentButtons = document.getElementsByClassName('delete_comment_btn')
+
+  for (let i = 0; i < deleteCommentButtons.length; i++) {
+    const deleteCommentBtn = deleteCommentButtons[i];
+
+    deleteCommentBtn.addEventListener('click', async () => {
+      const commentToDelete = document.querySelector(`.total_comment_${deleteCommentBtn.name}`)
+      commentToDelete.remove()
+
+      const response = await fetch(`/comments/delete/${deleteCommentBtn.name}`, {
+        method: 'DELETE'
+      })
+    })
+}`
