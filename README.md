@@ -75,6 +75,59 @@
               a(href="/" class="nav-link-anchor login") Login
             li(class='nav-link-li')
               a(href="/users/register" class="nav-link-anchor") Register`
+
+  > Waseem - I was proud of the questions page because it looks organized and I took my time with it. I learned how to easily create a fullstack website. All it takes is time and dedication.
+
+`include utils.pug
+doctype html
+html
+  head
+      block head
+        title="Project Zuora"
+        link(rel='stylesheet' href='/stylesheets/questions.css')
+        link(rel='stylesheet' href='/stylesheets/nav.css')
+
+  body
+    +navBar()
+    h1(id='title-of-page') Project Zuora #{title}
+    if(locals.authenticated)
+      .ask_container
+        a(href="/questions/add" id="ask-button") Ask a Question
+    div.container
+      div.sideBar
+        ul.sideBarList
+          p(class='side-bar-title') List of games
+          each tag in tags
+            li.listItem
+              a(href=`/questions/tag/${tag.id}` class="tag-link")= tag.name
+      div.main
+        if(locals.authenticated)
+          a(href= "/questions/add" class="question_link") Ask a Question
+        each question in questions
+          div.question
+            div.question_head
+              div.user_img
+                if (question.User.picSrc)
+                  img(src=question.User.picSrc class="user_profile_pic")
+                else
+                  img( class="user_profile_pic" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
+              div.head_text
+                div.question_head_upper
+                  a(href=`/users/${question.userId}` class='user_profile_link')= question.User.fullName
+                div.question_head_lower
+                  p= question.User.credentials
+            div.question_body
+              div.question_body_title
+                p= (`Game: ${question.Tag.name}`)
+                br
+              div.question_body_title
+                p= question.title
+              div.question_body_content
+                p= question.content
+              if (question.media)
+                div.question_body_img
+                  img(class="questions_img" src=question.media)`
+
               
               
   > John ALlan - It might sound abnormal, but I'm honestly most proud of the seed data I provided. Just makes me feel like a sound programmer and that I'm proficient in the fundementals.
@@ -139,3 +192,4 @@
       })
     })
 }`
+
