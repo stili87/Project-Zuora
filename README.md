@@ -75,6 +75,7 @@
               a(href="/" class="nav-link-anchor login") Login
             li(class='nav-link-li')
               a(href="/users/register" class="nav-link-anchor") Register`
+
   > Waseem - I was proud of the questions page because it looks organized and I took my time with it. I learned how to easily create a fullstack website. All it takes is time and dedication.
 
 `include utils.pug
@@ -126,3 +127,69 @@ html
               if (question.media)
                 div.question_body_img
                   img(class="questions_img" src=question.media)`
+
+              
+              
+  > John ALlan - It might sound abnormal, but I'm honestly most proud of the seed data I provided. Just makes me feel like a sound programmer and that I'm proficient in the fundementals.
+
+    'use strict';
+
+    module.exports = {
+      async up (queryInterface, Sequelize) {
+      await queryInterface.bulkInsert('Answers', [{
+        userId : 1,
+        questionId : 1,
+        streetCred : '10,000 hours of this game',
+        content: "the sword is right around the corner.",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    },
+    {
+        userId : 2,
+        questionId : 2,
+        streetCred : 'Eat sleep and dream video games',
+        content: "To get the heart piece have to jump off the cliff.",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    },
+    {
+        userId : 3,
+        questionId : 3,
+        streetCred : 'Have never played any games',
+        content: "I dont know, just try harder.",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    },
+    {
+        userId : 4,
+        questionId : 4,
+        streetCred : 'Once saw a video game through a store window',
+        content: "See the thing you have to do is stop playing video games,     it is bad for you.",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    }], {});
+      },
+
+      async down (queryInterface, Sequelize) {
+        await queryInterface.bulkDelete('Answers', null, {});
+      }
+    };
+    
+    
+> Jeffrey - I was very please with writing this bit of code! It finds the delete button on a specific comment and deletes that comment from the DOM and the database.
+
+`const deleteCommentButtons = document.getElementsByClassName('delete_comment_btn')
+
+  for (let i = 0; i < deleteCommentButtons.length; i++) {
+    const deleteCommentBtn = deleteCommentButtons[i];
+
+    deleteCommentBtn.addEventListener('click', async () => {
+      const commentToDelete = document.querySelector(`.total_comment_${deleteCommentBtn.name}`)
+      commentToDelete.remove()
+
+      const response = await fetch(`/comments/delete/${deleteCommentBtn.name}`, {
+        method: 'DELETE'
+      })
+    })
+}`
+

@@ -2,11 +2,6 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     */
     await queryInterface.bulkInsert('Questions', [{
       title: "Where do I get the hover boots?",
       content: "I just finished the Water Temple. I have been bouncing around the map trying to find out where to get the hover boots. I think the only place I haven't been yet is the Spirit Temple. Is it safe to assume that's where I'll find them?",
@@ -46,11 +41,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     */
     await queryInterface.bulkDelete('Questions', null, {});
   }
 };

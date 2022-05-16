@@ -2,15 +2,6 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
     await queryInterface.bulkInsert('Users', [{
       email: 'jeffreykintner@email.com',
       hashedPassword: '$2a$10$GaFWCwlU3/h5LolgocOTluMJ82V7FKA88Rn8qkUr9KdLgAZGwFNJy',
@@ -41,7 +32,7 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     },
-  {
+    {
       email: 'info@johnallanhinds.com',
       hashedPassword: '$2a$10$EiBM2PnrHF8bbYNCjJvBrud6cNSRrXh5FDNm.h4m.dsyM/CKpy59O',
       fullName: 'John Allan Hinds',
@@ -54,11 +45,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     */
     await queryInterface.bulkDelete('Users', null, {});
   }
 };

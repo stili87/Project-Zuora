@@ -47,7 +47,7 @@ html
               if (question.media)
                 div.question_body_img
                   img(class="questions_img" src=question.media)
-              else
+              //- else
                 div.question_body_img
                   img(class="questions_img" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
             div.question_footer
@@ -61,7 +61,10 @@ html
             .answer-inner-container(id=`inner_container_${question.id}`)
               if(locals.authenticated)
                 .answer-inner
-                  img(src=loggedInUser.picSrc class='user_profile_pic_answer')
+                  if(loggedInUser.picSrc)
+                    img(src=loggedInUser.picSrc class='user_profile_pic_answer')
+                  else
+                    img(class="user_profile_pic" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
                   form(action=`/questions/${question.User.id}/answers` method="POST")
                     input(type='hidden' name='_csrf' value=csrfToken)
                     div.inner-input-container
@@ -69,14 +72,14 @@ html
                       button(type='submit' id=`${question.id}` data-id=locals.user.id class='submit-answer-button') Submit Answer
             div.answer_section(class=`answer-section-${question.id}` id=`${question.id}`)
              if(question.Answers.length < 1)
-              p(class=`no_answers`) No Answers Submitted
+              p(class=`no_answers` id=`no_answers_question_${question.id}`) No Answers Submitted
              each answer in question.Answers
                div.answer(id=`answer-div-${answer.id}`)
                  div.answer_head
-                   if(answer.User.picSrc)
+                   if (answer.User.picSrc)
                     img(src=answer.User.picSrc class="user_profile_pic")
                    else
-                     img(class="questions_img" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
+                     img(class="user_profile_pic" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
                    if (question.Answers)
                      div.answer_details
                        p.answer_user_name= answer.User.fullName
@@ -99,7 +102,10 @@ html
                     div.total_comment(id=`comment_answer_${answer.id}` class=`total_comment_${comment.id}` name=`${comment.id}`)
                       div.comment_head
                         if(answer.Comments)
-                            img(src=comment.User.picSrc class="user_profile_pic_comment")
+                            if(comment.User.picSrc)
+                              img(src=comment.User.picSrc class="user_profile_pic_comment")
+                            else
+                              img(class="user_profile_pic" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
                             div.user_comment_details
                               p.user_of_comment= comment.User.fullName
                               p= comment.createdAt

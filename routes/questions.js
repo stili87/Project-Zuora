@@ -36,7 +36,11 @@ router.get('/get-answers/:id', async(req, res) => {
 
 router.get('/questions', csrfProtection, asyncHandler(async(req, res) => {
   const tags = await db.Tag.findAll();
-  const questions = await db.Question.findAll({include: [{model: db.Answer, include: [{model: db.Comment, include:[db.User]}, db.User]},{model: db.Tag},{model: db.User}]});
+  
+  const questions = await db.Question.findAll({
+    order: [['createdAt', 'DESC']],
+    include: [{model: db.Answer, include: [{model: db.Comment, include:[db.User]}, db.User]},{model: db.Tag},{model: db.User}]});
+
   if(req.session.auth){
   const loggedInUserId = req.session.auth.userId
   const loggedInUser = await db.User.findByPk(loggedInUserId)
@@ -63,7 +67,7 @@ router.get('/questions/tag/:id', csrfProtection, asyncHandler(async(req, res, ne
   const tags = await db.Tag.findAll();
   const questions = await db.Question.findAll({where: {tagId},include: [{model: db.Answer, include: [{model: db.Comment, include:[db.User]}, db.User]},{model: db.Tag},{model: db.User}]});
   const tag = await db.Tag.findByPk(tagId)
- 
+
 
   if(!tag){
     const newError = new Error("Tag does not exist.");
