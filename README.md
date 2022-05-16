@@ -178,9 +178,9 @@ html
     
 > Jeffrey - I was very please with writing this bit of code! It finds the delete button on a specific comment and deletes that comment from the DOM and the database.
 
-`const deleteCommentButtons = document.getElementsByClassName('delete_comment_btn')
+    const deleteCommentButtons = document.getElementsByClassName('delete_comment_btn')
 
-  for (let i = 0; i < deleteCommentButtons.length; i++) {
+    for (let i = 0; i < deleteCommentButtons.length; i++) {
     const deleteCommentBtn = deleteCommentButtons[i];
 
     deleteCommentBtn.addEventListener('click', async () => {
@@ -191,5 +191,5 @@ html
         method: 'DELETE'
       })
     })
-}`
+    }
 
