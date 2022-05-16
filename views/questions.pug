@@ -61,7 +61,10 @@ html
             .answer-inner-container(id=`inner_container_${question.id}`)
               if(locals.authenticated)
                 .answer-inner
-                  img(src=loggedInUser.picSrc class='user_profile_pic_answer')
+                  if (answer.User.picSrc)
+                    img(src=answer.User.picSrc class="user_profile_pic")
+                  else
+                    img(class="user_profile_pic" src="https://pngset.com/images/the-legend-of-zelda-zelda-majoras-mask-zora-graphics-art-leisure-activities-person-transparent-png-1598670.png")
                   form(action=`/questions/${question.User.id}/answers` method="POST")
                     input(type='hidden' name='_csrf' value=csrfToken)
                     div.inner-input-container
