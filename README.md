@@ -139,3 +139,41 @@
       })
     })
 }`
+
+
+> Waseem - I was proud of the questions page because it looks nice an organized. Icons would have really tied the page together. It was fun implementing the box shadows.
+`
+.question{
+  background-color: #84A98C;
+  border: 1px solid #354F52;
+  margin: 20px;
+  width: 600px;
+  min-height: 560px;
+
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  margin-bottom: 60px;
+}
+.question_head{
+  display: flex;
+  padding: 15px;
+
+}
+.head_text{
+  align-self: center;
+}
+.question_head_upper{
+  font-weight: bold;
+}
+.user_profile_link{
+  text-decoration: none;
+  color: black;
+}
+.question_body_title{
+  font-weight: bold;
+}
+.question_body_img img{
+  width: 600px;
+  min-height: 400px;
+}`
+
+
